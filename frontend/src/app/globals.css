@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+:root {
+  /* Bảng màu duy nhất */
+  --primary: #6a5acd;
+  --secondary: #9394ff;
+  --surface-1: #f8f8f8;
+  --surface-2: #ffffff;
+  --accent: #fe7794;
+
+  --background: var(--surface-2);
+  /* Chữ nội dung — không map sang primary */
+  --foreground: #1e293b; /* Slate-800 */
+  --muted: #64748b; /* Slate-500 */
+  --card: var(--surface-2);
+  /* Viền UI — nhẹ và tinh tế (Glassmorphism) */
+  --border: rgba(0, 0, 0, 0.04);
+  --border-strong: rgba(0, 0, 0, 0.08);
+  --primary-hover: var(--secondary);
+  /* Chữ/icon trên nền primary — tách khỏi nền trang #f2f2f2 để đủ tương phản */
+  --on-primary: #fafcf7;
+  --ring: var(--border-strong);
+
+  /* Logo — chỉ dùng màu trong bảng trên */
+  --logo-text: var(--primary);
+  --logo-accent: var(--accent);
+
+  /* Nút — map rõ ràng tới palette */
+  --btn-solid-bg: var(--primary);
+  --btn-solid-fg: var(--on-primary);
+  --btn-solid-hover-bg: var(--primary-hover);
+  --btn-solid-hover-fg: var(--primary);
+  --btn-outline-border: var(--border);
+  --btn-outline-fg: var(--primary);
+  --btn-outline-hover-bg: var(--card);
+  --btn-on-brand-bg: var(--card);
+  --btn-on-brand-fg: var(--primary);
+  --btn-on-brand-hover-bg: var(--accent);
+  --btn-on-brand-hover-fg: var(--on-primary);
+  --btn-ghost-on-brand-border: var(--on-primary);
+  --btn-ghost-on-brand-fg: var(--on-primary);
+  --btn-ghost-on-brand-hover-bg: var(--secondary);
+  --btn-ghost-on-brand-hover-fg: var(--primary);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-card: var(--card);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-on-primary: var(--on-primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-logo-text: var(--logo-text);
+  --color-logo-accent: var(--logo-accent);
+  --color-btn-solid-bg: var(--btn-solid-bg);
+  --color-btn-solid-fg: var(--btn-solid-fg);
+  --color-btn-solid-hover-bg: var(--btn-solid-hover-bg);
+  --color-btn-solid-hover-fg: var(--btn-solid-hover-fg);
+  --color-btn-outline-border: var(--btn-outline-border);
+  --color-btn-outline-fg: var(--btn-outline-fg);
+  --color-btn-outline-hover-bg: var(--btn-outline-hover-bg);
+  --color-btn-on-brand-bg: var(--btn-on-brand-bg);
+  --color-btn-on-brand-fg: var(--btn-on-brand-fg);
+  --color-btn-on-brand-hover-bg: var(--btn-on-brand-hover-bg);
+  --color-btn-on-brand-hover-fg: var(--btn-on-brand-hover-fg);
+  --color-btn-ghost-on-brand-border: var(--btn-ghost-on-brand-border);
+  --color-btn-ghost-on-brand-fg: var(--btn-ghost-on-brand-fg);
+  --color-btn-ghost-on-brand-hover-bg: var(--btn-ghost-on-brand-hover-bg);
+  --color-btn-ghost-on-brand-hover-fg: var(--btn-ghost-on-brand-hover-fg);
+  --font-sans: var(--font-roboto);
+  
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-marquee-reverse: marquee 50s linear infinite reverse;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+}
+
+/* Cỡ chữ & độ đậm mặc định toàn site (một bước nhẹ) */
+html {
+  font-size: 106.25%; /* ~17px khi trình duyệt 16px; mọi rem Tailwind tỉ lệ theo */
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-roboto), system-ui, sans-serif;
+  font-weight: 500; /* medium — đậm hơn 400; chỗ dùng font-normal vẫn là 400 */
+}
