@@ -1,0 +1,16 @@
+**/node_modules
+**/dist
+**/.next
+**/coverage
+
+.DS_Store
+.env
+.env.*
+!.env.example
+
+# PM2 local configs (may contain secrets)
+ecosystem.config.cjs
+ecosystem.config.js
+
+# Uploads/local assets
+backend/uploads
