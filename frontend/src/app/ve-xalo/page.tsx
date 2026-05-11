@@ -1,7 +1,7 @@
 import { FinalCta } from "@/components/home/final-cta";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { ArrowLeft, ArrowRight, Home, Linkedin, Star } from "lucide-react";
+import { ArrowLeft, ArrowRight, Home, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -369,7 +369,12 @@ export default function VeXaloPage() {
                     className="shrink-0 text-[var(--primary)] transition-opacity hover:opacity-80"
                     aria-label={`LinkedIn — ${member.name}`}
                   >
-                    <Linkedin className="h-5 w-5" strokeWidth={1.75} />
+                    <span
+                      className="inline-flex h-5 w-5 items-center justify-center rounded-sm border border-current text-[10px] font-semibold leading-none"
+                      aria-hidden
+                    >
+                      in
+                    </span>
                   </a>
                 </div>
                 <p className="mt-1 text-sm text-[var(--muted)]">{member.role}</p>
