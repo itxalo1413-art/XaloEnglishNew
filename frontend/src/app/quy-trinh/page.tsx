@@ -200,7 +200,7 @@ export default function QuyTrinhChanChuaPage() {
                     </span>
                     <div className="h-px min-w-0 flex-1 bg-gradient-to-r from-[var(--primary)]/35 to-transparent" aria-hidden />
                   </div>
-                  <p className="text-lg font-semibold leading-[1.75] text-[var(--foreground)] sm:text-xl">{x.body}</p>
+                  <p className="text-lg font-normal leading-[1.75] text-[var(--foreground)] sm:text-xl">{x.body}</p>
                 </article>
               ))}
             </div>
