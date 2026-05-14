@@ -155,7 +155,7 @@ export function ProofSection() {
                       fill
                       className="object-cover transition duration-500 group-hover:scale-[1.02]"
                     />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-black/0 to-black/0" aria-hidden />
+                    <div className="pointer-events-none absolute inset-0 bg-black/20" aria-hidden />
                     <div className="absolute bottom-3 left-3 inline-flex items-center gap-2 rounded-full bg-white/90 px-3 py-1.5 text-[10px] font-extrabold text-[var(--foreground)] ring-1 ring-black/10 backdrop-blur">
                       <BadgeCheck className="h-3.5 w-3.5 text-[var(--primary)]" aria-hidden />
                       Ảnh chụp minh hoạ dẫn chứng

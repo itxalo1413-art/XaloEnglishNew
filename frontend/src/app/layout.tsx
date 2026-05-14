@@ -1,13 +1,18 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import { Bricolage_Grotesque, Plus_Jakarta_Sans } from "next/font/google";
 import Script from "next/script";
 import { FloatingContactButtons } from "@/components/floating-contact-buttons";
 import "./globals.css";
 
-const roboto = Roboto({
-  subsets: ["latin", "latin-ext", "vietnamese"],
-  variable: "--font-roboto",
-  weight: ["300", "400", "500", "700", "900"],
+const bricolage = Bricolage_Grotesque({
+  subsets: ["latin", "vietnamese"],
+  variable: "--font-bricolage-grotesque",
+  display: "swap",
+});
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin", "vietnamese"],
+  variable: "--font-plus-jakarta-sans",
   display: "swap",
 });
 
@@ -16,8 +21,8 @@ export const metadata: Metadata = {
   description:
     "Chương trình Chẩn - Chữa: đánh giá điểm yếu, lộ trình rõ ràng, theo dõi tiến độ. Dành cho phụ huynh, học sinh THPT và sinh viên.",
   icons: {
-    icon: [{ url: "/LOGO_MAU.png" }],
-    apple: [{ url: "/LOGO_MAU.png" }],
+    icon: [{ url: "/Logo_XLE.svg" }],
+    apple: [{ url: "/Logo_XLE.svg" }],
   },
 };
 
@@ -27,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="vi" className={`${roboto.variable} scroll-smooth antialiased`}>
+    <html lang="vi" className={`${bricolage.variable} ${plusJakartaSans.variable} scroll-smooth antialiased`}>
       <body className="flex min-h-screen flex-col font-sans">
         {process.env.NEXT_PUBLIC_CLARITY_ID && (
           <Script id="microsoft-clarity" strategy="afterInteractive">

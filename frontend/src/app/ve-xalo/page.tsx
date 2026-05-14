@@ -63,7 +63,7 @@ export default function VeXaloPage() {
           <div className="flex flex-col gap-4 md:flex-row">
             <div className="relative overflow-hidden rounded-2xl md:w-3/5">
               <div
-                className="flex h-[300px] w-full items-center justify-center bg-gradient-to-br from-[var(--primary)]/15 via-[var(--surface-2)] to-[var(--accent)]/10 md:h-[380px]"
+                className="flex h-[300px] w-full items-center justify-center bg-[var(--surface-2)] md:h-[380px]"
                 role="img"
                 aria-label="Không gian học — ảnh minh hoạ"
               >
@@ -72,7 +72,7 @@ export default function VeXaloPage() {
             </div>
             <div className="relative overflow-hidden rounded-2xl md:w-2/5">
               <div
-                className="flex h-[300px] w-full items-center justify-center bg-gradient-to-tl from-[var(--foreground)]/10 via-[var(--surface-2)] to-[var(--secondary)]/15 md:h-[380px]"
+                className="flex h-[300px] w-full items-center justify-center bg-[var(--surface-1)] md:h-[380px]"
                 role="img"
                 aria-label="Hoạt động học — ảnh minh hoạ"
               >
@@ -134,7 +134,7 @@ export default function VeXaloPage() {
                 </div>
               </div>
               <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-neutral-100">
-                <Image src="/LOGO_MAU.png" alt="Xa Lộ English" width={40} height={40} className="h-10 w-10 object-contain" />
+                <Image src="/Logo_XLE.svg" alt="Xa Lộ English" width={40} height={40} className="h-10 w-10 object-contain" />
               </div>
               <h3 className="mb-1 text-4xl font-bold tracking-tight text-[var(--foreground)]">3+</h3>
               <p className="text-xs text-[var(--muted)]">Năm xây dựng hệ thống lớp nhỏ &amp; quy trình Chẩn – Chữa</p>
@@ -356,7 +356,7 @@ export default function VeXaloPage() {
                   role="img"
                   aria-label={`Ảnh đại diện — ${member.name}`}
                 >
-                  <div className="flex h-full w-full items-center justify-center bg-gradient-to-b from-neutral-200 to-neutral-300 text-center text-xs text-[var(--muted)]">
+                  <div className="flex h-full w-full items-center justify-center bg-neutral-200 text-center text-xs text-[var(--muted)]">
                     Ảnh đại diện
                   </div>
                 </div>
@@ -477,7 +477,7 @@ export default function VeXaloPage() {
                     style={{ boxShadow: "0 20px 40px rgba(0,0,0,0.12)" }}
                   >
                     <div
-                      className="flex h-[300px] w-full items-center justify-center bg-gradient-to-br from-[var(--primary)]/20 to-[var(--surface-2)]"
+                      className="flex h-[300px] w-full items-center justify-center bg-[var(--surface-2)]"
                       role="img"
                       aria-label="Minh hoạ bước 1"
                     />
@@ -488,7 +488,7 @@ export default function VeXaloPage() {
                       style={{ width: "min(100%, 360px)" }}
                     >
                       <div
-                        className="flex h-[280px] w-full min-w-[280px] items-center justify-center bg-gradient-to-tr from-[var(--accent)]/15 to-neutral-200"
+                        className="flex h-[280px] w-full min-w-[280px] items-center justify-center bg-neutral-200"
                         role="img"
                         aria-label="Minh hoạ phụ"
                       />

@@ -17,11 +17,11 @@ export class Lead {
   @Prop()
   message?: string;
 
-  @Prop({ type: [String], default: [] })
-  goals!: string[];
+  @Prop()
+  purpose?: string;
 
-  @Prop({ type: [String], default: [] })
-  consultationTime!: string[];
+  @Prop()
+  timeSlot?: string;
 
   @Prop({
     type: String,

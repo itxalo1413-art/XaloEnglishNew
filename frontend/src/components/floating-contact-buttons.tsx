@@ -6,26 +6,13 @@ function IconMessenger({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 36 36" fill="none" aria-hidden>
       <path
-        fill="url(#fab-messenger-grad)"
+        fill="var(--primary)"
         d="M18 3C9.716 3 3 9.067 3 16.5c0 3.6 1.58 6.86 4.15 9.07L3 33l8.06-2.66A15.9 15.9 0 0018 31.5c8.284 0 15-6.067 15-13.5S26.284 3 18 3z"
       />
       <path
         fill="#fff"
         d="M12.5 14.25h5.25v1.75H12.5v-1.75zm0 3.5h9v1.75h-9v-1.75zm0 3.5h7v1.75h-7v-1.75z"
       />
-      <defs>
-        <linearGradient
-          id="fab-messenger-grad"
-          x1="3"
-          x2="33"
-          y1="33"
-          y2="5"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop stopColor="#00B2FF" />
-          <stop offset="1" stopColor="#006AFF" />
-        </linearGradient>
-      </defs>
     </svg>
   );
 }

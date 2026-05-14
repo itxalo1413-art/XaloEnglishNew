@@ -36,7 +36,7 @@ export function CourseMatchSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="relative rounded-[2.5rem] bg-white/70 shadow-2xl shadow-black/10 backdrop-blur-xl ring-1 ring-black/5 p-6 sm:p-10 lg:p-12 overflow-hidden">
           {/* Subtle inner mesh glow */}
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[var(--surface-2)]/50 to-transparent" />
+          <div className="pointer-events-none absolute inset-0 bg-[var(--surface-2)]/50" />
           
           <div className="relative z-10 grid gap-10 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
             

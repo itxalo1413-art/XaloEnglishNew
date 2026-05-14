@@ -55,7 +55,7 @@ export function CourseComparisonSection() {
           <div className="rounded-[2rem] bg-[var(--surface-1)] p-8 shadow-sm ring-1 ring-black/5 lg:p-10">
             <div className="flex flex-col gap-6 md:flex-row md:items-start md:gap-10">
               <div className="h-12 w-12 shrink-0 overflow-hidden rounded-full ring-2 ring-[var(--primary)]/20">
-                <img src="/LOGO_MAU.png" alt="" className="h-full w-full object-contain p-2" />
+                <img src="/Logo_XLE.svg" alt="" className="h-full w-full object-contain p-2" />
               </div>
               <div className="space-y-4">
                 <h4 className="text-xl font-extrabold text-[var(--foreground)]">Note: Band điểm ≠ Lộ trình học (RLP)</h4>

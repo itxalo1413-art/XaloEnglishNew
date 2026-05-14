@@ -174,11 +174,7 @@ function TagDot({ kind }: { kind: "accent" | "secondary" | "primary" }) {
 export function ProcessTeaserSection() {
   return (
     <section className="scroll-mt-24 relative overflow-hidden bg-[var(--primary)] py-14 sm:py-24">
-      {/* Dark mode mesh gradient effect */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -left-20 -top-20 h-[500px] w-[500px] rounded-full bg-[var(--accent)]/20 mix-blend-screen blur-[100px]" />
-        <div className="absolute right-0 bottom-0 h-[600px] w-[600px] rounded-full bg-[#f4b6cc]/10 mix-blend-screen blur-[120px]" />
-      </div>
+      {/* Removed mesh gradients */}
 
       <div className="relative z-10 mx-auto max-w-8xl px-4 sm:px-6">
           {/* Hàng trên: hero + 3 cột module — chữ trắng / hồng nổi trên nền primary */}
@@ -210,9 +206,9 @@ export function ProcessTeaserSection() {
                 
                 // Enhance the panel styling for Stripe look
                 let enhancedPanel = m.panel;
-                if (m.id === "01") enhancedPanel = "bg-white/95 backdrop-blur-md shadow-[0_8px_30px_rgb(0,0,0,0.12)] ring-1 ring-white/20";
-                if (m.id === "02") enhancedPanel = "bg-[var(--secondary)]/90 backdrop-blur-md shadow-[0_8px_30px_rgb(0,0,0,0.12)] ring-1 ring-white/20";
-                if (m.id === "03") enhancedPanel = "bg-[var(--accent)]/95 backdrop-blur-md shadow-[0_8px_30px_rgb(0,0,0,0.12)] ring-1 ring-white/20";
+                if (m.id === "01") enhancedPanel = "bg-[var(--surface-2)] shadow-[0_8px_30px_rgb(0,0,0,0.12)] ring-1 ring-white/20";
+                if (m.id === "02") enhancedPanel = "bg-[var(--secondary)] shadow-[0_8px_30px_rgb(0,0,0,0.12)] ring-1 ring-white/20";
+                if (m.id === "03") enhancedPanel = "bg-[var(--accent)] shadow-[0_8px_30px_rgb(0,0,0,0.15)] ring-1 ring-white/20";
 
                 return (
                   <div
@@ -254,7 +250,7 @@ export function ProcessTeaserSection() {
 
               <div className="relative mt-10 pl-2">
                 <div
-                  className="absolute left-[30px] h-[calc(100%-24px)] top-4 bottom-4 w-1 bg-gradient-to-b from-[var(--accent)]/30 to-transparent rounded-full"
+                  className="absolute left-[30px] h-[calc(100%-24px)] top-4 bottom-4 w-1 bg-[var(--accent)]/30 rounded-full"
                   aria-hidden
                 />
                 <ul className="space-y-0">

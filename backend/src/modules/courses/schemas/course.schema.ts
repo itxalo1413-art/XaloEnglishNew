@@ -6,16 +6,34 @@ export type CourseDocument = HydratedDocument<Course>;
 @Schema({ timestamps: true })
 export class Course {
   @Prop({ required: true, trim: true })
-  name!: string;
+  title!: string;
 
   @Prop({ required: true })
   slug!: string;
 
-  @Prop({ required: true })
-  short_description!: string;
+  @Prop({ required: true, enum: ['online', 'offline'] })
+  mode!: string;
 
-  @Prop({ required: true })
-  price!: number;
+  @Prop()
+  note?: string;
+
+  @Prop({ type: [String], default: [] })
+  highlights!: string[];
+
+  @Prop()
+  entry?: string;
+
+  @Prop()
+  target?: string;
+
+  @Prop()
+  classSize?: string;
+
+  @Prop()
+  duration?: string;
+
+  @Prop()
+  audience?: string;
 
   @Prop({ default: true })
   is_active!: boolean;
@@ -23,8 +41,8 @@ export class Course {
   @Prop()
   image_url?: string;
 
-  @Prop({ required: true })
-  full_content!: string;
+  @Prop()
+  full_content?: string;
 }
 
 export const CourseSchema = SchemaFactory.createForClass(Course);

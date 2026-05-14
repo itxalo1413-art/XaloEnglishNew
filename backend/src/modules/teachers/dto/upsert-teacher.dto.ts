@@ -2,7 +2,8 @@ import { IsString } from 'class-validator';
 
 export class UpsertTeacherDto {
   @IsString() name!: string;
-  @IsString() bio!: string;
-  @IsString() expertise!: string;
-  @IsString() profile_image_url!: string;
+  @IsString() role!: string;
+  @IsString() desc!: string;
+  @IsString() img!: string;
+  @IsString() @IsOptional() students?: string;
 }

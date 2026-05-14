@@ -48,12 +48,7 @@ export default function TuyenDungPage() {
               clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 6vw), 0 100%)",
             }}
           >
-            {/* Animated Stripe Mesh Gradients */}
-            <div className="pointer-events-none absolute inset-0 overflow-hidden">
-              <div className="absolute -left-[10%] top-0 h-[600px] w-[600px] rounded-full bg-[#f4b6cc]/40 mix-blend-multiply blur-3xl opacity-80" />
-              <div className="absolute right-[5%] top-[10%] h-[500px] w-[500px] rounded-full bg-[#d0e5f2]/40 mix-blend-multiply blur-[120px] opacity-80" />
-              <div className="absolute -bottom-[20%] left-[20%] h-[700px] w-[700px] rounded-full bg-[var(--primary)]/10 mix-blend-multiply blur-[100px] opacity-70" />
-            </div>
+            {/* Removed Animated Mesh Gradients */}
 
             <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-28 pt-16 sm:px-6 sm:pb-36 sm:pt-24 lg:px-8 lg:pb-48 lg:pt-32">
               <div className="max-w-3xl">
@@ -93,7 +88,7 @@ export default function TuyenDungPage() {
                   key={job.title}
                   className="group relative flex flex-col rounded-[2rem] bg-white p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] ring-1 ring-black/5 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_8px_40px_rgb(0,0,0,0.12)] hover:ring-black/10 sm:p-8"
                 >
-                  <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-r from-[var(--primary)]/0 to-[var(--primary)]/0 group-hover:from-[var(--primary)]/[0.02] group-hover:to-transparent transition-colors duration-500 pointer-events-none" />
+                  <div className="absolute inset-0 rounded-[2rem] bg-[var(--primary)]/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                   <div className="relative z-10 sm:flex sm:items-start sm:justify-between sm:gap-6">
                     <div className="min-w-0 flex-1">

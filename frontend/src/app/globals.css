@@ -1,46 +1,46 @@
 @import "tailwindcss";
 
 :root {
-  /* Bảng màu duy nhất */
-  --primary: #6a5acd;
-  --secondary: #9394ff;
-  --surface-1: #f8f8f8;
-  --surface-2: #ffffff;
-  --accent: #fe7794;
+  /* Bảng màu duy nhất - Updated from Brand Identity PDF */
+  --primary: #9494ff;     /* Primary Purple */
+  --secondary: #6a5acd;   /* Dark Purple/Indigo */
+  --surface-1: #f6f6f9;   /* Background Light Grey */
+  --surface-2: #fafcf7;   /* Secondary White */
+  --accent: #fe7789;      /* Pink/Coral */
 
-  --background: var(--surface-2);
-  /* Chữ nội dung — không map sang primary */
+  --background: var(--surface-1);
+  /* Chữ nội dung */
   --foreground: #1e293b; /* Slate-800 */
   --muted: #64748b; /* Slate-500 */
-  --card: var(--surface-2);
+  --card: #ffffff;
   /* Viền UI — nhẹ và tinh tế (Glassmorphism) */
   --border: rgba(0, 0, 0, 0.04);
   --border-strong: rgba(0, 0, 0, 0.08);
   --primary-hover: var(--secondary);
-  /* Chữ/icon trên nền primary — tách khỏi nền trang #f2f2f2 để đủ tương phản */
+  /* Chữ/icon trên nền primary */
   --on-primary: #fafcf7;
   --ring: var(--border-strong);
 
   /* Logo — chỉ dùng màu trong bảng trên */
-  --logo-text: var(--primary);
+  --logo-text: var(--secondary);
   --logo-accent: var(--accent);
 
   /* Nút — map rõ ràng tới palette */
   --btn-solid-bg: var(--primary);
   --btn-solid-fg: var(--on-primary);
-  --btn-solid-hover-bg: var(--primary-hover);
-  --btn-solid-hover-fg: var(--primary);
-  --btn-outline-border: var(--border);
-  --btn-outline-fg: var(--primary);
-  --btn-outline-hover-bg: var(--card);
-  --btn-on-brand-bg: var(--card);
-  --btn-on-brand-fg: var(--primary);
+  --btn-solid-hover-bg: var(--secondary);
+  --btn-solid-hover-fg: var(--on-primary);
+  --btn-outline-border: var(--primary);
+  --btn-outline-fg: var(--secondary);
+  --btn-outline-hover-bg: var(--primary);
+  --btn-on-brand-bg: var(--surface-2);
+  --btn-on-brand-fg: var(--secondary);
   --btn-on-brand-hover-bg: var(--accent);
   --btn-on-brand-hover-fg: var(--on-primary);
   --btn-ghost-on-brand-border: var(--on-primary);
   --btn-ghost-on-brand-fg: var(--on-primary);
-  --btn-ghost-on-brand-hover-bg: var(--secondary);
-  --btn-ghost-on-brand-hover-fg: var(--primary);
+  --btn-ghost-on-brand-hover-bg: var(--primary);
+  --btn-ghost-on-brand-hover-fg: var(--on-primary);
 }
 
 @theme inline {
@@ -74,7 +74,8 @@
   --color-btn-ghost-on-brand-fg: var(--btn-ghost-on-brand-fg);
   --color-btn-ghost-on-brand-hover-bg: var(--btn-ghost-on-brand-hover-bg);
   --color-btn-ghost-on-brand-hover-fg: var(--btn-ghost-on-brand-hover-fg);
-  --font-sans: var(--font-roboto);
+  --font-sans: var(--font-plus-jakarta-sans);
+  --font-heading: var(--font-bricolage-grotesque);
   
   --animate-marquee: marquee 40s linear infinite;
   --animate-marquee-reverse: marquee 50s linear infinite reverse;
@@ -93,6 +94,6 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-roboto), system-ui, sans-serif;
+  font-family: var(--font-plus-jakarta-sans), system-ui, sans-serif;
   font-weight: 500; /* medium — đậm hơn 400; chỗ dùng font-normal vẫn là 400 */
 }

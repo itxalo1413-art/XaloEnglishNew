@@ -62,14 +62,10 @@ export function FinalCta() {
           clipPath: "polygon(0 6vw, 100% 0, 100% calc(100% - 6vw), 0 100%)",
         }}
       >
-        {/* Vibrant Gradient Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[var(--primary)] via-[#5821a8] to-[var(--accent)]" />
+        {/* Solid Background */}
+        <div className="absolute inset-0 bg-[var(--primary)]" />
         
-        {/* Mesh glowing orbs */}
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div className="absolute -left-20 top-0 h-[600px] w-[600px] rounded-full bg-[#f4b6cc] mix-blend-overlay blur-[120px] opacity-60" />
-          <div className="absolute right-0 bottom-0 h-[800px] w-[800px] rounded-full bg-white mix-blend-overlay blur-[150px] opacity-40" />
-        </div>
+        {/* Removed Mesh glowing orbs */}
 
         <div className="mx-auto max-w-6xl px-4 sm:px-6 relative z-10">
           <div className="text-center lg:text-left">

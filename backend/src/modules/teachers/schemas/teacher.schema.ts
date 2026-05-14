@@ -9,13 +9,16 @@ export class Teacher {
   name!: string;
 
   @Prop({ required: true })
-  bio!: string;
+  role!: string;
 
   @Prop({ required: true })
-  expertise!: string;
+  desc!: string;
 
   @Prop({ required: true })
-  profile_image_url!: string;
+  img!: string;
+
+  @Prop()
+  students?: string;
 }
 
 export const TeacherSchema = SchemaFactory.createForClass(Teacher);

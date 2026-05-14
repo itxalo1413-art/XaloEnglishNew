@@ -170,8 +170,8 @@ export function SiteHeader() {
           className="flex shrink-0 items-center gap-2 px-2.5 py-0"
           onClick={() => setOpen(false)}
         >
-          <img src="/LOGO_MAU.png" alt="Xa Lộ" className="h-8 w-full" />
-          <span className="text-[16px] font-bold leading-8 tracking-tight text-[var(--primary)] sm:text-[28px] sm:leading-9 lg:text-[24px] lg:leading-[38px]">
+          <img src="/Logo_XLE.svg" alt="Xa Lộ" className="h-8 w-full" />
+          <span className="text-[16px] font-heading font-bold leading-8 tracking-tight text-[var(--secondary)] sm:text-[28px] sm:leading-9 lg:text-[24px] lg:leading-[38px]">
             xalo.english
           </span>
         </Link>

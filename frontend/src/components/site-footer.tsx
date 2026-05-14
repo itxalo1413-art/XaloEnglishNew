@@ -67,13 +67,13 @@ export function SiteFooter() {
           <div className="md:col-span-2 lg:col-span-1">
             <Link href="/" className="inline-flex items-center gap-2">
               <Image
-                src="/LOGO_MAU.png"
+                src="/Logo_XLE.svg"
                 alt="Xa Lộ English"
                 width={36}
                 height={36}
                 className="h-9 w-9 object-contain"
               />
-              <span className="text-xl font-bold tracking-tight text-[var(--primary)]">xalo.english</span>
+              <span className="font-heading text-xl font-bold tracking-tight text-[var(--secondary)]">xalo.english</span>
             </Link>
             <p className="mt-4 text-sm leading-relaxed">
               Cơ sở: 250 Nguyễn Đình Chính, Phường 11, Phú Nhuận, TP.HCM.

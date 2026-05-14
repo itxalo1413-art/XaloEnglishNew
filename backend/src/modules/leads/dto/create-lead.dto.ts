@@ -15,10 +15,10 @@ export class CreateLeadDto {
   message?: string;
 
   @IsOptional()
-  @IsArray()
-  goals?: string[];
+  @IsString()
+  purpose?: string;
 
   @IsOptional()
-  @IsArray()
-  consultationTime?: string[];
+  @IsString()
+  timeSlot?: string;
 }

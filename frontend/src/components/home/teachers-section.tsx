@@ -83,7 +83,7 @@ function TeacherCard({ teacher }: { teacher: typeof teachers[0] }) {
           className="object-cover transition-transform duration-700 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent pointer-events-none opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+        <div className="absolute inset-0 bg-black/10 pointer-events-none opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       </div>
 
       {/* Content Area */}

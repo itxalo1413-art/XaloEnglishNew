@@ -509,7 +509,7 @@ export function CoursesTeaserSection() {
 
           <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_minmax(280px,36%)] lg:gap-10">
             {/* LEFT COLUMN: PHASES BENTO GRID */}
-            <aside className="min-w-0 rounded-[2rem] bg-gradient-to-br from-[var(--surface-2)] to-[var(--surface-1)] p-6 sm:p-8 ring-1 ring-black/5 shadow-sm self-start lg:sticky lg:top-8">
+            <aside className="min-w-0 rounded-[2rem] bg-[var(--surface-2)] p-6 sm:p-8 ring-1 ring-black/5 shadow-sm self-start lg:sticky lg:top-8">
               <div>
                 <h3 className="text-xl font-extrabold leading-snug text-[var(--foreground)] sm:text-2xl">{course.headline}</h3>
                 <p className="mt-3 text-sm font-medium leading-relaxed text-[var(--muted)] sm:text-base">{course.shortDesc}</p>

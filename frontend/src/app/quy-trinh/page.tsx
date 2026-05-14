@@ -191,14 +191,14 @@ export default function QuyTrinhChanChuaPage() {
                   className="group relative flex flex-col overflow-hidden rounded-2xl border border-black/[0.06] bg-[var(--surface-2)] p-6 shadow-sm shadow-black/[0.04] ring-1 ring-black/[0.02] transition duration-300 hover:-translate-y-1 hover:border-[var(--primary)]/20 hover:shadow-lg hover:shadow-[var(--primary)]/10 sm:p-8"
                 >
                   <div
-                    className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[var(--primary)] via-[var(--secondary)] to-[var(--accent)] opacity-90 transition group-hover:opacity-100"
+                    className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-[var(--primary)] opacity-90 transition group-hover:opacity-100"
                     aria-hidden
                   />
                   <div className="mb-5 flex items-center gap-4">
-                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[var(--primary)] to-[var(--secondary)] text-base font-bold tabular-nums text-[var(--on-primary)] shadow-md shadow-[var(--primary)]/25">
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[var(--primary)] text-base font-bold tabular-nums text-[var(--on-primary)] shadow-md shadow-[var(--primary)]/25">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <div className="h-px min-w-0 flex-1 bg-gradient-to-r from-[var(--primary)]/35 to-transparent" aria-hidden />
+                    <div className="h-px min-w-0 flex-1 bg-[var(--primary)]/35" aria-hidden />
                   </div>
                   <p className="text-lg font-normal leading-[1.75] text-[var(--foreground)] sm:text-xl">{x.body}</p>
                 </article>
@@ -207,8 +207,8 @@ export default function QuyTrinhChanChuaPage() {
           </div>
         </section>
 
-        <section className="relative isolate overflow-hidden bg-gradient-to-b from-[var(--surface-1)] via-white to-white py-14 sm:py-20">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(106,90,205,0.12),transparent)]" aria-hidden />
+        <section className="relative isolate overflow-hidden bg-[var(--surface-1)] py-14 sm:py-20">
+          <div className="pointer-events-none absolute inset-0 bg-[var(--secondary)]/5" aria-hidden />
           <div className="mx-auto max-w-8xl px-4 sm:px-6">
             <div className="relative mx-auto max-w-5xl">
               <figure className="relative overflow-hidden rounded-3xl border border-[var(--primary)]/12 bg-white/90 p-8 shadow-xl shadow-black/[0.06] backdrop-blur-sm sm:p-12">
@@ -255,14 +255,14 @@ export default function QuyTrinhChanChuaPage() {
                   ))}
                 </div>
                   <div className="relative min-h-[440px] bg-[#F5F0EA] sm:min-h-[560px] overflow-hidden">
-                    <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_60%_40%,rgba(0,0,0,0.18),transparent_62%)]" />
-                    <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[var(--surface-2)] to-transparent lg:w-32" />
-                    <div className="absolute inset-8 rounded-sm bg-[linear-gradient(135deg,rgba(0,0,0,0.08),rgba(0,0,0,0.02))] ring-1 ring-black/10" />
+                    <div className="absolute inset-0 bg-black/10" />
+                    <div className="absolute inset-y-0 left-0 w-24 bg-[var(--surface-2)] lg:w-32" />
+                    <div className="absolute inset-8 rounded-sm bg-black/5 ring-1 ring-black/10" />
                     <div className="absolute right-8 bottom-8 flex h-16 w-36 items-center justify-center rounded-lg bg-white/70 p-4 shadow-lg ring-1 ring-black/10 sm:w-40">
                       <span className="text-center text-sm font-extrabold tracking-widest text-[var(--primary)] sm:text-base">CORE PRINCIPLES</span>
                     </div>
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-10">
-                       <Image src="/LOGO_MAU.png" alt="" width={300} height={300} className="grayscale" />
+                       <Image src="/Logo_XLE.svg" alt="" width={300} height={300} className="grayscale" />
                     </div>
                   </div>
               </div>
@@ -286,7 +286,7 @@ export default function QuyTrinhChanChuaPage() {
                     fill
                     className="object-cover transition-transform duration-700 hover:scale-110" 
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                  <div className="absolute inset-0 bg-black/20" />
                 </div>
                 <div className="rounded-2xl bg-[var(--background)] p-8 shadow-xl shadow-black/5 ring-1 ring-black/5 sm:p-10">
                   <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--primary)] text-white shadow-lg shadow-[var(--primary)]/20">
@@ -345,7 +345,7 @@ export default function QuyTrinhChanChuaPage() {
                     fill
                     className="object-cover transition-transform duration-700 hover:scale-110" 
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                  <div className="absolute inset-0 bg-black/20" />
                 </div>
               </div>
             </div>
