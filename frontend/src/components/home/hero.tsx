@@ -1,70 +1,99 @@
 import Link from "next/link";
+import Image from "next/image";
+import { ArrowRight, CheckCircle2, Sparkles, Stethoscope } from "lucide-react";
 
 export function Hero() {
   return (
-    <div className="relative bg-white pb-[6vw] sm:pb-[4vw]">
+    <div className="relative bg-white pb-[4vw] sm:pb-[2vw]">
       <section
         id="hero"
         className="relative overflow-visible bg-[var(--surface-2)] text-[var(--foreground)]"
         style={{
-          clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 6vw), 0 100%)",
+          clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 4vw), 0 100%)",
         }}
       >
-        {/* Removed Animated Mesh Gradients - User requested solid colors only */}
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-24 pt-12 sm:px-6 sm:pb-32 sm:pt-20 lg:px-8 lg:pb-40 lg:pt-28">
-          
-          <div className="grid gap-12 lg:grid-cols-[1fr_minmax(0,400px)] lg:items-center xl:grid-cols-[1fr_minmax(0,480px)] xl:gap-16">
-            <div>
-              <h1 className="font-heading text-[3.5rem] font-[900] uppercase leading-[0.95] tracking-tighter text-[var(--foreground)] sm:text-[5rem] lg:text-[6rem] xl:text-[7.5rem]">
-                <span className="block text-[var(--secondary)] drop-shadow-sm">XALO ENGLISH</span>
-                <span className="block">LEARNING</span>
-                <span className="block text-[var(--primary)]">SYSTEM</span>
-              </h1>
-            </div>
-
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-20 pt-10 sm:px-6 sm:pb-28 sm:pt-16 lg:px-8 lg:pb-36 lg:pt-20">
+          {/* Badge & Headline Area */}
+          <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch xl:gap-16">
             <div className="flex flex-col justify-center">
-              <p className="text-lg font-medium leading-relaxed text-[var(--muted)] sm:text-xl border-l-4 border-[var(--primary)]/30 pl-4 py-1">
-                Không cần tốn thời gian học lan man. Xa Lộ giúp bạn xác định đúng điểm yếu, xây lộ trình
-                phù hợp và theo dõi tiến độ rõ ràng để tiến bộ nhanh hơn.
+              <div className="inline-flex items-center gap-2 self-start rounded-full bg-[var(--primary)]/10 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-[var(--secondary)] ring-1 ring-[var(--primary)]/20">
+                <Sparkles className="h-3.5 w-3.5 text-[var(--secondary)]" />
+                Quy trình Chẩn – Chữa Độc Quyền
+              </div>
+
+              <h1 className="mt-5 font-heading text-3xl font-[900] uppercase leading-[1.05] tracking-tight text-[var(--foreground)] sm:text-5xl lg:text-[3rem] xl:text-[3.75rem] 2xl:text-[4.25rem]">
+                <span className="block text-[var(--secondary)] drop-shadow-sm">Học đúng cách</span>
+                <span className="block whitespace-nowrap">khi hiểu đúng mình</span>
+                <span className="mt-2 block text-xl font-black lowercase tracking-normal text-[var(--primary)] sm:text-2xl lg:text-3xl">
+                  cùng Quy trình Chẩn - Chữa
+                </span>
+              </h1>
+
+              <p className="mt-6 max-w-2xl border-l-4 border-[var(--primary)] pl-4 py-1 text-base font-medium leading-relaxed text-[var(--muted)] sm:text-lg">
+                Xa Lộ English giúp bạn xác định đúng điểm yếu trước khi bắt đầu học, từ đó xây lộ trình tập trung vào những gì bạn thực sự cần cải thiện.
               </p>
-              <div className="mt-8 flex items-center">
+
+              {/* CTAs */}
+              <div className="mt-8 flex flex-col gap-3.5 sm:flex-row sm:items-center">
                 <Link
-                  href="/lien-he"
-                  className="group inline-flex h-16 w-full sm:w-auto items-center justify-center rounded-full bg-[var(--foreground)] px-10 text-sm font-extrabold uppercase tracking-widest text-[#fff] shadow-xl shadow-black/10 transition-all duration-500 hover:-translate-y-1 hover:bg-[var(--primary)] hover:shadow-2xl hover:shadow-[var(--primary)]/30"
+                  href="/#test-dau-vao"
+                  className="group inline-flex h-14 items-center justify-center rounded-full bg-[var(--primary)] px-8 text-sm font-black uppercase tracking-wider text-[var(--on-primary)] shadow-xl shadow-[var(--primary)]/25 transition-all duration-300 hover:-translate-y-1 hover:bg-[var(--secondary)] hover:shadow-2xl hover:shadow-[var(--primary)]/40"
                 >
-                  Find Your Class
-                  <svg className="ml-3 h-5 w-5 transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:translate-x-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
+                  <Stethoscope className="mr-2.5 h-4 w-4" />
+                  Test trình độ & nhận Bảng Chẩn Bệnh miễn phí
+                  <ArrowRight className="ml-2.5 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                </Link>
+
+                <Link
+                  href="/khoa-hoc"
+                  className="inline-flex h-14 items-center justify-center rounded-full bg-white px-7 text-sm font-extrabold text-[var(--foreground)] shadow-sm ring-1 ring-black/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--surface-1)] hover:text-[var(--primary)] hover:ring-[var(--primary)]/30"
+                >
+                  Xem lộ trình học phù hợp
                 </Link>
               </div>
-            </div>
-          </div>
 
-          <div className="mt-16 grid grid-cols-2 gap-4 sm:mt-24 sm:grid-cols-4 sm:gap-6 lg:mt-32">
-            {[
-              { name: "ANH THU", role: "Mất gốc", bg: "bg-[#f4b6cc]", text: "text-[#aa336a]" },
-              { name: "MINH KHANG", role: "Luyện thi", bg: "bg-[#d9e0e4]", text: "text-[#58798c]" },
-              { name: "NGỌC MAI", role: "Cần lộ trình", bg: "bg-[#e9e2d8]", text: "text-[#a0825e]" },
-              { name: "HẢI ĐĂNG", role: "Giao tiếp", bg: "bg-[#ffd646]", text: "text-[#a68612]" },
-            ].map((item) => (
-              <div
-                key={item.name}
-                className={`group relative flex min-h-[200px] flex-col overflow-hidden rounded-[2rem] ${item.bg} p-6 shadow-xl shadow-black/5 ring-1 ring-white/60 backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-black/15 sm:min-h-[260px]`}
-              >
-                <div className="absolute inset-0 bg-white/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                <p className={`relative z-10 text-xs font-black uppercase tracking-widest ${item.text}`}>{item.name}</p>
-                <p className="relative z-10 mt-1.5 text-sm font-bold text-black/60">{item.role}</p>
-                
-                <div className="mt-auto flex justify-end relative z-10 transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-1 group-hover:-translate-y-1">
-                  <div className={`flex h-10 w-10 items-center justify-center rounded-full bg-white/40 backdrop-blur-sm ${item.text}`}>
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                    </svg>
+              {/* Trust Indicators */}
+              <div className="mt-8 flex flex-wrap items-center gap-y-2 gap-x-6 text-xs font-bold text-[var(--muted)]">
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 className="h-4 w-4 text-[var(--primary)]" />
+                  Test 4 kỹ năng chuẩn rubric
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 className="h-4 w-4 text-[var(--primary)]" />
+                  Nhận Bảng Chẩn Bệnh (BCB) chi tiết
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 className="h-4 w-4 text-[var(--primary)]" />
+                  Lộ trình cá nhân hóa (RLP)
+                </div>
+              </div>
+            </div>
+
+            {/* Visual Photo Card - Tall Height */}
+            <div className="relative flex flex-col">
+              <div className="group relative w-full flex-1 min-h-[440px] sm:min-h-[500px] lg:min-h-[560px] overflow-hidden rounded-[2.5rem] bg-white p-3 shadow-2xl ring-1 ring-black/10 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_25px_60px_rgb(0,0,0,0.15)]">
+                <div className="relative h-full w-full min-h-[420px] sm:min-h-[480px] lg:min-h-[540px] overflow-hidden rounded-[2rem] bg-[var(--surface-1)]">
+                  <Image
+                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1000&h=1000"
+                    alt="Học viên Xa Lộ English trong buổi chẩn đoán và học lộ trình"
+                    fill
+                    priority
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 45vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-90" />
+                  
+                  <div className="absolute bottom-5 left-5 right-5 rounded-2xl bg-white/95 p-4 backdrop-blur-md ring-1 ring-black/5 shadow-lg">
+                    <p className="text-[11px] font-black uppercase tracking-widest text-[var(--secondary)]">
+                      Quy trình Chẩn – Chữa
+                    </p>
+                    <p className="mt-1 text-xs font-bold text-[var(--foreground)] sm:text-sm">
+                      Đồng hành 1 kèm 1 & Lộ trình RLP cá nhân hóa theo từng mục tiêu
+                    </p>
                   </div>
                 </div>
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>

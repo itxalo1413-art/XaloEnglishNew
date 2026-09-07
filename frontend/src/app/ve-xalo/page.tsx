@@ -1,9 +1,19 @@
-import { FinalCta } from "@/components/home/final-cta";
+import type { Metadata } from "next";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ArrowLeft, ArrowRight, Home, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { getSiteUrl } from "@/lib/site-url";
+import { buildPageMetadata } from "@/lib/seo";
+import { BelowFold, DeferredFinalCta } from "@/lib/deferred-public";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: "Về Xa Lộ English",
+  description:
+    "Khám phá câu chuyện, đội ngũ và định hướng đào tạo của Xa Lộ English, nơi đặt trọng tâm vào lộ trình rõ ràng và tiến bộ đo được.",
+  canonical: "/ve-xalo",
+});
 
 const TEAM_MEMBERS = [
   { name: "Septimus", role: "Chuyên viên marketing & tư vấn lộ trình" },
@@ -16,7 +26,35 @@ const TEAM_MEMBERS = [
   { name: "Ryan Siphron", role: "Giáo viên Speaking & giao tiếp" },
 ] as const;
 
+const siteUrl = getSiteUrl();
+
 export default function VeXaloPage() {
+  const aboutJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    name: "Về Xa Lộ English",
+    url: siteUrl ? `${siteUrl}/ve-xalo` : "/ve-xalo",
+    description:
+      "Trang giới thiệu về Xa Lộ English, định hướng đào tạo, đội ngũ và quy trình Chẩn - Chữa.",
+    about: {
+      "@type": "Organization",
+      "@id": siteUrl ? `${siteUrl}/#organization` : "#organization",
+      name: "Xa Lộ English",
+    },
+    mainEntity: {
+      "@type": "Organization",
+      "@id": siteUrl ? `${siteUrl}/#organization` : "#organization",
+      name: "Xa Lộ English",
+      description:
+        "Trung tâm tiếng Anh tập trung vào lộ trình rõ ràng, chẩn đoán điểm yếu và theo dõi tiến bộ thực tế.",
+      employee: TEAM_MEMBERS.map((member) => ({
+        "@type": "Person",
+        name: member.name,
+        jobTitle: member.role,
+      })),
+    },
+  };
+
   return (
     <>
       <SiteHeader />
@@ -577,11 +615,17 @@ export default function VeXaloPage() {
 
         <section className="bg-[#fafafa] pb-16 pt-4">
           <div className="mx-auto max-w-8xl px-6 sm:px-10 lg:px-14">
-            <FinalCta />
+            <BelowFold minHeight={360}>
+              <DeferredFinalCta />
+            </BelowFold>
           </div>
         </section>
       </main>
       <SiteFooter />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutJsonLd) }}
+      />
     </>
   );
 }

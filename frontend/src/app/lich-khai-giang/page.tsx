@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import Image from "next/image";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { FinalCta } from "@/components/home/final-cta";
+import { BelowFold, DeferredFinalCta } from "@/lib/deferred-public";
 
 type ProgramGroup = "ieltsOnline" | "ieltsOffline" | "special";
 
@@ -337,15 +337,11 @@ export default function LichKhaiGiangPage() {
     return Array.from(map.values()).sort((a, b) => a.label.localeCompare(b.label, "vi"));
   }, [groupFilter]);
 
-  // Reset program filter when switching group to avoid "no results" traps
-  // (do it in an effect to avoid state updates during render)
-  const groupRef = useRef(groupFilter);
-  useEffect(() => {
-    if (groupRef.current !== groupFilter) {
-      groupRef.current = groupFilter;
-      setProgramFilter("all");
-    }
-  }, [groupFilter]);
+  // Reset program filter when switching group to avoid empty result traps.
+  const handleGroupFilterChange = (value: typeof groupFilter) => {
+    setGroupFilter(value);
+    setProgramFilter("all");
+  };
 
   return (
     <>
@@ -375,7 +371,7 @@ export default function LichKhaiGiangPage() {
                   </span>
                   <select
                     value={groupFilter}
-                    onChange={(e) => setGroupFilter(e.target.value as typeof groupFilter)}
+                    onChange={(e) => handleGroupFilterChange(e.target.value as typeof groupFilter)}
                     className="h-10 w-full bg-transparent text-right text-sm font-extrabold text-[var(--foreground)] outline-none"
                     aria-label="Filter nhóm chương trình"
                   >
@@ -472,7 +468,7 @@ export default function LichKhaiGiangPage() {
                   {/* IMAGE BANNER PLACEHOLDER - Thay ảnh bìa vào đây */}
                   <div className="relative aspect-[4/3] w-full overflow-hidden bg-[var(--surface-1)]">
                     {row.imagePlaceholder ? (
-                      <Image src={row.imagePlaceholder} alt={row.className} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                      <Image src={row.imagePlaceholder} alt={row.className} fill loading="lazy" sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                     ) : (
                       <div className="flex h-full w-full items-center justify-center bg-[var(--surface-1)] p-6 text-center text-sm text-[var(--muted)] transition-transform duration-700 group-hover:scale-105">
                         <p>
@@ -591,8 +587,9 @@ export default function LichKhaiGiangPage() {
           </div>
         </section>
 
-        {/* CTA */}
-        <FinalCta />
+        <BelowFold minHeight={360}>
+          <DeferredFinalCta />
+        </BelowFold>
       </main>
       <SiteFooter />
 

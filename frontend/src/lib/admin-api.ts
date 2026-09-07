@@ -1,3 +1,5 @@
+import { getApiBaseUrl } from "@/lib/api-base-url";
+
 export type AdminLoginResponse = {
   _id: string;
   name: string;
@@ -5,13 +7,6 @@ export type AdminLoginResponse = {
   isAdmin: boolean;
   token: string;
 };
-
-function getApiBaseUrl() {
-  return (
-    process.env.NEXT_PUBLIC_API_URL?.replace(/\/+$/, "") ||
-    "http://localhost:3001/api/v1"
-  );
-}
 
 export class ApiError extends Error {
   status: number;
@@ -96,6 +91,12 @@ export const adminApi = {
     listAll(token: string) {
       return apiFetch<any[]>("/courses/all", { token });
     },
+    seedDefaults(token: string) {
+      return apiFetch<{ created: number; skipped: number; total: number }>(
+        "/courses/seed-defaults",
+        { method: "POST", token },
+      );
+    },
     create(token: string, payload: unknown) {
       return apiFetch<any>("/courses", {
         method: "POST",
@@ -165,14 +166,48 @@ export const adminApi = {
     list(token: string) {
       return apiFetch<any[]>("/schedules", { token });
     },
+    create(token: string, payload: unknown) {
+      return apiFetch<any>("/schedules", {
+        method: "POST",
+        token,
+        body: JSON.stringify(payload),
+      });
+    },
+    update(token: string, id: string, payload: unknown) {
+      return apiFetch<any>(`/schedules/${id}`, {
+        method: "PUT",
+        token,
+        body: JSON.stringify(payload),
+      });
+    },
+    delete(token: string, id: string) {
+      return apiFetch<any>(`/schedules/${id}`, { method: "DELETE", token });
+    },
   },
 
   blogPosts: {
-    list(token: string) {
+    list(token: string, pageSize = 50) {
       return apiFetch<{ posts: any[]; page: number; pages: number }>(
-        "/blog-posts?pageNumber=1",
+        `/blog-posts?pageNumber=1&pageSize=${pageSize}`,
         { token },
       );
+    },
+    create(token: string, payload: unknown) {
+      return apiFetch<any>("/blog-posts", {
+        method: "POST",
+        token,
+        body: JSON.stringify(payload),
+      });
+    },
+    update(token: string, id: string, payload: unknown) {
+      return apiFetch<any>(`/blog-posts/${id}`, {
+        method: "PUT",
+        token,
+        body: JSON.stringify(payload),
+      });
+    },
+    delete(token: string, id: string) {
+      return apiFetch<any>(`/blog-posts/${id}`, { method: "DELETE", token });
     },
   },
 
@@ -198,6 +233,52 @@ export const adminApi = {
         token,
         body: JSON.stringify(payload),
       });
+    },
+  },
+
+  acaSchedules: {
+    listAll(token: string) {
+      return apiFetch<any[]>("/aca-schedules/all", { token });
+    },
+    create(token: string, payload: unknown) {
+      return apiFetch<any>("/aca-schedules", {
+        method: "POST",
+        token,
+        body: JSON.stringify(payload),
+      });
+    },
+    update(token: string, id: string, payload: unknown) {
+      return apiFetch<any>(`/aca-schedules/${id}`, {
+        method: "PUT",
+        token,
+        body: JSON.stringify(payload),
+      });
+    },
+    delete(token: string, id: string) {
+      return apiFetch<any>(`/aca-schedules/${id}`, { method: "DELETE", token });
+    },
+  },
+
+  studentResults: {
+    list(token: string) {
+      return apiFetch<any[]>("/student-results", { token });
+    },
+    create(token: string, payload: unknown) {
+      return apiFetch<any>("/student-results", {
+        method: "POST",
+        token,
+        body: JSON.stringify(payload),
+      });
+    },
+    update(token: string, id: string, payload: unknown) {
+      return apiFetch<any>(`/student-results/${id}`, {
+        method: "PUT",
+        token,
+        body: JSON.stringify(payload),
+      });
+    },
+    delete(token: string, id: string) {
+      return apiFetch<any>(`/student-results/${id}`, { method: "DELETE", token });
     },
   },
 };

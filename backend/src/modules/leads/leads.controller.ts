@@ -40,12 +40,14 @@ export class LeadsController {
   @Get('export')
   async exportCsv(@Res() res: Response) {
     const leads = await this.leads.listAll();
-    const fields = ['Name', 'Email', 'Phone', 'Message', 'Status', 'Date'];
+    const fields = ['Name', 'Email', 'Phone', 'Purpose', 'TimeSlot', 'Message', 'Status', 'Date'];
     const csv = leads.map((lead: any) =>
       [
         lead.name,
         lead.email,
         lead.phone,
+        lead.purpose ?? '',
+        lead.timeSlot ?? '',
         lead.message ?? '',
         lead.status,
         lead.createdAt,

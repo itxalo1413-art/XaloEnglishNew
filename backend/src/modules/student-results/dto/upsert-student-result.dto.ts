@@ -3,6 +3,10 @@ import { IsNumber, IsOptional, IsString } from 'class-validator';
 export class UpsertStudentResultDto {
   @IsString() name!: string;
   @IsOptional() @IsNumber() inputScore?: number;
+  @IsOptional() @IsNumber() inputListening?: number;
+  @IsOptional() @IsNumber() inputReading?: number;
+  @IsOptional() @IsNumber() inputWriting?: number;
+  @IsOptional() @IsNumber() inputSpeaking?: number;
   @IsOptional() @IsNumber() overall?: number;
   @IsOptional() @IsNumber() listening?: number;
   @IsOptional() @IsNumber() reading?: number;

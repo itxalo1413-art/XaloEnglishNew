@@ -1,18 +1,69 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { CourseDetail, getCourseBySlug } from "@/components/khoa-hoc/course-detail";
-import { CourseFinalCta } from "@/components/khoa-hoc/course-final-cta";
 import { courses } from "@/components/khoa-hoc/courses-data";
+import { buildPageMetadata } from "@/lib/seo";
+import { BelowFold, DeferredFinalCta } from "@/lib/deferred-public";
+import { getSiteUrl } from "@/lib/site-url";
 
 export function generateStaticParams() {
   return courses.map((c) => ({ slug: c.slug }));
 }
 
+export function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Metadata {
+  const course = getCourseBySlug(params.slug);
+  if (!course) {
+    return { title: "Không tìm thấy khóa học" };
+  }
+
+  return buildPageMetadata({
+    title: course.title,
+    description: course.shortDesc,
+    canonical: `/khoa-hoc/${course.slug}`,
+  });
+}
+
 export default function CourseDetailPage({ params }: { params: { slug: string } }) {
   const course = getCourseBySlug(params.slug);
   if (!course) return notFound();
+  const siteUrl = getSiteUrl();
+  const courseUrl = siteUrl ? `${siteUrl}/khoa-hoc/${course.slug}` : `/khoa-hoc/${course.slug}`;
+  const courseJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: course.title,
+    description: course.shortDesc,
+    url: courseUrl,
+    provider: {
+      "@type": "Organization",
+      "@id": siteUrl ? `${siteUrl}/#organization` : "#organization",
+      name: "Xa Lộ English",
+      url: siteUrl || undefined,
+    },
+    educationalLevel: course.audienceTag,
+    teaches: [...course.solution, ...course.outcome].slice(0, 6),
+    about: course.matchTags,
+    instructor: {
+      "@type": "Person",
+      name: course.teacher.name,
+      jobTitle: course.teacher.title,
+    },
+    hasCourseInstance: {
+      "@type": "CourseInstance",
+      courseMode: "online and offline",
+      instructor: {
+        "@type": "Person",
+        name: course.teacher.name,
+      },
+    },
+  };
 
   return (
     <>
@@ -52,9 +103,15 @@ export default function CourseDetailPage({ params }: { params: { slug: string } 
         </section>
 
         <CourseDetail course={course} />
-        <CourseFinalCta />
+        <BelowFold minHeight={360}>
+          <DeferredFinalCta />
+        </BelowFold>
       </main>
       <SiteFooter />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(courseJsonLd) }}
+      />
     </>
   );
 }

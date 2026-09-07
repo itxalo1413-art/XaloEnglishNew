@@ -1,22 +1,31 @@
+import type { Metadata } from "next";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { CourseFinalCta } from "@/components/khoa-hoc/course-final-cta";
-import { CoursesCatalogSection } from "@/components/khoa-hoc/courses-catalog";
-import { TeachersSection } from "@/components/home/teachers-section";
+import {
+  BelowFold,
+  DeferredCoursesCatalog,
+  DeferredFinalCta,
+  DeferredTeachersSection,
+} from "@/lib/deferred-public";
+import { buildPageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: "Khóa học",
+  description:
+    "Khám phá các khóa học tại Xa Lộ English, từ xây nền tiếng Anh, luyện IELTS đến giao tiếp phản xạ với lộ trình học phù hợp từng mục tiêu.",
+  canonical: "/khoa-hoc",
+});
 
 export default function KhoaHocPage() {
   return (
     <>
       <SiteHeader />
       <main className="flex-1">
-        {/* HERO STRIPE CONCEPT */}
         <div className="relative overflow-hidden pb-[8vw] bg-white">
           <section
             className="relative px-4 pb-24 pt-24 sm:px-6 lg:pb-32 lg:pt-32"
             style={{ clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 6vw), 0 100%)", backgroundColor: "var(--surface-2)" }}
           >
-            {/* Removed mesh gradients */}
-            
             <div className="relative z-10 mx-auto max-w-7xl text-center sm:text-left">
               <h1 className="text-5xl font-extrabold tracking-tight text-[var(--foreground)] sm:text-6xl lg:text-7xl">
                 Khóa học
@@ -28,12 +37,17 @@ export default function KhoaHocPage() {
           </section>
         </div>
 
-        <CoursesCatalogSection />
-        <TeachersSection />
-        <CourseFinalCta />
+        <BelowFold minHeight={560}>
+          <DeferredCoursesCatalog />
+        </BelowFold>
+        <BelowFold minHeight={480}>
+          <DeferredTeachersSection />
+        </BelowFold>
+        <BelowFold minHeight={360}>
+          <DeferredFinalCta />
+        </BelowFold>
       </main>
       <SiteFooter />
     </>
   );
 }
-

@@ -7,12 +7,12 @@ import { useCallback, useEffect, useRef, useState } from "react";
 type NavItem = { href: string; label: string; mega?: boolean };
 
 const navItems: NavItem[] = [
-  { href: "/", label: "Trang chủ" },
-  { href: "/quy-trinh", label: "Quy trình Chẩn – Chữa là gì?" },
-  { href: "/khoa-hoc", label: "Khóa học", mega: true },
+  { href: "/quy-trinh", label: "Quy trình Chẩn – Chữa" },
+  { href: "/khoa-hoc", label: "Lộ trình học", mega: true },
+  { href: "/#ket-qua-hoc-vien", label: "Kết quả học viên" },
   { href: "/lich-khai-giang", label: "Lịch khai giảng" },
-  { href: "/ve-xalo", label: "Về chúng tôi" },
-  { href: "/tuyen-dung", label: "Tuyển dụng" },
+  { href: "/ve-xalo", label: "Về Xa Lộ" },
+  { href: "/blog", label: "Blog" },
 ];
 
 function useHash() {
@@ -40,6 +40,7 @@ function isActive(pathname: string, hash: string, href: string) {
 
   if (href === "/khoa-hoc") return pathname === "/khoa-hoc" || pathname.startsWith("/khoa-hoc/");
   if (href === "/quy-trinh") return pathname === "/quy-trinh" || pathname.startsWith("/quy-trinh/");
+  if (href === "/blog") return pathname === "/blog" || pathname.startsWith("/blog/");
 
   return pathname === href;
 }
@@ -104,6 +105,7 @@ const coursesMegaMenu: MegaQuadrant[] = [
           { label: "Quy trình Chẩn – Chữa", href: "/quy-trinh" },
           { label: "Lịch khai giảng", href: "/lich-khai-giang" },
           { label: "Đăng ký tư vấn", href: "/lien-he" },
+          { label: "Đặt lịch Test Speaking", href: "/speaking-test" },
         ],
       },
       {
@@ -128,6 +130,7 @@ function ChevronRight({ className }: { className?: string }) {
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [mobileCoursesOpen, setMobileCoursesOpen] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
   const megaLeaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pathname = usePathname();
@@ -156,7 +159,13 @@ export function SiteHeader() {
 
   useEffect(() => {
     setMegaOpen(false);
+    setMobileCoursesOpen(false);
+    setOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    if (!open) setMobileCoursesOpen(false);
+  }, [open]);
 
   const coursesActive = isActive(pathname, hash, "/khoa-hoc");
 
@@ -176,8 +185,11 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        <nav className="hidden min-w-0 flex-1 items-center justify-center lg:flex" aria-label="Chính">
-          <ul className="flex h-16 items-center justify-center gap-6">
+        <nav
+          className="hidden min-w-0 flex-1 items-center justify-center overflow-x-auto lg:flex [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          aria-label="Chính"
+        >
+          <ul className="flex h-16 min-w-max items-center justify-center gap-4 px-1 xl:gap-6">
             {navItems.map((item) => {
               if (item.mega) {
                 const active = coursesActive || megaOpen;
@@ -210,10 +222,10 @@ export function SiteHeader() {
 
               const active = isActive(pathname, hash, item.href);
               return (
-                <li key={item.href} className="flex h-full list-none">
+                <li key={item.href} className="flex h-full shrink-0 list-none">
                   <Link
                     href={item.href}
-                    className={`relative flex h-full items-center text-sm leading-6 transition-colors ${
+                    className={`relative flex h-full items-center whitespace-nowrap text-sm leading-6 transition-colors ${
                       active
                         ? "font-bold text-[var(--primary)]"
                         : "font-normal text-[var(--foreground)] hover:text-[var(--primary)]"
@@ -235,10 +247,10 @@ export function SiteHeader() {
 
         <div className="ml-auto flex shrink-0 items-center gap-2">
           <Link
-            href="/lien-he"
-            className="hidden h-10 min-w-[180px] items-center justify-center whitespace-nowrap rounded-sm bg-[var(--primary)] px-3 py-2 text-center text-sm font-bold leading-4 text-[var(--on-primary)] transition-opacity hover:opacity-90 lg:inline-flex"
+            href="/#test-dau-vao"
+            className="hidden h-10 min-w-[200px] items-center justify-center whitespace-nowrap rounded-full bg-[var(--primary)] px-4 py-2 text-center text-xs font-black uppercase tracking-wider text-[var(--on-primary)] shadow-md shadow-[var(--primary)]/20 transition-all hover:bg-[var(--secondary)] hover:shadow-lg hover:shadow-[var(--primary)]/30 lg:inline-flex"
           >
-            Đăng ký tư vấn
+            TEST TRÌNH ĐỘ MIỄN PHÍ
           </Link>
 
           <button
@@ -318,41 +330,76 @@ export function SiteHeader() {
       {open && (
         <div
           id="mobile-nav"
-          className="bg-[var(--surface-2)] px-4 py-3 shadow-lg shadow-black/10 lg:hidden"
+          className="max-h-[min(75dvh,560px)] overflow-y-auto bg-[var(--surface-2)] px-4 py-3 shadow-lg shadow-black/10 lg:hidden"
         >
           <nav className="flex flex-col gap-1" aria-label="Mobile">
             {navItems.map((item) => {
               if (item.mega) {
+                const active = coursesActive || mobileCoursesOpen;
                 return (
-                  <div key={item.href} className="flex flex-col gap-2 py-1">
-                    <Link
-                      href={item.href}
-                      className={`rounded-sm px-3 py-2.5 text-sm leading-6 ${
-                        isActive(pathname, hash, item.href)
+                  <div key={item.href} className="py-1">
+                    <button
+                      type="button"
+                      className={`flex w-full items-center justify-between rounded-sm px-3 py-2.5 text-left text-sm leading-6 ${
+                        active
                           ? "font-bold text-[var(--primary)]"
                           : "font-normal text-[var(--foreground)]"
                       }`}
-                      onClick={() => setOpen(false)}
+                      aria-expanded={mobileCoursesOpen}
+                      aria-controls="mobile-courses-submenu"
+                      onClick={() => setMobileCoursesOpen((v) => !v)}
                     >
                       {item.label}
-                    </Link>
-                    <div className="border-l-2 border-[var(--border-strong)]/35 pl-3">
-                      {coursesMegaMenu.flatMap((q) =>
-                        q.columns.flatMap((c) =>
-                          c.links.map((l) => (
-                            <Link
-                              key={`${q.title}-${l.label}`}
-                              href={l.href}
-                              className="block py-1.5 text-xs font-bold text-[var(--foreground)]"
-                              onClick={() => setOpen(false)}
-                            >
-                              {l.label}
-                              {l.badge ? ` · ${l.badge}` : ""}
-                            </Link>
-                          )),
-                        ),
-                      )}
-                    </div>
+                      <svg
+                        className={`h-4 w-4 shrink-0 transition-transform duration-200 ${
+                          mobileCoursesOpen ? "rotate-180" : ""
+                        }`}
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                        aria-hidden
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                    {mobileCoursesOpen ? (
+                      <div
+                        id="mobile-courses-submenu"
+                        className="mt-1 border-l-2 border-[var(--border-strong)]/35 pl-3"
+                      >
+                        <Link
+                          href={item.href}
+                          className="block py-2 text-xs font-semibold text-[var(--primary)]"
+                          onClick={() => setOpen(false)}
+                        >
+                          Xem tất cả khóa học →
+                        </Link>
+                        {coursesMegaMenu.map((q) => (
+                          <div key={q.title} className="mt-2 first:mt-0">
+                            <p className="py-1 text-[10px] font-bold uppercase tracking-wide text-[var(--muted)]">
+                              {q.title}
+                            </p>
+                            <ul className="flex flex-col">
+                              {q.columns.flatMap((c) =>
+                                c.links.map((l) => (
+                                  <li key={`${q.title}-${l.label}`}>
+                                    <Link
+                                      href={l.href}
+                                      className="block py-1.5 text-xs font-bold text-[var(--foreground)]"
+                                      onClick={() => setOpen(false)}
+                                    >
+                                      {l.label}
+                                      {l.badge ? ` · ${l.badge}` : ""}
+                                    </Link>
+                                  </li>
+                                )),
+                              )}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                    ) : null}
                   </div>
                 );
               }
@@ -372,11 +419,11 @@ export function SiteHeader() {
               );
             })}
             <Link
-              href="/lien-he"
-              className="mt-2 flex h-10 items-center justify-center rounded-sm bg-[var(--primary)] text-center text-xs font-bold text-[var(--on-primary)]"
+              href="/#test-dau-vao"
+              className="mt-2 flex h-11 items-center justify-center rounded-full bg-[var(--primary)] text-center text-xs font-black uppercase tracking-wider text-[var(--on-primary)] shadow-md"
               onClick={() => setOpen(false)}
             >
-              Đăng ký tư vấn
+              TEST TRÌNH ĐỘ MIỄN PHÍ
             </Link>
           </nav>
         </div>

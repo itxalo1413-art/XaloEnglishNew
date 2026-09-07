@@ -9,6 +9,11 @@ export class StudentResult {
   name!: string;
 
   @Prop() inputScore?: number;
+  @Prop() inputListening?: number;
+  @Prop() inputReading?: number;
+  @Prop() inputWriting?: number;
+  @Prop() inputSpeaking?: number;
+
   @Prop() overall?: number;
   @Prop() listening?: number;
   @Prop() reading?: number;

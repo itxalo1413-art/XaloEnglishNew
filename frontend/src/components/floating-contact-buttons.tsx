@@ -1,6 +1,19 @@
-/** Thay bằng link Messenger fanpage, ví dụ: https://m.me/ten-trang */
+/** Thay bằng link Messenger & Zalo fanpage */
 const MESSENGER_URL = "https://m.me/";
+const ZALO_URL = "https://zalo.me/0786688149";
 const HOTLINE_TEL = "tel:0786688149";
+
+function IconZalo({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" fill="none" aria-hidden>
+      <circle cx="24" cy="24" r="24" fill="#0068FF" />
+      <path
+        fill="#FFFFFF"
+        d="M34.2 26.5c-.3-.2-3.1-1.5-3.6-1.7-.5-.2-.8-.2-1.2.2s-1.4 1.7-1.7 2.1-.6.4-1.2.2c-.5-.2-2.3-.8-4.3-2.6-1.6-1.4-2.7-3.2-3-3.7-.3-.5 0-.8.2-1 .2-.2.5-.6.8-.9.2-.3.3-.5.5-.8.2-.3.1-.6 0-.8-.1-.2-1.2-2.8-1.6-3.8-.4-1-.8-.8-1.2-.9h-1c-.3 0-1 .1-1.5.7s-2 2-2 4.8 2.1 5.6 2.3 6c.3.3 4 6.2 9.8 8.6 1.4.6 2.5 1 3.3 1.2 1.4.4 2.7.4 3.7.2 1.1-.2 3.4-1.4 3.9-2.7.5-1.3.5-2.5.3-2.7z"
+      />
+    </svg>
+  );
+}
 
 function IconMessenger({ className }: { className?: string }) {
   return (
@@ -41,17 +54,26 @@ export function FloatingContactButtons() {
       aria-label="Liên hệ nhanh"
     >
       <a
+        href={ZALO_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="pointer-events-auto flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-[0_4px_14px_rgba(0,0,0,0.18)] ring-1 ring-black/5 transition hover:scale-110 hover:shadow-lg"
+        aria-label="Chat Zalo Tư Vấn"
+      >
+        <span className="font-heading font-black text-xs text-[#0068FF] tracking-tighter">Zalo</span>
+      </a>
+      <a
         href={MESSENGER_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className="pointer-events-auto flex h-14 w-14 items-center justify-center rounded-full bg-[var(--surface-2)] shadow-[0_4px_14px_rgba(0,0,0,0.18)] ring-1 ring-black/5 transition hover:scale-105 hover:shadow-lg"
+        className="pointer-events-auto flex h-14 w-14 items-center justify-center rounded-full bg-[var(--surface-2)] shadow-[0_4px_14px_rgba(0,0,0,0.18)] ring-1 ring-black/5 transition hover:scale-110 hover:shadow-lg"
         aria-label="Chat Messenger"
       >
         <IconMessenger className="h-8 w-8" />
       </a>
       <a
         href={HOTLINE_TEL}
-        className="pointer-events-auto flex h-14 w-14 items-center justify-center rounded-full bg-[var(--surface-2)] shadow-[0_4px_14px_rgba(0,0,0,0.18)] ring-1 ring-black/5 transition hover:scale-105 hover:shadow-lg"
+        className="pointer-events-auto flex h-14 w-14 items-center justify-center rounded-full bg-[var(--surface-2)] shadow-[0_4px_14px_rgba(0,0,0,0.18)] ring-1 ring-black/5 transition hover:scale-110 hover:shadow-lg"
         aria-label="Gọi hotline"
       >
         <IconPhone className="h-[1.35rem] w-[1.35rem]" />

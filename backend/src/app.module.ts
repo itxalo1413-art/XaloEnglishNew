@@ -21,6 +21,7 @@ import { JobPositionsModule } from './modules/job-positions/job-positions.module
 import { JobApplicationsModule } from './modules/job-applications/job-applications.module';
 import { MailModule } from './modules/mail/mail.module';
 import { CoursesModule } from './modules/courses/courses.module';
+import { AcaSchedulesModule } from './modules/aca-schedules/aca-schedules.module';
 
 @Module({
   imports: [
@@ -49,6 +50,7 @@ import { CoursesModule } from './modules/courses/courses.module';
     DashboardModule,
     JobPositionsModule,
     JobApplicationsModule,
+    AcaSchedulesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

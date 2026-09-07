@@ -1,63 +1,15 @@
-import { IsArray, IsDateString, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsDateString, IsOptional, IsString } from 'class-validator';
 
 export class UpsertScheduleDto {
-  @IsString()
-  className!: string;
+  @IsDateString()
+  month!: string;
 
   @IsOptional()
   @IsString()
-  filterKey?: string;
-
-  @IsOptional()
-  @IsString()
-  filterLabel?: string;
-
-  @IsString()
-  delivery!: string;
-
-  @IsString()
-  programGroup!: string;
-
-  @IsOptional()
-  @IsString()
-  entry?: string;
-
-  @IsOptional()
-  @IsString()
-  target?: string;
-
-  @IsOptional()
-  @IsString()
-  oneToOneSlot?: string;
-
-  @IsString()
-  audience!: string;
-
-  @IsString()
-  timeSlot!: string;
-
-  @IsString()
-  startDate!: string;
-
-  @IsString()
-  studyDays!: string;
-
-  @IsString()
-  studyTime!: string;
-
-  @IsOptional()
-  @IsNumber()
-  seatsLeft?: number;
-
-  @IsOptional()
-  @IsString()
-  shortDesc?: string;
-
-  @IsOptional()
-  @IsString()
-  fitFor?: string;
+  title?: string;
 
   @IsOptional()
   @IsArray()
+  @IsString({ each: true })
   scheduleImgURL?: string[];
 }

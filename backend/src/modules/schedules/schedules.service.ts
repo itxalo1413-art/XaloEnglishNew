@@ -17,23 +17,18 @@ export class SchedulesService {
   create(dto: UpsertScheduleDto) {
     return this.scheduleModel.create({
       month: new Date(dto.month),
-      scheduleImgURL: dto.scheduleImgURL ?? [],
       title: dto.title,
+      scheduleImgURL: dto.scheduleImgURL ?? [],
     });
   }
 
   async update(id: string, dto: UpsertScheduleDto) {
-    const updated = await this.scheduleModel.findByIdAndUpdate(
-      id,
-      {
-        month: new Date(dto.month),
-        scheduleImgURL: dto.scheduleImgURL ?? [],
-        title: dto.title,
-      },
-      { new: true },
-    );
-    if (!updated) throw new NotFoundException('Schedule not found');
-    return updated;
+    const existing = await this.scheduleModel.findById(id);
+    if (!existing) throw new NotFoundException('Schedule not found');
+    existing.month = new Date(dto.month);
+    existing.title = dto.title;
+    existing.scheduleImgURL = dto.scheduleImgURL ?? existing.scheduleImgURL;
+    return existing.save();
   }
 
   async delete(id: string) {

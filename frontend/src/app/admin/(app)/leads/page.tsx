@@ -2,7 +2,17 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { adminApi } from "@/lib/admin-api";
+import { leadPurposeFromRecord, leadTimeSlotFromRecord } from "@/lib/leads-api";
 import { getAdminToken } from "@/components/admin/auth";
+import {
+  AdminAlert,
+  AdminButton,
+  AdminPageHeader,
+  AdminSearch,
+  AdminTable,
+  AdminTd,
+  AdminTh,
+} from "@/components/admin/admin-ui";
 
 type Lead = {
   _id: string;
@@ -10,8 +20,8 @@ type Lead = {
   email: string;
   phone: string;
   message?: string;
-  goals?: string[];
-  consultationTime?: string[];
+  purpose?: string;
+  timeSlot?: string;
   status: "new" | "contacted" | "converted" | "closed" | string;
   createdAt?: string;
   updatedAt?: string;
@@ -85,55 +95,42 @@ export default function AdminLeadsPage() {
 
   return (
     <div>
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight text-[var(--foreground)]">
-            Leads / Tư vấn
-          </h1>
-          <p className="mt-1 text-sm text-[var(--muted)]">
-            Dữ liệu từ Lead (name, email, phone, goals, consultationTime, status…).
-          </p>
-        </div>
-
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-          <a
-            href={adminApi.leads.exportCsvUrl()}
-            className="inline-flex h-10 items-center justify-center rounded-sm border border-[var(--border)] px-3 text-sm font-semibold text-[var(--foreground)] transition hover:border-[var(--border-strong)]"
-          >
-            Export CSV
+      <AdminPageHeader
+        title="Tư vấn"
+        description="Danh sách khách đăng ký tư vấn từ website"
+        action={
+          <a href={adminApi.leads.exportCsvUrl()} download>
+            <AdminButton variant="secondary">Export CSV</AdminButton>
           </a>
-          <input
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder="Tìm theo tên / email / SĐT / trạng thái…"
-            className="h-10 w-full rounded-sm border border-[var(--border)] bg-[var(--background)] px-3 text-sm outline-none transition focus:border-[var(--border-strong)] sm:w-[320px]"
-          />
-        </div>
+        }
+      />
+
+      <div className="mt-6 flex justify-end">
+        <AdminSearch value={q} onChange={setQ} placeholder="Tìm theo tên / email / SĐT…" />
       </div>
 
       {loading ? (
         <p className="mt-8 text-sm text-[var(--muted)]">Đang tải…</p>
       ) : error ? (
-        <div className="mt-8 rounded-sm bg-red-50 px-4 py-3 text-sm text-red-700 ring-1 ring-red-200">
-          {error}
+        <div className="mt-6">
+          <AdminAlert>{error}</AdminAlert>
         </div>
       ) : (
-        <div className="mt-8 overflow-hidden rounded-sm ring-1 ring-black/10">
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[980px] border-collapse bg-[var(--background)] text-sm">
+        <AdminTable>
+            <table className="w-full min-w-[720px] border-collapse bg-[var(--background)] text-sm">
               <thead className="bg-[var(--surface-2)]">
-                <tr className="text-left text-xs font-semibold uppercase tracking-wide text-[var(--muted)]">
-                  <th className="px-4 py-3">Khách</th>
-                  <th className="px-4 py-3">Mục tiêu</th>
-                  <th className="px-4 py-3">Khung giờ</th>
-                  <th className="px-4 py-3">Trạng thái</th>
-                  <th className="px-4 py-3">Ngày</th>
+                <tr>
+                  <AdminTh>Khách hàng</AdminTh>
+                  <AdminTh>Mục đích</AdminTh>
+                  <AdminTh>Khung giờ</AdminTh>
+                  <AdminTh>Trạng thái</AdminTh>
+                  <AdminTh>Ngày gửi</AdminTh>
                 </tr>
               </thead>
               <tbody>
                 {filtered.map((r) => (
                   <tr key={r._id} className="border-t border-black/5 align-top">
-                    <td className="px-4 py-3">
+                    <AdminTd>
                       <div className="font-semibold text-[var(--foreground)]">{r.name}</div>
                       <div className="mt-1 text-xs text-[var(--muted)]">
                         {r.email} · {r.phone}
@@ -143,30 +140,28 @@ export default function AdminLeadsPage() {
                           {r.message}
                         </div>
                       ) : null}
-                    </td>
-                    <td className="px-4 py-3">
-                      <div className="flex flex-wrap gap-1.5">
-                        {(r.goals ?? []).length ? (
-                          (r.goals ?? []).map((g, i) => (
-                            <Badge key={`${r._id}-g-${i}`}>{g}</Badge>
-                          ))
+                    </AdminTd>
+                    <AdminTd>
+                      {(() => {
+                        const purpose = leadPurposeFromRecord(r);
+                        return purpose ? (
+                          <Badge>{purpose}</Badge>
                         ) : (
                           <span className="text-xs text-[var(--muted)]">—</span>
-                        )}
-                      </div>
-                    </td>
-                    <td className="px-4 py-3">
-                      <div className="flex flex-wrap gap-1.5">
-                        {(r.consultationTime ?? []).length ? (
-                          (r.consultationTime ?? []).map((t, i) => (
-                            <Badge key={`${r._id}-t-${i}`}>{t}</Badge>
-                          ))
+                        );
+                      })()}
+                    </AdminTd>
+                    <AdminTd>
+                      {(() => {
+                        const slot = leadTimeSlotFromRecord(r);
+                        return slot ? (
+                          <Badge>{slot}</Badge>
                         ) : (
                           <span className="text-xs text-[var(--muted)]">—</span>
-                        )}
-                      </div>
-                    </td>
-                    <td className="px-4 py-3">
+                        );
+                      })()}
+                    </AdminTd>
+                    <AdminTd>
                       <select
                         value={r.status}
                         onChange={(e) => onUpdateStatus(r._id, e.target.value)}
@@ -179,19 +174,17 @@ export default function AdminLeadsPage() {
                           </option>
                         ))}
                       </select>
-                    </td>
-                    <td className="px-4 py-3 text-xs text-[var(--muted)]">
-                      {r.createdAt ? new Date(r.createdAt).toLocaleString() : "—"}
-                    </td>
+                    </AdminTd>
+                    <AdminTd>
+                      <span className="text-xs text-[var(--muted)]">
+                        {r.createdAt ? new Date(r.createdAt).toLocaleString("vi-VN") : "—"}
+                      </span>
+                    </AdminTd>
                   </tr>
                 ))}
               </tbody>
             </table>
-          </div>
-          <div className="border-t border-black/5 bg-[var(--surface-2)] px-4 py-2 text-xs text-[var(--muted)]">
-            Tổng: <span className="font-semibold">{filtered.length}</span>
-          </div>
-        </div>
+        </AdminTable>
       )}
     </div>
   );

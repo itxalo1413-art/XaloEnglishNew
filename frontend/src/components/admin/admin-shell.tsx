@@ -6,6 +6,7 @@ import { ReactNode, useEffect, useMemo, useState } from "react";
 import {
   BookOpen,
   BriefcaseBusiness,
+  Calendar,
   FileText,
   Gauge,
   GraduationCap,
@@ -28,11 +29,16 @@ function NavLink({ href, label, icon }: NavItem) {
       className={[
         "flex items-center gap-3 rounded-sm px-3 py-2 text-sm transition-colors",
         active
-          ? "bg-[var(--surface-2)] text-[var(--foreground)]"
+          ? "bg-[var(--primary)] text-[var(--on-primary)] shadow-sm"
           : "text-[var(--muted)] hover:bg-[var(--surface-2)] hover:text-[var(--foreground)]",
       ].join(" ")}
     >
-      <span className="grid h-8 w-8 place-items-center rounded-sm bg-[var(--background)] ring-1 ring-black/10">
+      <span
+        className={[
+          "grid h-8 w-8 place-items-center rounded-sm ring-1 ring-black/10",
+          active ? "bg-white/20 ring-white/20" : "bg-[var(--background)]",
+        ].join(" ")}
+      >
         {icon}
       </span>
       <span className="font-medium">{label}</span>
@@ -57,8 +63,10 @@ export function AdminShell({ children }: { children: ReactNode }) {
       { href: "/admin/courses", label: "Khóa học", icon: <BookOpen className="h-4 w-4" /> },
       { href: "/admin/teachers", label: "Giáo viên", icon: <GraduationCap className="h-4 w-4" /> },
       { href: "/admin/testimonials", label: "Feedback", icon: <Users className="h-4 w-4" /> },
-      { href: "/admin/blog-posts", label: "Bài viết", icon: <FileText className="h-4 w-4" /> },
-      { href: "/admin/schedules", label: "Lịch khai giảng", icon: <Users className="h-4 w-4" /> },
+      { href: "/admin/blog-posts", label: "Tin tức", icon: <FileText className="h-4 w-4" /> },
+      { href: "/admin/schedules", label: "Lịch học", icon: <Users className="h-4 w-4" /> },
+      { href: "/admin/aca-schedules", label: "Lịch rảnh ACA", icon: <Calendar className="h-4 w-4" /> },
+      { href: "/admin/student-results", label: "Bảng điểm học viên", icon: <GraduationCap className="h-4 w-4" /> },
       { href: "/admin/jobs", label: "Tuyển dụng", icon: <BriefcaseBusiness className="h-4 w-4" /> },
       { href: "/admin/settings", label: "Cài đặt", icon: <Settings className="h-4 w-4" /> },
     ],

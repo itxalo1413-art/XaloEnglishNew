@@ -23,6 +23,9 @@ export class Lead {
   @Prop()
   timeSlot?: string;
 
+  @Prop()
+  acaScheduleId?: string;
+
   @Prop({
     type: String,
     enum: ['new', 'contacted', 'converted', 'closed'],

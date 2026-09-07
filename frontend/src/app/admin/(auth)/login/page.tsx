@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { adminApi, ApiError } from "@/lib/admin-api";
 import { setAdminToken } from "@/components/admin/auth";
+import { getApiBaseUrl } from "@/lib/api-base-url";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -100,7 +101,7 @@ export default function AdminLoginPage() {
             <span>
               API:{" "}
               <code className="rounded-sm bg-black/5 px-1.5 py-0.5">
-                {process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api/v1"}
+                {getApiBaseUrl()}
               </code>
             </span>
           </div>

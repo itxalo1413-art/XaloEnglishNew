@@ -2,7 +2,7 @@ import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class UpsertCourseDto {
   @IsString() title!: string;
-  @IsString() slug!: string;
+  @IsOptional() @IsString() slug?: string;
   @IsString() mode!: string;
   @IsOptional() @IsString() note?: string;
   @IsOptional() @IsString({ each: true }) highlights?: string[];

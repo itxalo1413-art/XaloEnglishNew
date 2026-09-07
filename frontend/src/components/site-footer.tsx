@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const footerNavAbout = [
+  { href: "/blog", label: "Tin tức" },
   { href: "/tuyen-dung", label: "Tuyển dụng" },
   { href: "/lien-he", label: "Chính sách thanh toán" },
   { href: "/lien-he", label: "Chính sách cam kết" },

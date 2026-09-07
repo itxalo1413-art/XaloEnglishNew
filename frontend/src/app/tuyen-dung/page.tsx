@@ -1,6 +1,15 @@
+import type { Metadata } from "next";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import Link from "next/link";
+import { buildPageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: "Tuyển dụng",
+  description:
+    "Cơ hội nghề nghiệp tại Xa Lộ English cho giáo viên, trợ giảng, vận hành và marketing trong môi trường giáo dục chú trọng hiệu quả học tập thực tế.",
+  canonical: "/tuyen-dung",
+});
 
 const jobs = [
   {

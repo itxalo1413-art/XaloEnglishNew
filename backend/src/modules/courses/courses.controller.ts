@@ -34,6 +34,12 @@ export class CoursesController {
   }
 
   @UseGuards(JwtAuthGuard, AdminGuard)
+  @Post('seed-defaults')
+  seedDefaults() {
+    return this.courses.seedDefaults();
+  }
+
+  @UseGuards(JwtAuthGuard, AdminGuard)
   @Post()
   create(@Body() dto: UpsertCourseDto) {
     return this.courses.create(dto);

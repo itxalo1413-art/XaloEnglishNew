@@ -19,8 +19,14 @@ export class BlogPostsController {
   constructor(private readonly blogPosts: BlogPostsService) {}
 
   @Get()
-  list(@Query('pageNumber') pageNumber?: string) {
-    return this.blogPosts.list(Number(pageNumber ?? 1), 10);
+  list(
+    @Query('pageNumber') pageNumber?: string,
+    @Query('pageSize') pageSize?: string,
+  ) {
+    return this.blogPosts.list(
+      Number(pageNumber ?? 1),
+      Number(pageSize ?? 10),
+    );
   }
 
   @Get(':slug')

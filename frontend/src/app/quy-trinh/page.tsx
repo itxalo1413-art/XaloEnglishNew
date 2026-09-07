@@ -1,8 +1,17 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { FinalCta } from "@/components/home/final-cta";
+import { buildPageMetadata } from "@/lib/seo";
+import { BelowFold, DeferredFinalCta } from "@/lib/deferred-public";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: "Quy trình Chẩn - Chữa",
+  description:
+    "Tìm hiểu quy trình Chẩn - Chữa tại Xa Lộ English: xác định đúng điểm nghẽn, xây lộ trình học cá nhân hóa và theo dõi tiến bộ thực tế.",
+  canonical: "/quy-trinh",
+});
 
 const khaiNiemCards = [
   { body: "Quy trình Chẩn – Chữa là nền tảng cốt lõi trong toàn bộ mô hình đào tạo tại Xa Lộ English, được áp dụng xuyên suốt cho cả lớp nhóm và lớp 1:1. Quy trình này tập trung vào việc xác định đúng “điểm nghẽn” trong năng lực học tập của từng học viên, từ đó xây dựng giải pháp học tập cá nhân hóa, thay vì sử dụng một lộ trình chung cho tất cả." },
@@ -284,6 +293,8 @@ export default function QuyTrinhChanChuaPage() {
                     src="/quy-trinh-branding/image2.jpg" 
                     alt="Quy trình Chẩn" 
                     fill
+                    loading="lazy"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-cover transition-transform duration-700 hover:scale-110" 
                   />
                   <div className="absolute inset-0 bg-black/20" />
@@ -343,6 +354,8 @@ export default function QuyTrinhChanChuaPage() {
                     src="/quy-trinh-branding/image3.jpg" 
                     alt="Quy trình Chữa" 
                     fill
+                    loading="lazy"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-cover transition-transform duration-700 hover:scale-110" 
                   />
                   <div className="absolute inset-0 bg-black/20" />
@@ -368,6 +381,8 @@ export default function QuyTrinhChanChuaPage() {
                   alt="6 bước quy trình"
                   width={1206}
                   height={654}
+                  loading="lazy"
+                  sizes="100vw"
                   className="mx-auto h-auto min-w-[1000px] w-full max-w-full drop-shadow-sm"
                 />
               </div>
@@ -629,7 +644,9 @@ export default function QuyTrinhChanChuaPage() {
           </div>
         </section>
 
-        <FinalCta />
+        <BelowFold minHeight={360}>
+          <DeferredFinalCta />
+        </BelowFold>
       </main>
       <SiteFooter />
     </>

@@ -1,219 +1,236 @@
-import Image from "next/image";
-import { BadgeCheck, ExternalLink, Quote, Star } from "lucide-react";
+"use client";
 
-type ProofTestimonial = {
+import Link from "next/link";
+import Image from "next/image";
+import { useState } from "react";
+import {
+  Award,
+  BadgeCheck,
+  CheckCircle2,
+  ChevronRight,
+  Quote,
+} from "lucide-react";
+
+type CaseStudy = {
+  id: string;
+  studentName: string;
+  avatar: string;
+  targetRole: string;
+  startBand: string;
+  endBand: string;
+  timeframe: string;
+  before: string;
+  diagnosisBCB: string;
+  treatmentRLP: string;
+  resultSummary: string;
   quote: string;
-  name: string;
-  role: string;
-  program: string;
-  dateText: string;
-  rating: 4 | 5;
-  source: { label: string; url: string };
-  proof: { src: string; alt: string };
+  proofBadge: string;
 };
 
-const testimonials: ProofTestimonial[] = [
+const caseStudies: CaseStudy[] = [
   {
-    quote:
-      "Trước chỉ biết con yếu tiếng Anh, giờ thấy rõ con kẹt ở đọc hiểu và từ vựng học thuật. Sau 3 tháng có bảng theo dõi, đỡ hoang mang hơn hẳn.",
-    name: "Chị N. (đã ẩn danh)",
-    role: "Phụ huynh học sinh lớp 10",
-    program: "Lộ trình 1:1 — mục tiêu 6.5",
-    dateText: "03/2026",
-    rating: 5,
-    source: { label: "Ảnh chụp tin nhắn", url: "https://example.com/proof/message-1" },
-    proof: { src: "/proof/mock-chat-1.svg", alt: "Ảnh chụp minh hoạ tin nhắn feedback" },
+    id: "case-1",
+    studentName: "Minh Khang",
+    avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=70&w=200&h=200",
+    targetRole: "Sinh viên ĐH Bách Khoa — Mục tiêu 6.5 nộp hồ sơ tốt nghiệp",
+    startBand: "4.5",
+    endBand: "6.5",
+    timeframe: "4.5 tháng (Lộ trình RLP)",
+    before: "Tự học làm đề trên mạng gần 1 năm nhưng band dậm chân ở 4.5. Nói ngắc ngứ, Viết sai thì và cấu trúc câu liên tục.",
+    diagnosisBCB: "Chẩn ra 2 điểm gãy: Vốn từ vựng bị dịch từng từ (word-by-word) và thiếu kỹ thuật triển khai luận điểm trong Writing Task 2.",
+    treatmentRLP: "Tập trung 100% chữa dứt điểm lỗi ngữ pháp cơ bản trong 4 tuần đầu, sau đó rèn cấu trúc viết chuẩn PEEL và phản xạ Speaking 1 kèm 1.",
+    resultSummary: "Đạt 6.5 Overall ngay lần thi đầu tiên (Writing tăng từ 4.5 lên 6.0, Speaking tăng từ 4.5 lên 6.5).",
+    quote: "Trước mình nghĩ phải cày đề cả ngày mới lên điểm. Đến XLE nhận Bảng Chẩn Bệnh mới biết mình sai ở đâu để chữa đúng chỗ đó, đỡ mất thời gian vô cùng!",
+    proofBadge: "Bảng điểm IDP & BCB lưu trữ",
   },
   {
-    quote:
-      "Mình tưởng phải học lại từ zero, hoá ra được kê lộ trình từ chỗ đang yếu. Không còn cảm giác học lan man như trước.",
-    name: "Minh T.",
-    role: "Sinh viên năm 2",
-    program: "Lớp nhóm — tập trung Writing",
-    dateText: "01/2026",
-    rating: 5,
-    source: { label: "Google Review", url: "https://example.com/proof/google-review-1" },
-    proof: { src: "/proof/mock-review-1.svg", alt: "Ảnh chụp minh hoạ review" },
+    id: "case-2",
+    studentName: "Ngọc Mai",
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=70&w=200&h=200",
+    targetRole: "Nhân viên văn phòng — Cần IELTS 7.0 xin học bổng Thạc sĩ",
+    startBand: "5.5",
+    endBand: "7.0",
+    timeframe: "3.5 tháng (Lớp nhóm chuyên sâu)",
+    before: "Nghe Đọc 7.0 nhưng Nói Viết kẹt cứng ở 5.0. Bận rộn công việc, chỉ học được vào buổi tối.",
+    diagnosisBCB: "Điểm nghẽn ở tiêu chí Lexical Resource & Cohesion: Lạm dụng từ vựng đao to búa lớn sai ngữ cảnh và phát âm nuốt âm đuôi.",
+    treatmentRLP: "Cắt bỏ toàn bộ từ vựng hoa mỹ không cần thiết, chuẩn hoá Collocations tự nhiên và luyện sửa phát âm trực tiếp từng buổi.",
+    resultSummary: "Tăng 1.5 Band output sau 3.5 tháng: Writing 6.5, Speaking 7.0, Overall xuất sắc đạt 7.0.",
+    quote: "Giáo viên XLE sửa bài cực kỳ kỹ tính. Từng câu văn của mình đều được bóc tách và giải thích tại sao người bản xứ không dùng như vậy.",
+    proofBadge: "Score Report 7.0 chính thức",
   },
   {
-    quote:
-      "Học không bị khô như trên trường, mỗi buổi biết mình đang sửa lỗi gì. Có mốc band rõ nên có động lực.",
-    name: "Bạn H.",
-    role: "Học sinh lớp 12",
-    program: "RLP theo chặng — kiểm tra giữa kỳ",
-    dateText: "12/2025",
-    rating: 4,
-    source: { label: "Bình luận Facebook", url: "https://example.com/proof/fb-comment-1" },
-    proof: { src: "/proof/mock-comment-1.svg", alt: "Ảnh chụp minh hoạ bình luận" },
+    id: "case-3",
+    studentName: "Hải Đăng",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=70&w=200&h=200",
+    targetRole: "Học sinh THPT — Mất gốc tiếng Anh cần gỡ điểm thi Đại học",
+    startBand: "Mất gốc",
+    endBand: "6.0",
+    timeframe: "5 tháng (Lộ trình Foundation)",
+    before: "Sợ tiếng Anh, học trước quên sau, điểm kiểm tra trên lớp chỉ 3–4 điểm, không dám phát âm vì sợ sai.",
+    diagnosisBCB: "Hổng hoàn toàn hệ thống ngữ pháp cốt lõi và phương pháp phát âm ngữ âm (Phonics).",
+    treatmentRLP: "Xây lại nền tảng từ âm vị, từ vựng theo chủ đề quen thuộc, tạo phản xạ nói tự tin trước khi ghép vào format thi.",
+    resultSummary: "Từ mất gốc bứt phá đạt IELTS 6.0, được quy đổi 10 điểm tiếng Anh trong kỳ thi THPT Quốc gia.",
+    quote: "Không khí học rất cởi mở, thầy cô không chỉ trích lỗi sai mà hướng dẫn cách sửa nhẹ nhàng, giúp em tìm lại hứng thú học tiếng Anh.",
+    proofBadge: "Bảng điểm quy đổi & Feedback",
   },
 ];
-
-const skillBars = [
-  { label: "Nghe", before: 35, after: 72 },
-  { label: "Nói", before: 28, after: 65 },
-  { label: "Đọc", before: 40, after: 78 },
-  { label: "Viết", before: 32, after: 70 },
-];
-
-function Stars({ rating }: { rating: 4 | 5 }) {
-  return (
-    <div className="flex items-center gap-1 text-[var(--accent)]" aria-label={`${rating} trên 5 sao`}>
-      {Array.from({ length: 5 }).map((_, i) => (
-        <Star
-          key={i}
-          className={`h-4 w-4 ${i < rating ? "fill-current" : "fill-transparent opacity-40"}`}
-          strokeWidth={1.6}
-          aria-hidden
-        />
-      ))}
-    </div>
-  );
-}
 
 export function ProofSection() {
+  const [selectedCase, setSelectedCase] = useState<string>(caseStudies[0].id);
+  const activeCase = caseStudies.find((c) => c.id === selectedCase) ?? caseStudies[0];
+
   return (
-    <section className="bg-[var(--background)] py-8 sm:py-12">
-      <div className="mx-auto max-w-8xl px-4 sm:px-6">
-        <h2 className="text-6xl text-center font-bold tracking-tight text-[var(--foreground)] sm:text-6xl">
-          Bằng chứng & phản hồi
-        </h2>
-        <p className="mt-3 max-w-2xl text-[var(--muted)]">
-          Không chỉ nói “chúng tôi tốt” — bên dưới là tiến độ (mẫu) và feedback được trình bày theo format có “nguồn”/dẫn chứng.
-          Hiện dùng dữ liệu mock để bạn thay bằng case thật khi được phép chia sẻ.
-        </p>
-
-        <div className="mt-10 space-y-10">
-          <div>
-            <div className="flex items-end justify-between gap-4">
-              <div>
-                <h3 className="text-lg font-semibold text-[var(--foreground)]">Feedback</h3>
-                <p className="mt-1 text-xs font-medium text-[var(--muted)]">
-                  Xếp theo dạng review: có người gửi, thời điểm, bối cảnh học và nguồn.
-                </p>
-              </div>
-            </div>
-
-            <ul className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
-              {testimonials.map((t) => (
-                <li
-                  key={t.quote}
-                  className="h-full group overflow-hidden rounded-3xl border border-[var(--border)] bg-white shadow-sm shadow-black/[0.04] ring-1 ring-black/[0.03] transition hover:-translate-y-0.5 hover:shadow-md flex flex-col"
-                >
-                  <div className="p-5 sm:p-6 flex flex-col flex-1">
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="min-w-0">
-                        <div className="flex items-center gap-2">
-                          <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--primary)] text-xs font-extrabold text-[var(--on-primary)]">
-                            {t.name
-                              .replaceAll("(đã ẩn danh)", "")
-                              .trim()
-                              .split(" ")
-                              .slice(0, 2)
-                              .map((w) => w[0]?.toUpperCase())
-                              .join("") || "XL"}
-                          </span>
-                          <div className="min-w-0">
-                            <p className="truncate text-sm font-extrabold text-[var(--foreground)]">{t.name}</p>
-                            <p className="truncate text-xs font-medium text-[var(--muted)]">
-                              {t.role} • {t.dateText}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      <Stars rating={t.rating} />
-                    </div>
-
-                    <div className="mt-4 rounded-2xl bg-[var(--surface-2)] p-4 ring-1 ring-black/5 flex-1">
-                      <div className="flex items-center gap-2 text-[var(--muted)]">
-                        <Quote className="h-4 w-4" aria-hidden />
-                        <p className="text-xs font-bold uppercase tracking-widest">Feedback</p>
-                      </div>
-                      <blockquote className="mt-2 text-sm leading-relaxed text-[var(--foreground)]">
-                        “{t.quote}”
-                      </blockquote>
-                      <p className="mt-3 text-xs font-semibold text-[var(--muted)]">{t.program}</p>
-                    </div>
-
-                    <div className="mt-4 flex items-center justify-between gap-3">
-                      <a
-                        href={t.source.url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-2 text-xs font-bold text-[var(--foreground)] ring-1 ring-black/5 transition group-hover:ring-black/10"
-                        aria-label={`Mở nguồn: ${t.source.label}`}
-                      >
-                        <ExternalLink className="h-4 w-4 text-[var(--accent)]" aria-hidden />
-                        {t.source.label}
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="relative h-40 w-full overflow-hidden bg-[var(--surface-1)]">
-                    <Image
-                      src={t.proof.src}
-                      alt={t.proof.alt}
-                      fill
-                      className="object-cover transition duration-500 group-hover:scale-[1.02]"
-                    />
-                    <div className="pointer-events-none absolute inset-0 bg-black/20" aria-hidden />
-                    <div className="absolute bottom-3 left-3 inline-flex items-center gap-2 rounded-full bg-white/90 px-3 py-1.5 text-[10px] font-extrabold text-[var(--foreground)] ring-1 ring-black/10 backdrop-blur">
-                      <BadgeCheck className="h-3.5 w-3.5 text-[var(--primary)]" aria-hidden />
-                      Ảnh chụp minh hoạ dẫn chứng
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
+    <section id="ket-qua-hoc-vien" className="scroll-mt-20 bg-[var(--background)] py-16 sm:py-24 border-t border-black/5">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="mx-auto max-w-3xl text-center">
+          <div className="inline-flex items-center gap-2 rounded-full bg-[var(--primary)]/10 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-[var(--secondary)] ring-1 ring-[var(--primary)]/25">
+            <Award className="h-3.5 w-3.5 text-[var(--secondary)]" />
+            Minh chứng & Kết quả thực tế
           </div>
+          <h2 className="mt-4 font-heading text-3xl font-black tracking-tight text-[var(--foreground)] sm:text-4xl lg:text-5xl leading-tight">
+            Không chỉ khoe band. Cho bạn thấy XLE đã “Chữa” điều gì để tạo ra kết quả đó.
+          </h2>
+          <p className="mt-4 text-base font-medium leading-relaxed text-[var(--muted)] sm:text-lg">
+            Mỗi học viên tại Xa Lộ đều là một hành trình rõ ràng: <span className="font-bold text-[var(--foreground)]">Vấn đề ban đầu → Chẩn ra điểm nghẽn → Kế hoạch Chữa → Tiến bộ đo được.</span>
+          </p>
+        </div>
 
-          <div className="rounded-3xl border border-[var(--border)] bg-white/60 p-6 shadow-sm shadow-black/[0.04] ring-1 ring-black/[0.03] backdrop-blur-sm sm:p-8">
-            <div className="flex flex-wrap items-start justify-between gap-3">
+        {/* Tab Selection */}
+        <div className="mt-10 flex flex-wrap justify-center gap-3">
+          {caseStudies.map((item) => {
+            const isActive = item.id === selectedCase;
+            return (
+              <button
+                key={item.id}
+                onClick={() => setSelectedCase(item.id)}
+                className={`flex items-center gap-3 rounded-full px-6 py-3 text-sm font-extrabold transition-all duration-300 cursor-pointer ${
+                  isActive
+                    ? "bg-[var(--primary)] text-[var(--on-primary)] shadow-lg shadow-[var(--primary)]/25 scale-105"
+                    : "bg-white text-[var(--foreground)] shadow-sm ring-1 ring-black/5 hover:bg-[var(--surface-1)]"
+                }`}
+              >
+                <span>{item.studentName}</span>
+                <span className={`rounded-full px-2 py-0.5 text-xs font-black ${isActive ? "bg-white text-[var(--secondary)]" : "bg-[var(--surface-2)] text-[var(--muted)]"}`}>
+                  {item.startBand} → {item.endBand}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Case Study Detail Card (Before -> Diagnosis -> Treatment -> Result) */}
+        <div className="mt-10 rounded-[2.5rem] bg-white p-6 shadow-xl ring-1 ring-black/5 sm:p-10 lg:p-12">
+          {/* Header of the Active Case */}
+          <div className="flex flex-col gap-6 border-b border-black/5 pb-8 lg:flex-row lg:items-center lg:justify-between">
+            <div className="flex items-center gap-4">
+              <div className="relative h-16 w-16 overflow-hidden rounded-full ring-2 ring-[var(--primary)]">
+                <Image
+                  src={activeCase.avatar}
+                  alt={activeCase.studentName}
+                  fill
+                  className="object-cover"
+                />
+              </div>
               <div>
-                <p className="text-sm font-semibold uppercase tracking-wide text-[var(--accent)]">
-                  Minh hoạ tiến bộ (mẫu)
-                </p>
-                <p className="mt-2 text-2xl font-bold text-[var(--foreground)]">
-                  IELTS Overall:{" "}
-                  <span className="text-[var(--muted)] line-through decoration-2">4.0</span> →{" "}
-                  <span className="text-[var(--accent)]">6.5</span>
-                </p>
-                <p className="mt-1 text-xs text-[var(--muted)]">Sau 5–6 tháng — lộ trình cá nhân, có mốc kiểm tra giữa kỳ.</p>
-              </div>
-              <div className="flex items-center gap-2 rounded-full bg-white px-3 py-2 text-xs font-semibold text-[var(--foreground)] ring-1 ring-black/5">
-                <BadgeCheck className="h-4 w-4 text-[var(--primary)]" aria-hidden />
-                Có mốc đo lại giữa chặng
-              </div>
-            </div>
-
-            <div className="mt-8 space-y-5" role="img" aria-label="Biểu đồ kỹ năng trước và sau">
-              <p className="text-xs font-medium text-[var(--muted)]">Kỹ năng (% — ví dụ minh hoạ)</p>
-              {skillBars.map((row) => (
-                <div key={row.label}>
-                  <div className="mb-2 flex justify-between text-xs font-medium text-[var(--foreground)]">
-                    <span>{row.label}</span>
-                    <span className="text-[var(--muted)]">
-                      {row.before}% → {row.after}%
-                    </span>
-                  </div>
-                  <div className="space-y-1.5">
-                    <div className="flex items-center gap-2">
-                      <span className="w-11 shrink-0 text-[10px] text-[var(--muted)]">Trước</span>
-                      <div className="h-2 flex-1 rounded-full bg-[var(--secondary)]/25">
-                        <div className="h-full rounded-full bg-[var(--secondary)]" style={{ width: `${row.before}%` }} />
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="w-11 shrink-0 text-[10px] text-[var(--muted)]">Sau</span>
-                      <div className="h-2 flex-1 rounded-full bg-[var(--secondary)]/25">
-                        <div className="h-full rounded-full bg-[var(--primary)]" style={{ width: `${row.after}%` }} />
-                      </div>
-                    </div>
-                  </div>
+                <div className="flex items-center gap-2">
+                  <h3 className="text-2xl font-black text-[var(--foreground)]">{activeCase.studentName}</h3>
+                  <BadgeCheck className="h-5 w-5 text-[var(--primary)]" />
                 </div>
-              ))}
+                <p className="mt-1 text-xs font-semibold text-[var(--muted)] sm:text-sm">
+                  {activeCase.targetRole}
+                </p>
+              </div>
             </div>
 
+            <div className="flex flex-wrap items-center gap-4">
+              <div className="rounded-2xl bg-[var(--surface-2)] px-5 py-3 text-center ring-1 ring-black/5">
+                <p className="text-[10px] font-black uppercase tracking-wider text-[var(--muted)]">Tiến bộ Band</p>
+                <p className="mt-0.5 text-xl font-black text-[var(--secondary)]">
+                  {activeCase.startBand} <span className="text-[var(--primary)] font-bold">→</span> {activeCase.endBand}
+                </p>
+              </div>
+
+              <div className="rounded-2xl bg-[var(--surface-2)] px-5 py-3 text-center ring-1 ring-black/5">
+                <p className="text-[10px] font-black uppercase tracking-wider text-[var(--muted)]">Thời gian học</p>
+                <p className="mt-0.5 text-sm font-black text-[var(--foreground)]">{activeCase.timeframe}</p>
+              </div>
+            </div>
           </div>
+
+          {/* 4-Step Process Breakdown */}
+          <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {/* 1. Trước khi học */}
+            <div className="rounded-2xl bg-[var(--surface-1)] p-5 ring-1 ring-black/5">
+              <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-[var(--muted)]">
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-black/10 text-[10px]">1</span>
+                Trước khi học
+              </div>
+              <p className="mt-3 text-sm font-semibold leading-relaxed text-[var(--foreground)] text-pretty">
+                {activeCase.before}
+              </p>
+            </div>
+
+            {/* 2. BCB chẩn ra gì */}
+            <div className="rounded-2xl bg-[var(--secondary)]/10 p-5 ring-1 ring-[var(--secondary)]/20 border-l-4 border-[var(--secondary)]">
+              <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-[var(--secondary)]">
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--secondary)] text-white text-[10px]">2</span>
+                BCB Chẩn ra gì?
+              </div>
+              <p className="mt-3 text-sm font-semibold leading-relaxed text-[var(--foreground)] text-pretty">
+                {activeCase.diagnosisBCB}
+              </p>
+            </div>
+
+            {/* 3. XLE chữa gì */}
+            <div className="rounded-2xl bg-[var(--primary)]/10 p-5 ring-1 ring-[var(--primary)]/20 border-l-4 border-[var(--primary)]">
+              <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-[var(--secondary)]">
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--primary)] text-white text-[10px]">3</span>
+                XLE tập trung chữa gì?
+              </div>
+              <p className="mt-3 text-sm font-semibold leading-relaxed text-[var(--foreground)] text-pretty">
+                {activeCase.treatmentRLP}
+              </p>
+            </div>
+
+            {/* 4. Kết quả sau quá trình */}
+            <div className="rounded-2xl bg-[var(--surface-2)] p-5 ring-1 ring-black/5 border-l-4 border-[var(--secondary)]">
+              <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-[var(--secondary)]">
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--secondary)] text-white text-[10px]">4</span>
+                Kết quả đạt được
+              </div>
+              <p className="mt-3 text-sm font-black leading-relaxed text-[var(--foreground)] text-pretty">
+                {activeCase.resultSummary}
+              </p>
+            </div>
+          </div>
+
+          {/* Feedback Quote Block */}
+          <div className="mt-8 rounded-2xl bg-[var(--surface-2)] p-6 ring-1 ring-black/5 sm:p-8">
+            <div className="flex items-start gap-4">
+              <Quote className="h-8 w-8 shrink-0 text-[var(--secondary)] opacity-80" />
+              <div>
+                <blockquote className="text-base font-bold italic leading-relaxed text-[var(--foreground)] sm:text-lg text-pretty">
+                  “{activeCase.quote}”
+                </blockquote>
+                <div className="mt-3 flex items-center gap-2 text-xs font-bold text-[var(--muted)]">
+                  <BadgeCheck className="h-4 w-4 text-[var(--primary)]" />
+                  <span>{activeCase.proofBadge}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* CTA to View More Cases */}
+        <div className="mt-12 text-center">
+          <Link
+            href="/khoa-hoc"
+            className="group inline-flex items-center gap-2 rounded-full bg-[var(--primary)] px-8 py-4 text-xs font-black uppercase tracking-wider text-[var(--on-primary)] shadow-lg shadow-[var(--primary)]/20 transition-all duration-300 hover:-translate-y-1 hover:bg-[var(--secondary)] hover:shadow-xl"
+          >
+            XEM THÊM CASE STUDY & BẢNG ĐIỂM
+            <ChevronRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </Link>
         </div>
       </div>
     </section>

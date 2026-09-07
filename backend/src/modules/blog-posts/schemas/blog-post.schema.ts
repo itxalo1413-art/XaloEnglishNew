@@ -17,6 +17,12 @@ export class BlogPost {
   @Prop()
   excerpt?: string;
 
+  @Prop()
+  metaTitle?: string;
+
+  @Prop()
+  metaDescription?: string;
+
   @Prop({ required: true })
   contentHtml!: string;
 }

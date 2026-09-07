@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import slugify from 'slugify';
 import { Course } from './schemas/course.schema';
 import { UpsertCourseDto } from './dto/upsert-course.dto';
+import { DEFAULT_COURSES } from './courses.defaults';
 
 @Injectable()
 export class CoursesService {
@@ -42,7 +43,9 @@ export class CoursesService {
   }
 
   async create(dto: UpsertCourseDto) {
-    const slug = await this.generateUniqueSlug(dto.name);
+    const slug = dto.slug?.trim()
+      ? dto.slug.trim()
+      : await this.generateUniqueSlug(dto.title);
     return this.courseModel.create({
       ...dto,
       slug,
@@ -50,12 +53,32 @@ export class CoursesService {
     });
   }
 
+  /** Thêm khóa học mẫu (bỏ qua slug đã tồn tại). */
+  async seedDefaults() {
+    let created = 0;
+    let skipped = 0;
+    for (const dto of DEFAULT_COURSES) {
+      const exists = await this.courseModel.findOne({ slug: dto.slug });
+      if (exists) {
+        skipped += 1;
+        continue;
+      }
+      await this.courseModel.create({
+        ...dto,
+        slug: dto.slug!,
+        is_active: dto.is_active ?? true,
+      });
+      created += 1;
+    }
+    return { created, skipped, total: DEFAULT_COURSES.length };
+  }
+
   async update(id: string, dto: UpsertCourseDto) {
     const existing = await this.courseModel.findById(id);
     if (!existing) throw new NotFoundException('Course not found');
     const nextSlug =
-      dto.name && dto.name !== existing.name
-        ? await this.generateUniqueSlug(dto.name, id)
+      dto.title && dto.title !== existing.title
+        ? await this.generateUniqueSlug(dto.title, id)
         : existing.slug;
     Object.assign(existing, dto, { slug: nextSlug });
     if (dto.is_active !== undefined)

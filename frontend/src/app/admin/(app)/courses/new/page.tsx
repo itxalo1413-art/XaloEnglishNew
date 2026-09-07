@@ -4,27 +4,30 @@ import { FormEvent, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { adminApi, ApiError } from "@/lib/admin-api";
 import { getAdminToken } from "@/components/admin/auth";
+import { uploadAdminImage } from "@/lib/admin-upload";
+import {
+  AdminAlert,
+  AdminButton,
+  AdminField,
+  AdminInput,
+  AdminPageHeader,
+  AdminPanel,
+  AdminTextarea,
+} from "@/components/admin/admin-ui";
 
 export default function AdminNewCoursePage() {
   const router = useRouter();
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const [name, setName] = useState("");
-  const [shortDescription, setShortDescription] = useState("");
-  const [price, setPrice] = useState<string>("0");
+  const [title, setTitle] = useState("");
+  const [mode, setMode] = useState<"online" | "offline">("online");
+  const [note, setNote] = useState("");
   const [isActive, setIsActive] = useState(true);
-  const [imageUrl, setImageUrl] = useState("");
   const [fullContent, setFullContent] = useState("");
+  const [imageFile, setImageFile] = useState<File | null>(null);
 
-  const canSubmit = useMemo(() => {
-    return (
-      name.trim().length > 0 &&
-      shortDescription.trim().length > 0 &&
-      fullContent.trim().length > 0 &&
-      Number.isFinite(Number(price))
-    );
-  }, [name, shortDescription, fullContent, price]);
+  const canSubmit = useMemo(() => title.trim().length > 0, [title]);
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -35,13 +38,15 @@ export default function AdminNewCoursePage() {
     setSaving(true);
     setError(null);
     try {
+      let image_url: string | undefined;
+      if (imageFile) image_url = await uploadAdminImage(token, imageFile);
       await adminApi.courses.create(token, {
-        name: name.trim(),
-        short_description: shortDescription.trim(),
-        price: Number(price),
+        title: title.trim(),
+        mode,
+        note: note.trim() || undefined,
         is_active: isActive,
-        image_url: imageUrl.trim() || undefined,
-        full_content: fullContent,
+        image_url,
+        full_content: fullContent.trim() || undefined,
       });
       router.replace("/admin/courses");
     } catch (err) {
@@ -55,105 +60,68 @@ export default function AdminNewCoursePage() {
 
   return (
     <div>
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight text-[var(--foreground)]">
-            Thêm khóa học
-          </h1>
-          <p className="mt-1 text-sm text-[var(--muted)]">
-            Map theo `UpsertCourseDto` (name, short_description, price, is_active, image_url, full_content).
-          </p>
-        </div>
-      </div>
+      <AdminPageHeader title="Thêm khóa học" description="Khóa học mới sẽ hiển thị trên trang Khóa học" />
 
-      <form onSubmit={onSubmit} className="mt-8 space-y-5">
-        <div className="grid gap-4 lg:grid-cols-2">
-          <label className="block">
-            <span className="text-xs font-semibold text-[var(--muted)]">Tên khóa học</span>
-            <input
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="mt-2 h-11 w-full rounded-sm border border-[var(--border)] bg-[var(--background)] px-3 text-sm outline-none transition focus:border-[var(--border-strong)]"
-            />
-          </label>
-
-          <label className="block">
-            <span className="text-xs font-semibold text-[var(--muted)]">Giá</span>
-            <input
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-              inputMode="numeric"
-              className="mt-2 h-11 w-full rounded-sm border border-[var(--border)] bg-[var(--background)] px-3 text-sm outline-none transition focus:border-[var(--border-strong)]"
-            />
-          </label>
-        </div>
-
-        <label className="block">
-          <span className="text-xs font-semibold text-[var(--muted)]">Mô tả ngắn</span>
-          <textarea
-            value={shortDescription}
-            onChange={(e) => setShortDescription(e.target.value)}
-            rows={3}
-            className="mt-2 w-full rounded-sm border border-[var(--border)] bg-[var(--background)] px-3 py-2 text-sm outline-none transition focus:border-[var(--border-strong)]"
-          />
-        </label>
-
-        <div className="grid gap-4 lg:grid-cols-2">
-          <label className="block">
-            <span className="text-xs font-semibold text-[var(--muted)]">Image URL (optional)</span>
-            <input
-              value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
-              className="mt-2 h-11 w-full rounded-sm border border-[var(--border)] bg-[var(--background)] px-3 text-sm outline-none transition focus:border-[var(--border-strong)]"
-              placeholder="https://..."
-            />
-          </label>
-
-          <label className="flex items-end gap-3 rounded-sm border border-[var(--border)] bg-[var(--surface-2)] px-3 py-3">
-            <input
-              type="checkbox"
-              checked={isActive}
-              onChange={(e) => setIsActive(e.target.checked)}
-              className="h-4 w-4"
-            />
-            <span className="text-sm font-semibold text-[var(--foreground)]">Đang hoạt động</span>
-          </label>
-        </div>
-
-        <label className="block">
-          <span className="text-xs font-semibold text-[var(--muted)]">Nội dung chi tiết (HTML/text)</span>
-          <textarea
-            value={fullContent}
-            onChange={(e) => setFullContent(e.target.value)}
-            rows={10}
-            className="mt-2 w-full rounded-sm border border-[var(--border)] bg-[var(--background)] px-3 py-2 text-sm outline-none transition focus:border-[var(--border-strong)]"
-          />
-        </label>
-
-        {error ? (
-          <div className="rounded-sm bg-red-50 px-3 py-2 text-sm text-red-700 ring-1 ring-red-200">
-            {error}
+      <form onSubmit={onSubmit} className="mt-8">
+        <AdminPanel>
+          <AdminField label="Tên khóa học">
+            <AdminInput value={title} onChange={(e) => setTitle(e.target.value)} required />
+          </AdminField>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            <AdminField label="Hình thức">
+              <select
+                value={mode}
+                onChange={(e) => setMode(e.target.value as "online" | "offline")}
+                className="h-11 w-full rounded-sm border border-[var(--border)] bg-[var(--background)] px-3 text-sm"
+              >
+                <option value="online">Online</option>
+                <option value="offline">Offline</option>
+              </select>
+            </AdminField>
+            <AdminField label="Trạng thái">
+              <label className="mt-2 flex items-center gap-2 text-sm">
+                <input type="checkbox" checked={isActive} onChange={(e) => setIsActive(e.target.checked)} />
+                Hiển thị trên web
+              </label>
+            </AdminField>
           </div>
-        ) : null}
+          <div className="mt-4">
+            <AdminField label="Ghi chú ngắn">
+              <AdminInput value={note} onChange={(e) => setNote(e.target.value)} />
+            </AdminField>
+          </div>
+          <div className="mt-4">
+            <AdminField label="Ảnh khóa học">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => setImageFile(e.target.files?.[0] ?? null)}
+                className="block w-full text-sm file:mr-3 file:rounded-sm file:border-0 file:bg-[var(--primary)] file:px-3 file:py-2 file:text-xs file:font-semibold file:text-[var(--on-primary)]"
+              />
+            </AdminField>
+          </div>
+          <div className="mt-4">
+            <AdminField label="Nội dung chi tiết">
+              <AdminTextarea rows={8} value={fullContent} onChange={(e) => setFullContent(e.target.value)} />
+            </AdminField>
+          </div>
 
-        <div className="flex flex-wrap gap-2">
-          <button
-            type="submit"
-            disabled={!canSubmit || saving}
-            className="inline-flex h-11 items-center justify-center rounded-sm bg-[var(--primary)] px-5 text-sm font-semibold text-[var(--on-primary)] transition-opacity hover:opacity-90 disabled:opacity-50"
-          >
-            {saving ? "Đang lưu…" : "Tạo khóa học"}
-          </button>
-          <button
-            type="button"
-            onClick={() => router.back()}
-            className="inline-flex h-11 items-center justify-center rounded-sm border border-[var(--border)] px-5 text-sm font-semibold text-[var(--foreground)] transition hover:border-[var(--border-strong)]"
-          >
-            Hủy
-          </button>
-        </div>
+          {error ? (
+            <div className="mt-4">
+              <AdminAlert>{error}</AdminAlert>
+            </div>
+          ) : null}
+
+          <div className="mt-6 flex gap-2">
+            <AdminButton type="submit" variant="primary" disabled={!canSubmit || saving}>
+              {saving ? "Đang lưu…" : "Tạo khóa học"}
+            </AdminButton>
+            <AdminButton type="button" variant="secondary" onClick={() => router.back()}>
+              Huỷ
+            </AdminButton>
+          </div>
+        </AdminPanel>
       </form>
     </div>
   );
 }
-

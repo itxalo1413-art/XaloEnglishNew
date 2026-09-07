@@ -2,218 +2,322 @@
 
 import Link from "next/link";
 import { FormEvent, useState } from "react";
+import { CheckCircle2, ChevronRight, Send, Sparkles, Stethoscope } from "lucide-react";
+import { submitLead } from "@/lib/leads-api";
 
-const PURPOSE_OPTIONS = [
-  { id: "study-abroad", label: "Đi du học" },
-  { id: "immigration", label: "Định cư nước ngoài" },
-  { id: "university", label: "Đầu vào/ đầu ra đại học" },
-  { id: "career", label: "Thăng tiến trong công việc" },
-  { id: "passion", label: "Rất yêu thích tiếng Anh" },
-  { id: "other", label: "Lí do khác" },
+const SITUATION_OPTIONS = [
+  { id: "mat-goc", label: "Mất gốc / Hổng kiến thức" },
+  { id: "dang-hoc", label: "Đang học IELTS" },
+  { id: "sap-thi", label: "Sắp thi (cần bứt band)" },
+  { id: "chua-biet", label: "Chưa biết bắt đầu từ đâu" },
 ] as const;
 
-const TIME_OPTIONS = [
-  { id: "morning", label: "Buổi sáng (9 a.m. – 12 p.m.)" },
-  { id: "afternoon", label: "Buổi chiều (12 p.m. – 6 p.m.)" },
-  { id: "evening", label: "Buổi tối (6 p.m. – 11 p.m.)" },
-] as const;
+const TARGET_BANDS = ["5.0 - 5.5", "6.0 - 6.5", "7.0 - 7.5", "8.0+", "Chưa rõ mục tiêu"];
+const DEADLINES = ["Dưới 3 tháng (Gấp)", "3 - 6 tháng", "6 - 12 tháng", "Thong thả"];
+const LEARNING_MODES = ["Online", "Offline (tại Phú Nhuận)", "Lớp 1 Kèm 1"];
+const TIME_SLOTS = ["Buổi sáng (9h - 12h)", "Buổi chiều (14h - 17h)", "Buổi tối (18h - 21h)"];
 
 export function FinalCta() {
-  const [purpose, setPurpose] = useState<string>("");
-  const [purposeOther, setPurposeOther] = useState("");
-  const [timeSlot, setTimeSlot] = useState<string>("");
+  const [situation, setSituation] = useState<string>("mat-goc");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+
+  // Step 2 (Progressive profiling after initial submit or expanded)
+  const [targetBand, setTargetBand] = useState(TARGET_BANDS[1]);
+  const [deadline, setDeadline] = useState(DEADLINES[1]);
+  const [learningMode, setLearningMode] = useState(LEARNING_MODES[0]);
+  const [timeSlot, setTimeSlot] = useState(TIME_SLOTS[2]);
+
+  const [step, setStep] = useState<1 | 2>(1);
+  const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const onSubmit = (e: FormEvent) => {
+  const onInitialSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !phone.trim() || !purpose || !timeSlot) return;
-    if (purpose === "other" && !purposeOther.trim()) return;
+    if (!name.trim() || !phone.trim() || submitting) return;
 
-    const purposeLabel =
-      purpose === "other"
-        ? `Lí do khác: ${purposeOther.trim()}`
-        : PURPOSE_OPTIONS.find((p) => p.id === purpose)?.label ?? purpose;
-    const timeLabel = TIME_OPTIONS.find((t) => t.id === timeSlot)?.label ?? timeSlot;
+    setSubmitting(true);
+    setSubmitError(null);
 
-    const subject = encodeURIComponent("Đăng ký tư vấn — Xa Lộ English (trang chủ)");
-    const body = encodeURIComponent(
-      `Mục đích học tiếng Anh/ IELTS: ${purposeLabel}\n` +
-        `Khung giờ tư vấn mong muốn: ${timeLabel}\n` +
-        `Tên: ${name.trim()}\n` +
-        `Điện thoại: ${phone.trim()}\n` +
-        `Email: ${email.trim() || "(chưa điền)"}\n`
-    );
-    window.location.href = `mailto:hello@xaloenglish.vn?subject=${subject}&body=${body}`;
-    setSubmitted(true);
+    const sitLabel = SITUATION_OPTIONS.find((s) => s.id === situation)?.label ?? situation;
+
+    try {
+      await submitLead({
+        name: name.trim(),
+        phone: phone.trim(),
+        email: email.trim() || undefined,
+        purpose: `Tình trạng: ${sitLabel}`,
+        timeSlot: timeSlot,
+        message: `Đăng ký Test Trình Độ & Chẩn Bệnh miễn phí. Tình trạng: ${sitLabel}.`,
+      });
+      // Move to step 2 for progressive profiling
+      setStep(2);
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : "Gửi đăng ký thất bại. Vui lòng thử lại.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const onFinalizeProfiling = async (e: FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    try {
+      const sitLabel = SITUATION_OPTIONS.find((s) => s.id === situation)?.label ?? situation;
+      await submitLead({
+        name: name.trim(),
+        phone: phone.trim(),
+        email: email.trim() || undefined,
+        purpose: `Target: ${targetBand} | Deadline: ${deadline} | Hình thức: ${learningMode}`,
+        timeSlot: timeSlot,
+        message: `Cập nhật hồ sơ: Tình trạng: ${sitLabel} | Target: ${targetBand} | Deadline: ${deadline} | Hình thức: ${learningMode} | Khung giờ tư vấn: ${timeSlot}.`,
+      });
+      setSubmitted(true);
+    } catch {
+      // Even if secondary update fails, user lead is already recorded
+      setSubmitted(true);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
-    <div className="relative bg-[var(--primary)] pb-0">
-      {/* Background fill for the bottom diagonal reveal */}
-      <div className="absolute inset-x-0 bottom-0 top-[80%] bg-[var(--background)]" />
-      
-      <section
-        id="dang-ky-tu-van"
-        className="relative scroll-mt-24 py-24 sm:py-36 overflow-hidden"
-        style={{
-          clipPath: "polygon(0 6vw, 100% 0, 100% calc(100% - 6vw), 0 100%)",
-        }}
-      >
-        {/* Solid Background */}
-        <div className="absolute inset-0 bg-[var(--primary)]" />
-        
-        {/* Removed Mesh glowing orbs */}
+    <section id="test-dau-vao" className="scroll-mt-20 bg-[var(--primary)] text-white py-16 sm:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
+          {/* Left Column: Brand Message & Value Props */}
+          <div className="lg:col-span-6">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-white ring-1 ring-white/25">
+              <Stethoscope className="h-3.5 w-3.5 text-white" />
+              Test 4 Kỹ Năng Miễn Phí
+            </div>
 
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 relative z-10">
-          <div className="text-center lg:text-left">
-            <h2 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl drop-shadow-md">Sẵn sàng bước tiếp?</h2>
-            <p className="mx-auto mt-5 max-w-3xl text-sm font-semibold leading-relaxed text-white/90 sm:text-lg lg:mx-0 drop-shadow-sm">
-              Điền form — chúng tôi tư vấn lộ trình phù hợp và giúp bạn Chẩn bệnh mượt mà.
+            <h2 className="mt-5 font-heading text-3xl font-black uppercase tracking-tight sm:text-4xl lg:text-5xl leading-tight text-balance">
+              Đăng ký Test trình độ & Nhận Bảng Chẩn Bệnh
+            </h2>
+
+            <p className="mt-5 text-base font-medium leading-relaxed text-white/90 sm:text-lg text-pretty">
+              Giáo viên Xa Lộ English sẽ trực tiếp đánh giá năng lực 4 kỹ năng của bạn, chỉ rõ điểm nghẽn và tư vấn lộ trình chữa phù hợp nhất.
             </p>
+
+            {/* Brand Message Chốt */}
+            <div className="mt-8 rounded-[2rem] bg-white/10 p-6 backdrop-blur-md ring-1 ring-white/20">
+              <p className="text-[11px] font-black uppercase tracking-widest text-white/80">
+                Triết lý đào tạo XLE
+              </p>
+              <h3 className="mt-2 text-xl font-black uppercase tracking-tight text-white sm:text-2xl text-pretty">
+                Học đúng cách khi hiểu đúng mình
+              </h3>
+              <p className="mt-1 text-sm font-extrabold text-white/80">
+                Cùng Quy trình Chẩn – Chữa
+              </p>
+            </div>
+
+            <ul className="mt-6 space-y-3 text-sm font-semibold text-white/90">
+              <li className="flex items-center gap-2.5">
+                <CheckCircle2 className="h-5 w-5 text-white" />
+                Miễn phí 100% bài kiểm tra và buổi phân tích năng lực
+              </li>
+              <li className="flex items-center gap-2.5">
+                <CheckCircle2 className="h-5 w-5 text-white" />
+                Nhận Bảng Chẩn Bệnh (BCB) lưu trữ trọn đời
+              </li>
+              <li className="flex items-center gap-2.5">
+                <CheckCircle2 className="h-5 w-5 text-white" />
+                Không ép buộc mua khóa học nếu chưa sẵn sàng
+              </li>
+            </ul>
           </div>
 
-          <div className="relative mt-12 sm:mt-16">
-            <div className="pointer-events-none absolute -inset-6 rounded-[3.5rem] bg-black/20 blur-2xl opacity-40" />
-            <form
-              onSubmit={onSubmit}
-              className="relative rounded-[2.5rem] bg-white/95 p-6 text-left text-[var(--foreground)] shadow-2xl ring-1 ring-white/50 backdrop-blur-3xl sm:p-8 lg:p-12 transition-all duration-500 hover:shadow-[0_20px_50px_rgb(0,0,0,0.3)] hover:-translate-y-1"
-            >
-              {/* Hàng 1: mục đích — chip ngang */}
-              <fieldset>
-                <legend className="mb-4 block text-sm font-extrabold uppercase tracking-widest text-[var(--muted)]">
-                  Mục đích học tiếng Anh / IELTS
-                </legend>
-                <div className="flex flex-wrap gap-2.5">
-                  {PURPOSE_OPTIONS.map((opt) => (
-                    <label
-                      key={opt.id}
-                      className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface-1)] px-5 py-3 text-sm font-bold transition-all duration-300 hover:border-[var(--primary)]/50 hover:bg-[var(--primary)]/5 hover:-translate-y-0.5 hover:shadow-md has-[:checked]:border-[var(--primary)] has-[:checked]:bg-[var(--primary)] has-[:checked]:text-white has-[:checked]:shadow-lg has-[:checked]:shadow-[var(--primary)]/30"
-                    >
-                      <input
-                        type="radio"
-                        name="purpose"
-                        value={opt.id}
-                        checked={purpose === opt.id}
-                        onChange={() => setPurpose(opt.id)}
-                        className="sr-only" // Hidden radio for cleaner look
-                      />
-                      <span>{opt.label}</span>
-                    </label>
-                  ))}
-                </div>
-                {purpose === "other" && (
-                  <div className="mt-4 animate-in fade-in slide-in-from-top-2 duration-300">
-                    <label className="block max-w-3xl text-sm">
-                      <span className="mb-2 block font-extrabold text-[var(--foreground)]">Mô tả lí do khác *</span>
-                      <textarea
-                        value={purposeOther}
-                        onChange={(e) => setPurposeOther(e.target.value)}
-                        required={purpose === "other"}
-                        rows={2}
-                        className="w-full rounded-2xl border border-[var(--border)] bg-white px-5 py-4 text-base font-medium text-[var(--foreground)] shadow-sm outline-none transition-all duration-300 focus:border-[var(--primary)] focus:ring-4 focus:ring-[var(--primary)]/10"
-                        placeholder="Nhập lí do của bạn"
-                      />
-                    </label>
+          {/* Right Column: Lead Form */}
+          <div className="lg:col-span-6">
+            <div className="rounded-[2.5rem] bg-white p-6 text-[var(--foreground)] shadow-2xl ring-1 ring-black/10 sm:p-8 md:p-10">
+              {submitted ? (
+                <div className="py-8 text-center animate-in fade-in duration-500">
+                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[var(--primary)]/15 text-[var(--secondary)]">
+                    <CheckCircle2 className="h-10 w-10" />
                   </div>
-                )}
-              </fieldset>
-
-              {/* Hàng 2: khung giờ — ba ô ngang (md+) */}
-              <fieldset className="mt-8 border-t border-black/5 pt-8">
-                <legend className="mb-4 block text-sm font-extrabold uppercase tracking-widest text-[var(--muted)]">
-                  Khung thời gian mong muốn tư vấn
-                </legend>
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-                  {TIME_OPTIONS.map((opt) => (
-                    <label
-                      key={opt.id}
-                      className="flex min-h-[4rem] cursor-pointer items-center gap-3 rounded-2xl border border-[var(--border)] bg-[var(--surface-1)] px-5 py-3 text-sm font-bold transition-all duration-300 hover:border-[var(--primary)]/50 hover:bg-[var(--primary)]/5 hover:-translate-y-0.5 hover:shadow-md has-[:checked]:border-[var(--primary)] has-[:checked]:bg-[var(--primary)] has-[:checked]:text-white has-[:checked]:shadow-lg has-[:checked]:shadow-[var(--primary)]/30"
-                    >
-                      <input
-                        type="radio"
-                        name="timeSlot"
-                        value={opt.id}
-                        checked={timeSlot === opt.id}
-                        onChange={() => setTimeSlot(opt.id)}
-                        className="sr-only" // Hidden radio
-                      />
-                      <span className="min-w-0 leading-snug">{opt.label}</span>
-                    </label>
-                  ))}
-                </div>
-              </fieldset>
-
-              {/* Hàng 3: Tên | Điện thoại | Email ngang */}
-              <div className="mt-8 grid grid-cols-1 gap-5 border-t border-black/5 pt-8 sm:grid-cols-3">
-                <label className="block text-sm">
-                  <span className="mb-2 block font-extrabold text-[var(--foreground)]">Tên *</span>
-                  <input
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                    autoComplete="name"
-                    className="h-14 w-full rounded-2xl border border-[var(--border)] bg-[var(--surface-1)] px-5 text-base font-medium text-[var(--foreground)] shadow-sm outline-none transition-all duration-300 focus:bg-white focus:border-[var(--primary)] focus:ring-4 focus:ring-[var(--primary)]/10"
-                    placeholder="Tên của bạn"
-                  />
-                </label>
-                <label className="block text-sm">
-                  <span className="mb-2 block font-extrabold text-[var(--foreground)]">Điện thoại *</span>
-                  <input
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    required
-                    autoComplete="tel"
-                    inputMode="tel"
-                    className="h-14 w-full rounded-2xl border border-[var(--border)] bg-[var(--surface-1)] px-5 text-base font-medium text-[var(--foreground)] shadow-sm outline-none transition-all duration-300 focus:bg-white focus:border-[var(--primary)] focus:ring-4 focus:ring-[var(--primary)]/10"
-                    placeholder="Số điện thoại liên hệ"
-                  />
-                </label>
-                <label className="block text-sm">
-                  <span className="mb-2 block font-extrabold text-[var(--foreground)]">Email</span>
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    autoComplete="email"
-                    className="h-14 w-full rounded-2xl border border-[var(--border)] bg-[var(--surface-1)] px-5 text-base font-medium text-[var(--foreground)] shadow-sm outline-none transition-all duration-300 focus:bg-white focus:border-[var(--primary)] focus:ring-4 focus:ring-[var(--primary)]/10"
-                    placeholder="Địa chỉ Email"
-                  />
-                </label>
-              </div>
-
-              {/* Hàng 4: nút ngang */}
-              <div className="mt-10 flex flex-col gap-4 border-t border-black/5 pt-10 sm:flex-row sm:flex-wrap sm:items-center">
-                <button
-                  type="submit"
-                  className="group inline-flex h-16 min-w-[220px] flex-1 items-center justify-center rounded-full bg-[var(--primary)] px-8 text-sm font-extrabold text-[var(--on-primary)] shadow-xl shadow-[var(--primary)]/20 uppercase tracking-widest transition-all duration-500 hover:-translate-y-1 hover:bg-[var(--primary-hover)] hover:shadow-2xl hover:shadow-[var(--primary)]/40 sm:flex-none"
-                >
-                  Gửi đăng ký tư vấn
-                  <svg className="ml-3 h-4 w-4 transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:translate-x-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </button>
-                <Link
-                  href="/lien-he"
-                  className="inline-flex h-16 min-w-[220px] flex-1 items-center justify-center rounded-full bg-[var(--surface-1)] px-8 text-center text-sm font-extrabold text-[var(--foreground)] shadow-sm uppercase tracking-widest transition-all duration-300 hover:bg-white hover:text-[var(--primary)] hover:shadow-md ring-1 ring-inset ring-[var(--border)] sm:flex-none"
-                >
-                  Làm test đầu vào
-                </Link>
-              </div>
-
-              {submitted && (
-                <div className="mt-8 rounded-2xl bg-[var(--primary)]/5 p-4 text-center">
-                  <p className="text-sm font-bold text-[var(--primary)]">
-                    Cảm ơn bạn! Ứng dụng thư đã mở với nội dung đăng ký — chỉ cần bấm gửi email.
+                  <h3 className="mt-4 text-2xl font-black text-[var(--foreground)]">
+                    Đăng Ký Thành Công!
+                  </h3>
+                  <p className="mt-2 text-sm text-[var(--muted)] font-medium leading-relaxed">
+                    Cảm ơn bạn <span className="font-bold text-[var(--foreground)]">{name}</span>. Đội ngũ học vụ XLE sẽ liên hệ với bạn trong khung giờ <span className="font-bold text-[var(--foreground)]">{timeSlot}</span> để gửi đề test và hẹn lịch Chẩn bệnh.
                   </p>
+                  <div className="mt-6">
+                    <Link
+                      href="/quy-trinh"
+                      className="inline-flex h-12 items-center justify-center rounded-full bg-[var(--primary)] px-6 text-xs font-black uppercase tracking-wider text-white shadow-md hover:bg-[var(--secondary)]"
+                    >
+                      Tìm hiểu thêm về Quy trình Chẩn – Chữa
+                    </Link>
+                  </div>
                 </div>
+              ) : step === 1 ? (
+                /* BƯỚC 1: FORM RÚT GỌN THEO BRIEF */
+                <form onSubmit={onInitialSubmit} className="space-y-6">
+                  <div>
+                    <span className="text-xs font-black uppercase tracking-widest text-[var(--secondary)]">
+                      Bước 1 / 2: Thông tin cơ bản
+                    </span>
+                    <h3 className="mt-1 text-2xl font-black text-[var(--foreground)]">
+                      Bạn đang ở đâu trên hành trình?
+                    </h3>
+                  </div>
+
+                  {/* Single Choice: Tình trạng */}
+                  <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                    {SITUATION_OPTIONS.map((opt) => (
+                      <label
+                        key={opt.id}
+                        className={`flex cursor-pointer items-center gap-3 rounded-2xl border p-3.5 text-xs font-bold transition-all ${
+                          situation === opt.id
+                            ? "border-[var(--primary)] bg-[var(--primary)]/10 text-[var(--secondary)] ring-2 ring-[var(--primary)]/30"
+                            : "border-[var(--border)] bg-[var(--surface-1)] text-[var(--foreground)] hover:bg-white"
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name="situation"
+                          value={opt.id}
+                          checked={situation === opt.id}
+                          onChange={() => setSituation(opt.id)}
+                          className="h-4 w-4 text-[var(--primary)]"
+                        />
+                        <span>{opt.label}</span>
+                      </label>
+                    ))}
+                  </div>
+
+                  {/* Name & Phone Inputs */}
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-xs font-extrabold uppercase tracking-wider text-[var(--muted)]">
+                        Họ và tên <span className="text-[var(--secondary)]">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="Nhập họ và tên của bạn"
+                        className="mt-1.5 h-12 w-full rounded-2xl border border-[var(--border)] bg-[var(--surface-1)] px-4 text-sm font-semibold text-[var(--foreground)] outline-none focus:border-[var(--primary)] focus:bg-white focus:ring-2 focus:ring-[var(--primary)]/20"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-extrabold uppercase tracking-wider text-[var(--muted)]">
+                        Số điện thoại / Zalo <span className="text-[var(--secondary)]">*</span>
+                      </label>
+                      <input
+                        type="tel"
+                        required
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        placeholder="Số điện thoại nhận tư vấn & đề test"
+                        className="mt-1.5 h-12 w-full rounded-2xl border border-[var(--border)] bg-[var(--surface-1)] px-4 text-sm font-semibold text-[var(--foreground)] outline-none focus:border-[var(--primary)] focus:bg-white focus:ring-2 focus:ring-[var(--primary)]/20"
+                      />
+                    </div>
+                  </div>
+
+                  {submitError && (
+                    <p className="text-xs font-bold text-red-600">{submitError}</p>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    className="flex h-14 w-full items-center justify-center rounded-full bg-[var(--primary)] text-xs font-black uppercase tracking-wider text-white shadow-lg shadow-[var(--primary)]/30 transition-all hover:bg-[var(--secondary)] disabled:opacity-50 cursor-pointer"
+                  >
+                    {submitting ? "Đang xử lý..." : "ĐĂNG KÝ TEST MIỄN PHÍ"}
+                    <Send className="ml-2 h-4 w-4" />
+                  </button>
+                </form>
+              ) : (
+                /* BƯỚC 2: PROGRESSIVE PROFILING (MỤC TIÊU & THỜI GIAN) */
+                <form onSubmit={onFinalizeProfiling} className="space-y-6 animate-in fade-in duration-300">
+                  <div>
+                    <span className="text-xs font-black uppercase tracking-widest text-[var(--secondary)]">
+                      Bước 2 / 2: Cá nhân hoá lộ trình
+                    </span>
+                    <h3 className="mt-1 text-2xl font-black text-[var(--foreground)]">
+                      Chi tiết mục tiêu của bạn
+                    </h3>
+                    <p className="text-xs text-[var(--muted)] font-medium">
+                      Giúp XLE chuẩn bị đề test và giáo viên phù hợp nhất cho bạn.
+                    </p>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-xs font-extrabold uppercase tracking-wider text-[var(--muted)]">
+                        Mục tiêu Band IELTS
+                      </label>
+                      <select
+                        value={targetBand}
+                        onChange={(e) => setTargetBand(e.target.value)}
+                        className="mt-1.5 h-12 w-full rounded-2xl border border-[var(--border)] bg-[var(--surface-1)] px-4 text-sm font-semibold text-[var(--foreground)] outline-none focus:border-[var(--primary)]"
+                      >
+                        {TARGET_BANDS.map((b) => (
+                          <option key={b} value={b}>{b}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-extrabold uppercase tracking-wider text-[var(--muted)]">
+                        Thời gian dự kiến thi / hoàn thành
+                      </label>
+                      <select
+                        value={deadline}
+                        onChange={(e) => setDeadline(e.target.value)}
+                        className="mt-1.5 h-12 w-full rounded-2xl border border-[var(--border)] bg-[var(--surface-1)] px-4 text-sm font-semibold text-[var(--foreground)] outline-none focus:border-[var(--primary)]"
+                      >
+                        {DEADLINES.map((d) => (
+                          <option key={d} value={d}>{d}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-extrabold uppercase tracking-wider text-[var(--muted)]">
+                        Khung giờ thuận tiện để nhận tư vấn
+                      </label>
+                      <select
+                        value={timeSlot}
+                        onChange={(e) => setTimeSlot(e.target.value)}
+                        className="mt-1.5 h-12 w-full rounded-2xl border border-[var(--border)] bg-[var(--surface-1)] px-4 text-sm font-semibold text-[var(--foreground)] outline-none focus:border-[var(--primary)]"
+                      >
+                        {TIME_SLOTS.map((t) => (
+                          <option key={t} value={t}>{t}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3">
+                    <button
+                      type="submit"
+                      disabled={submitting}
+                      className="flex h-14 flex-1 items-center justify-center rounded-full bg-[var(--primary)] text-xs font-black uppercase tracking-wider text-white shadow-md hover:bg-[var(--secondary)] cursor-pointer"
+                    >
+                      {submitting ? "Đang lưu..." : "HOÀN TẤT HỒ SƠ"}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setSubmitted(true)}
+                      className="flex h-14 items-center justify-center rounded-full bg-[var(--surface-1)] px-6 text-xs font-bold text-[var(--muted)] hover:text-[var(--foreground)] cursor-pointer"
+                    >
+                      Bỏ qua
+                    </button>
+                  </div>
+                </form>
               )}
-            </form>
+            </div>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }

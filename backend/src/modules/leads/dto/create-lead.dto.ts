@@ -4,8 +4,9 @@ export class CreateLeadDto {
   @IsString()
   name!: string;
 
+  @IsOptional()
   @IsEmail()
-  email!: string;
+  email?: string;
 
   @IsString()
   phone!: string;
@@ -21,4 +22,8 @@ export class CreateLeadDto {
   @IsOptional()
   @IsString()
   timeSlot?: string;
+
+  @IsOptional()
+  @IsString()
+  acaScheduleId?: string;
 }

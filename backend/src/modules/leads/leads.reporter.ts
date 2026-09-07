@@ -30,19 +30,13 @@ export class LeadsReporter {
 
     const leadDetails = newLeads
       .map((lead: any, index: number) => {
-        const goals =
-          Array.isArray(lead.goals) && lead.goals.length
-            ? lead.goals.join(', ')
-            : 'Không có';
-        const consultationTime =
-          Array.isArray(lead.consultationTime) && lead.consultationTime.length
-            ? lead.consultationTime.join(', ')
-            : 'Không có';
+        const purpose = lead.purpose || 'Không có';
+        const timeSlot = lead.timeSlot || 'Không có';
         return (
           `${index + 1}. ${lead.name} - ${lead.phone} (${lead.email})\n` +
           `   - Lúc: ${new Date(lead.createdAt).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' })}\n` +
-          `   - Mục tiêu: ${goals}\n` +
-          `   - Thời gian tư vấn: ${consultationTime}\n` +
+          `   - Mục đích: ${purpose}\n` +
+          `   - Khung giờ: ${timeSlot}\n` +
           `   - Lời nhắn: ${lead.message || 'Không có'}`
         );
       })
@@ -50,19 +44,13 @@ export class LeadsReporter {
 
     const htmlDetails = newLeads
       .map((lead: any, index: number) => {
-        const goals =
-          Array.isArray(lead.goals) && lead.goals.length
-            ? lead.goals.join(', ')
-            : 'Không có';
-        const consultationTime =
-          Array.isArray(lead.consultationTime) && lead.consultationTime.length
-            ? lead.consultationTime.join(', ')
-            : 'Không có';
+        const purpose = lead.purpose || 'Không có';
+        const timeSlot = lead.timeSlot || 'Không có';
         return `<li>
   <b>${index + 1}. ${lead.name}</b> - ${lead.phone} (${lead.email})<br/>
   <i>Lúc: ${new Date(lead.createdAt).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' })}</i><br/>
-  <span><b>Mục tiêu:</b> ${goals}</span><br/>
-  <span><b>Thời gian tư vấn:</b> ${consultationTime}</span><br/>
+  <span><b>Mục đích:</b> ${purpose}</span><br/>
+  <span><b>Khung giờ:</b> ${timeSlot}</span><br/>
   <span><b>Lời nhắn:</b> ${lead.message || '<i>Không có</i>'}</span>
 </li>`;
       })

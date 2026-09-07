@@ -5,11 +5,13 @@ import { LeadsService } from './leads.service';
 import { LeadsController } from './leads.controller';
 import { LeadsReporter } from './leads.reporter';
 import { MailModule } from '../mail/mail.module';
+import { AcaSchedulesModule } from '../aca-schedules/aca-schedules.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Lead.name, schema: LeadSchema }]),
     MailModule,
+    AcaSchedulesModule,
   ],
   controllers: [LeadsController],
   providers: [LeadsService, LeadsReporter],

@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { getSiteUrl } from "@/lib/site-url";
 
 type QuickChoice = {
   label: string;
@@ -28,6 +29,8 @@ const quickChoices: QuickChoice[] = [
   },
 ];
 
+const siteUrl = getSiteUrl();
+
 export default function LienHePage() {
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
@@ -52,6 +55,27 @@ export default function LienHePage() {
     );
     window.location.href = `mailto:hello@xaloenglish.vn?subject=${subject}&body=${body}`;
     setSubmitted(true);
+  };
+
+  const contactJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    name: "Liên hệ tư vấn",
+    url: siteUrl ? `${siteUrl}/lien-he` : "/lien-he",
+    description:
+      "Trang liên hệ để nhận tư vấn lộ trình học tiếng Anh, IELTS và THPT tại Xa Lộ English.",
+    mainEntity: {
+      "@type": "Organization",
+      "@id": siteUrl ? `${siteUrl}/#organization` : "#organization",
+      name: "Xa Lộ English",
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "customer support",
+        availableLanguage: ["vi", "en"],
+        email: "hello@xaloenglish.vn",
+        url: siteUrl ? `${siteUrl}/lien-he` : "/lien-he",
+      },
+    },
   };
 
   return (
@@ -230,6 +254,10 @@ export default function LienHePage() {
         </section>
       </main>
       <SiteFooter />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactJsonLd) }}
+      />
     </>
   );
 }
