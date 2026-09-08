@@ -38,12 +38,12 @@ const tiers: HomeCourseTier[] = [
     diagnostic: "Test đầu vào + phân tích lỗ hổng cơ bản",
     schedule: "Tiết tấu chậm, ôn lặp có kiểm tra",
     feedback: "Nhận xét ngắn sau buổi, dễ theo dõi",
-    focus: "Ngữ pháp – từ vựng – nghe/đọc nền",
+    focus: "Ngữ pháp - từ vựng - nghe/đọc nền",
     outcomeLine: "Tự tin hơn với bài tập đúng trình độ.",
     phases: [
       {
         title: "Giai đoạn 1 — Chẩn",
-        rows: [{ module: "Đánh giá đầu vào", detail: "Xác định mức xuất phát và 2–3 điểm yếu cốt lõi." }],
+        rows: [{ module: "Đánh giá đầu vào", detail: "Xác định mức xuất phát và 2-3 điểm yếu cốt lõi." }],
       },
       {
         title: "Giai đoạn 2 — Kê lộ trình",
@@ -83,7 +83,7 @@ const tiers: HomeCourseTier[] = [
       },
       {
         title: "Giai đoạn 2 — Kê lộ trình",
-        rows: [{ module: "Gia tốc có trọng tâm", detail: "Chọn 1–2 kỹ năng ưu tiên để tạo momentum." }],
+        rows: [{ module: "Gia tốc có trọng tâm", detail: "Chọn 1-2 kỹ năng ưu tiên để tạo momentum." }],
       },
       {
         title: "Giai đoạn 3 — Chữa & theo dõi",
@@ -143,7 +143,7 @@ const tiers: HomeCourseTier[] = [
     shortDesc: "Xây nền theo hướng IELTS: hiểu dạng bài, hình thành tư duy làm bài và thói quen học đều.",
     audience: "Mới chạm IELTS / cần nền trước khi vào CORE",
     coach: "GV IELTS nền tảng",
-    diagnostic: "Test đầu vào + xác định 2–3 điểm nghẽn theo kỹ năng",
+    diagnostic: "Test đầu vào + xác định 2-3 điểm nghẽn theo kỹ năng",
     schedule: "Online, nhịp vừa — bám mục tiêu tuần",
     feedback: "Checklist + nhận xét theo mốc",
     focus: "Nền từ vựng/grammar + format IELTS cơ bản",
@@ -191,7 +191,7 @@ const tiers: HomeCourseTier[] = [
       },
       {
         title: "Giai đoạn 2 — Kê lộ trình",
-        rows: [{ module: "Chuẩn hoá", detail: "Chọn 1–2 ưu tiên để tạo nền ổn định." }],
+        rows: [{ module: "Chuẩn hoá", detail: "Chọn 1-2 ưu tiên để tạo nền ổn định." }],
       },
       {
         title: "Giai đoạn 3 — Chữa & theo dõi",
@@ -236,7 +236,7 @@ const tiers: HomeCourseTier[] = [
       {
         title: "Trọng tâm nội dung",
         rows: [
-          { module: "Ưu tiên 1", detail: "Nền ngữ pháp – từ vựng dùng được." },
+          { module: "Ưu tiên 1", detail: "Nền ngữ pháp - từ vựng dùng được." },
           { module: "Ưu tiên 2", detail: "Nghe/đọc hiểu đúng cấu trúc đề." },
           { module: "Ưu tiên 3", detail: "Nói/viết có khung và feedback." },
         ],
@@ -287,7 +287,7 @@ const tiers: HomeCourseTier[] = [
     shortDesc: "Tập trung bứt tốc theo mục tiêu: tối ưu tốc độ, độ chính xác và độ ổn định output.",
     audience: "Đã có nền vững, muốn bứt tốc theo mục tiêu rõ",
     coach: "GV chuyên sâu theo mục tiêu",
-    diagnostic: "Benchmark theo rubric/đầu ra + xác định 1–2 nút thắt chính",
+    diagnostic: "Benchmark theo rubric/đầu ra + xác định 1-2 nút thắt chính",
     schedule: "Online, pace cao — có deadline và checkpoint",
     feedback: "Phản hồi theo tiêu chí + kế hoạch sửa lỗi",
     focus: "Tối ưu performance: accuracy + speed + consistency",

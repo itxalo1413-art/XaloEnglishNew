@@ -66,59 +66,59 @@ const teachers: TeacherProfile[] = [
 
 export function TeachersSection() {
   return (
-    <section className="bg-[var(--background)] py-16 sm:py-24 border-t border-black/5">
+    <section className="bg-[var(--background)] py-10 sm:py-14 border-t border-black/5">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[var(--primary)]/10 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-[var(--secondary)] ring-1 ring-[var(--primary)]/20">
+          <div className="inline-flex items-center gap-2 rounded-[5px] bg-[var(--primary)]/10 px-3.5 py-1 text-xs font-black uppercase tracking-widest text-[var(--secondary)] border border-[var(--primary)]/20">
             <HeartHandshake className="h-3.5 w-3.5 text-[var(--secondary)]" />
             Đội ngũ trực tiếp đồng hành
           </div>
-          <h2 className="mt-4 font-heading text-3xl font-black tracking-tight text-[var(--foreground)] sm:text-4xl lg:text-5xl leading-tight">
+          <h2 className="mt-3 font-heading text-3xl font-black tracking-tight text-[var(--foreground)] sm:text-4xl lg:text-5xl text-balance">
             Người trực tiếp giúp bạn “Chữa” từng điểm yếu.
           </h2>
-          <p className="mt-4 text-base font-medium leading-relaxed text-[var(--muted)] sm:text-lg">
+          <p className="mt-2 text-sm font-medium leading-relaxed text-[var(--muted)] sm:text-base text-pretty">
             100% giáo viên tại Xa Lộ English có chuyên môn cao, trực tiếp chấm chữa và theo sát lộ trình RLP cá nhân của từng học viên.
           </p>
         </div>
 
         {/* Teachers Cards Grid */}
-        <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {teachers.map((teacher) => (
             <div
               key={teacher.name}
-              className="group flex flex-col rounded-[2.5rem] bg-white p-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)] ring-1 ring-black/5 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgb(0,0,0,0.12)] border-2 border-transparent hover:border-[var(--primary)]/30"
+              className="group flex flex-col rounded-[5px] bg-white p-3.5 border border-[var(--border-strong)] hover:border-[var(--secondary)] transition-all duration-300 shadow-sm"
             >
               {/* Teacher Image */}
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] bg-[var(--surface-1)]">
+              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[5px] bg-[var(--surface-1)]">
                 <Image
                   src={teacher.img}
                   alt={teacher.name}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute top-3 left-3 rounded-full bg-white/95 px-3 py-1 text-[11px] font-black uppercase tracking-wider text-[var(--secondary)] shadow-sm backdrop-blur">
+                <div className="absolute top-2.5 left-2.5 rounded-[5px] bg-white/95 px-2.5 py-0.5 text-[11px] font-black uppercase tracking-wider text-[var(--secondary)] shadow-sm backdrop-blur">
                   {teacher.ieltsBand}
                 </div>
               </div>
 
               {/* Profile Details */}
-              <div className="flex flex-1 flex-col p-4">
-                <h3 className="text-xl font-black text-[var(--foreground)]">{teacher.name}</h3>
-                <p className="mt-1 text-xs font-black uppercase tracking-wider text-[var(--secondary)]">
+              <div className="flex flex-1 flex-col p-3 pt-4">
+                <h3 className="text-lg font-black text-[var(--foreground)]">{teacher.name}</h3>
+                <p className="mt-0.5 text-xs font-bold text-[var(--secondary)]">
                   {teacher.specialty}
                 </p>
-                <p className="mt-1 text-xs font-semibold text-[var(--muted)]">
+                <p className="mt-0.5 text-xs font-semibold text-[var(--muted)]">
                   • {teacher.experience}
                 </p>
 
-                <p className="mt-3 text-xs leading-relaxed text-[var(--muted)] line-clamp-3 text-pretty">
+                <p className="mt-2 text-xs leading-relaxed text-[var(--muted)] line-clamp-3 text-pretty">
                   {teacher.desc}
                 </p>
 
                 {/* Feedback Quote Bubble */}
-                <div className="mt-4 rounded-2xl bg-[var(--surface-1)] p-3 ring-1 ring-black/5 border-l-3 border-[var(--primary)]">
+                <div className="mt-3.5 rounded-[5px] bg-[var(--surface-1)] p-3 border-l-3 border-[var(--primary)] border border-black/5">
                   <div className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-[var(--secondary)]">
                     <MessageSquare className="h-3 w-3 text-[var(--primary)]" />
                     Feedback từ học viên:
@@ -129,18 +129,18 @@ export function TeachersSection() {
                 </div>
 
                 {/* Action CTAs */}
-                <div className="mt-auto pt-5 flex flex-col gap-2">
+                <div className="mt-auto pt-4 flex flex-col gap-2">
                   <a
                     href={teacher.fbLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-10 w-full items-center justify-center rounded-full bg-[var(--surface-1)] text-[11px] font-black uppercase tracking-wider text-[var(--secondary)] ring-1 ring-[var(--secondary)]/20 transition-all hover:bg-[var(--secondary)] hover:text-white"
+                    className="flex h-9 w-full items-center justify-center rounded-[5px] bg-[var(--surface-1)] text-[11px] font-black uppercase tracking-wider text-[var(--secondary)] border border-[var(--secondary)]/20 transition-all hover:bg-[var(--secondary)] hover:text-white"
                   >
                     Xem Feedback & Profile GV ↗
                   </a>
                   <Link
                     href="/#test-dau-vao"
-                    className="flex h-11 w-full items-center justify-center rounded-full bg-[var(--primary)] text-xs font-black uppercase tracking-wider text-white shadow-sm transition-all hover:bg-[var(--secondary)]"
+                    className="flex h-10 w-full items-center justify-center rounded-[5px] bg-[var(--primary)] text-xs font-black uppercase tracking-wider text-white shadow-sm transition-all hover:bg-[var(--secondary)]"
                   >
                     Đăng ký học cùng GV →
                   </Link>

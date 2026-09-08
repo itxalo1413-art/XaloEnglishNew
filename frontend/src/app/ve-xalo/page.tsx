@@ -132,16 +132,16 @@ export default function VeXaloPage() {
                 còn phụ huynh luôn ở trạng thái mơ hồ vì không biết con mình đang kẹt chỗ nào.
               </p>
               <p className="mb-4 text-sm leading-relaxed text-[var(--muted)]">
-                Xa Lộ ra đời để thay “học theo cảm giác” bằng một hệ thống có logic trước–sau, có đo lường,
+                Xa Lộ ra đời để thay “học theo cảm giác” bằng một hệ thống có logic trước-sau, có đo lường,
                 có trách nhiệm với kết quả — với{" "}
-                <span className="font-semibold text-[var(--foreground)]">quy trình Chẩn – Chữa</span> thống nhất
+                <span className="font-semibold text-[var(--foreground)]">quy trình Chẩn - Chữa</span> thống nhất
                 trong toàn bộ lộ trình.
               </p>
               <p className="text-sm font-semibold text-[var(--foreground)]">Tinh thần khác biệt</p>
               <ul className="mt-3 mb-4 space-y-3 text-sm leading-relaxed text-[var(--muted)]">
                 <li className="flex gap-2">
                   <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--primary)] mt-1.5" />
-                  <span><strong className="text-[var(--foreground)]">Hệ thống ra quyết định:</strong> Chẩn – Chữa không phải phương pháp dạy cố định mà là hệ thống ra quyết định dựa trên dữ liệu thật của từng người học.</span>
+                  <span><strong className="text-[var(--foreground)]">Hệ thống ra quyết định:</strong> Chẩn - Chữa không phải phương pháp dạy cố định mà là hệ thống ra quyết định dựa trên dữ liệu thật của từng người học.</span>
                 </li>
                 <li className="flex gap-2">
                   <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--primary)] mt-1.5" />
@@ -175,7 +175,7 @@ export default function VeXaloPage() {
                 <Image src="/Logo_XLE.svg" alt="Xa Lộ English" width={40} height={40} className="h-10 w-10 object-contain" />
               </div>
               <h3 className="mb-1 text-4xl font-bold tracking-tight text-[var(--foreground)]">3+</h3>
-              <p className="text-xs text-[var(--muted)]">Năm xây dựng hệ thống lớp nhỏ &amp; quy trình Chẩn – Chữa</p>
+              <p className="text-xs text-[var(--muted)]">Năm xây dựng hệ thống lớp nhỏ &amp; quy trình Chẩn - Chữa</p>
             </div>
           </div>
 
@@ -212,7 +212,7 @@ export default function VeXaloPage() {
             </div>
 
             <div className="flex flex-1 flex-col justify-end rounded-2xl bg-[var(--foreground)] p-6">
-              <h3 className="mb-1 text-4xl font-bold tracking-tight italic text-[var(--primary)]">Chẩn – Chữa</h3>
+              <h3 className="mb-1 text-4xl font-bold tracking-tight italic text-[var(--primary)]">Chẩn - Chữa</h3>
               <p className="text-xs text-white/70">Một quy trình nhất quán từ đầu vào đến theo dõi tiến độ</p>
             </div>
           </div>
@@ -299,9 +299,9 @@ export default function VeXaloPage() {
               className="mt-12 rounded-2xl border p-6 sm:p-10"
               style={{ borderColor: "hsl(0,0%,88%)", backgroundColor: "hsl(0,0%,100%)" }}
             >
-              <h3 className="text-xl font-bold text-[var(--foreground)]">Vì sao chọn quy trình Chẩn – Chữa?</h3>
+              <h3 className="text-xl font-bold text-[var(--foreground)]">Vì sao chọn quy trình Chẩn - Chữa?</h3>
               <p className="mt-4 text-sm leading-relaxed text-[var(--muted)]">
-                Vì chúng tôi tin rằng sự tiến bộ không đến từ việc &quot;học hết giáo trình&quot;, mà đến từ việc **xử lý đúng điểm nghẽn**. Chẩn – Chữa mang lại cho học viên 3 giá trị cốt lõi ở tầng cảm nhận:
+                Vì chúng tôi tin rằng sự tiến bộ không đến từ việc &quot;học hết giáo trình&quot;, mà đến từ việc **xử lý đúng điểm nghẽn**. Chẩn - Chữa mang lại cho học viên 3 giá trị cốt lõi ở tầng cảm nhận:
               </p>
               <div className="mt-8 grid gap-6 sm:grid-cols-3">
                 {[
@@ -381,7 +381,7 @@ export default function VeXaloPage() {
             <p className="max-w-xl text-sm font-normal leading-relaxed text-[var(--muted)] md:text-base">
               Các khóa học có thể diễn ra trực tuyến hay tại lớp, nhưng hành trình học của bạn luôn được đồng
               hành bởi đội ngũ thật. Chúng tôi không chỉ chọn giáo viên “dạy tốt”, mà chọn người có cùng phương
-              châm: hiểu học viên, theo sát tiến độ, và dạy dựa trên lỗi thật — thống nhất phương pháp Chẩn – Chữa,
+              châm: hiểu học viên, theo sát tiến độ, và dạy dựa trên lỗi thật — thống nhất phương pháp Chẩn - Chữa,
               phản hồi tiến độ đều đặn để phụ huynh và học viên cùng nắm rõ lộ trình.
             </p>
           </div>
@@ -421,13 +421,13 @@ export default function VeXaloPage() {
           </div>
         </section>
 
-        {/* Triết lý Chẩn – Chữa dành cho giáo viên */}
+        {/* Triết lý Chẩn - Chữa dành cho giáo viên */}
         <section className="bg-[var(--surface-2)] py-16 sm:py-24">
           <div className="mx-auto max-w-8xl px-6 sm:px-10 lg:px-14">
             <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
               <div>
                 <h2 className="text-3xl font-extrabold tracking-tight text-[var(--foreground)] sm:text-4xl">
-                  Triết lý Chẩn – Chữa <br/>
+                  Triết lý Chẩn - Chữa <br/>
                   <span className="text-[var(--primary)] text-stroke-sm">dành cho giáo viên</span>
                 </h2>
                 <div className="mt-8 space-y-6">
@@ -435,7 +435,7 @@ export default function VeXaloPage() {
                     <div className="absolute left-0 top-0 bottom-0 w-1 bg-[var(--primary)] rounded-full" />
                     <p className="text-base font-bold text-[var(--foreground)]">Hệ thống ra quyết định, không phải phương pháp cố định</p>
                     <p className="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-                      Tại Xa Lộ English, giáo viên không chỉ là người truyền đạt kiến thức mà là người đưa ra quyết định dựa trên dữ liệu. Giáo viên sử dụng quy trình Chẩn – Chữa để xác định đúng vấn đề và lựa chọn phương pháp phù hợp nhất cho từng học viên.
+                      Tại Xa Lộ English, giáo viên không chỉ là người truyền đạt kiến thức mà là người đưa ra quyết định dựa trên dữ liệu. Giáo viên sử dụng quy trình Chẩn - Chữa để xác định đúng vấn đề và lựa chọn phương pháp phù hợp nhất cho từng học viên.
                     </p>
                   </div>
                   <div className="relative pl-6">
@@ -478,7 +478,7 @@ export default function VeXaloPage() {
           <div className="grid gap-4 md:grid-cols-3">
             {[
               { year: "2023", title: "Xa Lộ bắt đầu với mô hình lớp nhỏ", body: "Tập trung giải bài toán “học nhiều nhưng không biết sai ở đâu”." },
-              { year: "2024", title: "Chuẩn hoá quy trình Chẩn – Chữa", body: "Áp dụng đồng nhất từ đánh giá đầu vào đến theo dõi tiến độ." },
+              { year: "2024", title: "Chuẩn hoá quy trình Chẩn - Chữa", body: "Áp dụng đồng nhất từ đánh giá đầu vào đến theo dõi tiến độ." },
               { year: "2025", title: "Mở rộng lộ trình cho HS, SV và luyện thi", body: "Tăng độ cá nhân hóa theo từng mục tiêu học cụ thể." },
             ].map((item) => (
               <div
@@ -501,7 +501,7 @@ export default function VeXaloPage() {
               Hành trình cùng Xa Lộ
             </h2>
             <p className="mb-12 max-w-lg text-sm text-[var(--muted)]">
-              Từ buổi trao đổi đầu tiên đến lộ trình Chẩn – Chữa, chúng tôi giữ nhịp rõ ràng và trách nhiệm với
+              Từ buổi trao đổi đầu tiên đến lộ trình Chẩn - Chữa, chúng tôi giữ nhịp rõ ràng và trách nhiệm với
               tiến độ.
             </p>
 
@@ -556,7 +556,7 @@ export default function VeXaloPage() {
                   Buổi tư vấn &amp; làm rõ mục tiêu
                 </h3>
                 <p className="text-sm leading-relaxed text-[var(--muted)]">
-                  Bạn chia sẻ bối cảnh học, mục tiêu và điểm đang kẹt. Chúng tôi giải thích cách Chẩn – Chữa giúp
+                  Bạn chia sẻ bối cảnh học, mục tiêu và điểm đang kẹt. Chúng tôi giải thích cách Chẩn - Chữa giúp
                   ưu tiên phần cần sửa trước, để không học lan man và có mốc tiến độ theo dõi được.
                 </p>
               </div>
@@ -576,7 +576,7 @@ export default function VeXaloPage() {
             className="grid grid-cols-2 overflow-hidden rounded-2xl border md:grid-cols-4"
             style={{ borderColor: "hsl(0,0%,88%)" }}
           >
-            {["Phụ huynh", "Học sinh THPT", "Sinh viên", "Luyện IELTS", "Tiếng Anh học thuật", "Lớp nhỏ", "Theo dõi tiến độ", "Chẩn – Chữa"].map(
+            {["Phụ huynh", "Học sinh THPT", "Sinh viên", "Luyện IELTS", "Tiếng Anh học thuật", "Lớp nhỏ", "Theo dõi tiến độ", "Chẩn - Chữa"].map(
               (name, i) => (
                 <div
                   key={`${name}-${i}`}

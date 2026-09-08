@@ -14,8 +14,8 @@ export const metadata: Metadata = buildPageMetadata({
 });
 
 const khaiNiemCards = [
-  { body: "Quy trình Chẩn – Chữa là nền tảng cốt lõi trong toàn bộ mô hình đào tạo tại Xa Lộ English, được áp dụng xuyên suốt cho cả lớp nhóm và lớp 1:1. Quy trình này tập trung vào việc xác định đúng “điểm nghẽn” trong năng lực học tập của từng học viên, từ đó xây dựng giải pháp học tập cá nhân hóa, thay vì sử dụng một lộ trình chung cho tất cả." },
-  { body: "Mỗi học viên đều trải qua tối thiểu hai chu kỳ Chẩn – Chữa trong suốt quá trình học: trước, trong và sau khi học. (Xem chi tiết ở phần mô tả bên dưới)." },
+  { body: "Quy trình Chẩn - Chữa là nền tảng cốt lõi trong toàn bộ mô hình đào tạo tại Xa Lộ English, được áp dụng xuyên suốt cho cả lớp nhóm và lớp 1:1. Quy trình này tập trung vào việc xác định đúng “điểm nghẽn” trong năng lực học tập của từng học viên, từ đó xây dựng giải pháp học tập cá nhân hóa, thay vì sử dụng một lộ trình chung cho tất cả." },
+  { body: "Mỗi học viên đều trải qua tối thiểu hai chu kỳ Chẩn - Chữa trong suốt quá trình học: trước, trong và sau khi học. (Xem chi tiết ở phần mô tả bên dưới)." },
   { body: "Khác với nhiều trung tâm tập trung vào xây dựng phương pháp dạy mang tính đại trà hoặc sản phẩm branding để thu hút học viên, Xa Lộ English đặt trọng tâm vào hiệu quả học tập thực tế. Mỗi học viên không chỉ được “dạy” mà còn được chẩn đoán đúng vấn đề và điều trị bằng giải pháp học tập phù hợp, đảm bảo tiến bộ rõ ràng và bền vững." },
 ] as const;
 
@@ -35,12 +35,12 @@ const nguyenTacItems = [
     ),
   },
   {
-    title: "Lộ trình tối ưu (40%) – Cơ sở để cam kết quá trình học tập",
+    title: "Lộ trình tối ưu (40%) - Cơ sở để cam kết quá trình học tập",
     body: (
       <>
         <p>Lộ trình được xây dựng dựa trên kết quả Chẩn nên phản ánh đúng:</p>
         <ul className="mt-3 list-disc space-y-2 pl-5">
-          <li>Điểm mạnh – điểm yếu thực tế</li>
+          <li>Điểm mạnh - điểm yếu thực tế</li>
           <li>Nền tảng ngôn ngữ hiện tại</li>
           <li>Tốc độ tiếp thu của học viên</li>
         </ul>
@@ -55,7 +55,7 @@ const nguyenTacItems = [
     ),
   },
   {
-    title: "Hướng đến mục tiêu bền vững – “Học để dùng”",
+    title: "Hướng đến mục tiêu bền vững - “Học để dùng”",
     body: (
       <>
         <p>Trọng tâm không chỉ là đạt band điểm mà là sử dụng được ngôn ngữ sau khóa học. Vì vậy:</p>
@@ -71,13 +71,13 @@ const nguyenTacItems = [
 ] as const;
 
 const chanPoints = [
-  { label: "Trước khóa học:", text: "Học viên làm bài kiểm tra đầu vào. Grader chấm bài, đưa ra nhận xét qua BCB để xác định các vấn đề sơ cấp – những lỗi cơ bản hiện rõ trong bài làm." },
-  { label: "Trong khóa học:", text: "Giáo viên quan sát và tương tác để phát hiện các vấn đề thứ cấp – các lỗi trong quá trình học và vận dụng kiến thức mới." },
+  { label: "Trước khóa học:", text: "Học viên làm bài kiểm tra đầu vào. Grader chấm bài, đưa ra nhận xét qua BCB để xác định các vấn đề sơ cấp - những lỗi cơ bản hiện rõ trong bài làm." },
+  { label: "Trong khóa học:", text: "Giáo viên quan sát và tương tác để phát hiện các vấn đề thứ cấp - các lỗi trong quá trình học và vận dụng kiến thức mới." },
   { label: "Cuối chặng/cuối khóa:", text: "Học viên làm bài tập về nhà và bài kiểm tra tổng kết. Từ đó GV/Grader xác định các vấn đề còn sót lại hoặc mới phát sinh." },
 ] as const;
 
 const chuaPoints = [
-  { label: "Trước khóa học:", text: "Giáo viên lập kế hoạch dạy dựa trên BCB – định hướng cụ thể thông qua RLP (mục tiêu chặng – phân bố kỹ năng – nội dung học)." },
+  { label: "Trước khóa học:", text: "Giáo viên lập kế hoạch dạy dựa trên BCB - định hướng cụ thể thông qua RLP (mục tiêu chặng - phân bố kỹ năng - nội dung học)." },
   { label: "Trong khóa học:", text: "GV thiết kế bài giảng theo RLP, tập trung cải thiện các vấn đề sơ cấp." },
   { label: "Sau khóa học:", text: "GV xây dựng hoặc hướng dẫn học viên phương pháp học ngoài giờ để giải quyết vấn đề còn lại và hướng tới tự học hiệu quả." },
 ] as const;
@@ -122,12 +122,12 @@ const bcbBrandingPoints = [
 
 const rlpFramework = [
   {
-    name: "🔹 Chẩn – Student Profile",
+    name: "🔹 Chẩn - Student Profile",
     desc: "Ghi lại thông tin nền tảng: mục tiêu IELTS, đích đến và điểm đầu vào. Giúp giáo viên hiểu rõ vị trí xuất phát để định hướng dạy học.",
     color: "var(--secondary)"
   },
   {
-    name: "🔹 Chữa – RLP",
+    name: "🔹 Chữa - RLP",
     desc: "Xây dựng kế hoạch học tập chi tiết: mục tiêu tuần, chiến lược luyện thi và điều chỉnh tài liệu phù hợp với năng lực thực tế.",
     color: "var(--primary)"
   }
@@ -144,7 +144,7 @@ const rlpBrandingPoints = [
   }
 ] as const;
 
-const docClosingArrowNote = "=> Vì vậy, Chẩn – Chữa không chỉ là phương pháp dạy học mà là quy chuẩn học vụ bắt buộc, quyết định chất lượng đào tạo và là nền tảng cho mọi cam kết học tập tại Xa Lộ English.";
+const docClosingArrowNote = "=> Vì vậy, Chẩn - Chữa không chỉ là phương pháp dạy học mà là quy chuẩn học vụ bắt buộc, quyết định chất lượng đào tạo và là nền tảng cho mọi cam kết học tập tại Xa Lộ English.";
 
 export default function QuyTrinhChanChuaPage() {
   return (
@@ -434,7 +434,7 @@ export default function QuyTrinhChanChuaPage() {
                     Trục vận hành học thuật bắt buộc
                   </h3>
                   <p className="mt-4 text-base font-semibold leading-relaxed text-[var(--foreground)] sm:text-lg">
-                    Quy trình Chẩn – Chữa không phải là hoạt động bổ trợ mà là trung tâm của mọi hoạt động tại Xa Lộ English. Được áp dụng xuyên suốt trong toàn bộ mô hình đào tạo (lớp nhóm và 1:1).
+                    Quy trình Chẩn - Chữa không phải là hoạt động bổ trợ mà là trung tâm của mọi hoạt động tại Xa Lộ English. Được áp dụng xuyên suốt trong toàn bộ mô hình đào tạo (lớp nhóm và 1:1).
                   </p>
                   <p className="mt-4 text-sm font-extrabold text-[var(--foreground)] uppercase tracking-wider sm:text-base">Bao gồm các bước:</p>
                   <div className="mt-3 flex flex-wrap gap-2">
@@ -471,7 +471,7 @@ export default function QuyTrinhChanChuaPage() {
                   <div className="space-y-4 text-base font-semibold leading-relaxed opacity-95 sm:text-lg">
                     <p>BCB (Bảng chẩn bệnh) là đầu ra bắt buộc của bước Chẩn, đồng thời là đầu vào học thuật để giáo viên thiết kế kế hoạch giảng dạy.</p>
                     <p>RLP (Resonant Lesson Plan) là khung triển khai bắt buộc để đảm bảo tiến trình học tập bám sát mục tiêu.</p>
-                    <p className="border-t border-white/20 pt-4">Quy trình này được thực hiện tối thiểu hai chu kỳ chẩn – chữa trong một khóa học nhằm:</p>
+                    <p className="border-t border-white/20 pt-4">Quy trình này được thực hiện tối thiểu hai chu kỳ chẩn - chữa trong một khóa học nhằm:</p>
                     <ul className="space-y-1 pl-4 list-disc text-sm font-semibold opacity-90 sm:text-base">
                       <li>Xác định đúng vấn đề ban đầu</li>
                       <li>Phát hiện vấn đề phát sinh</li>
@@ -543,7 +543,7 @@ export default function QuyTrinhChanChuaPage() {
                           <p className="mt-1 text-sm font-bold text-[var(--foreground)] sm:text-base">{sheet.function}</p>
                         </div>
                         <div>
-                          <p className="text-xs font-black uppercase tracking-widest text-[var(--muted)] sm:text-sm">Vai trò Chẩn – Chữa</p>
+                          <p className="text-xs font-black uppercase tracking-widest text-[var(--muted)] sm:text-sm">Vai trò Chẩn - Chữa</p>
                           <p className="mt-1 text-sm font-semibold text-[var(--foreground)] italic sm:text-base">{sheet.role}</p>
                         </div>
                       </div>

@@ -52,7 +52,7 @@ export function CourseDetail({
       {/* Method */}
       <section className="border-b border-[var(--border)] bg-[var(--background)] py-14 sm:py-20">
         <div className="mx-auto max-w-8xl px-4 sm:px-6">
-          <SectionTitle title="Method (Chẩn – Chữa)" subtitle="Cá nhân hoá theo từng học viên" />
+          <SectionTitle title="Method (Chẩn - Chữa)" subtitle="Cá nhân hoá theo từng học viên" />
           <div className="mt-8 grid gap-4 lg:grid-cols-3">
             {[
               { label: "Chẩn", value: course.method.chuan },

@@ -188,7 +188,7 @@ export default function LienHePage() {
           <div className="mx-auto grid max-w-8xl gap-4 px-4 sm:grid-cols-3 sm:px-6">
             {[
               "Không spam",
-              "Tư vấn trong 5–10 phút",
+              "Tư vấn trong 5-10 phút",
               "Cá nhân hoá theo từng người",
             ].map((item) => (
               <div

@@ -30,19 +30,19 @@ export const courseCatalog: CourseCatalogItem[] = [
     id: "pre-core",
     mode: "online",
     title: "PRE - CORE",
-    highlights: ["0 – 2.5 → 4.0 – 4.5", "Tăng thời lượng để xây nền vững", "Học đúng thứ tự, tránh học lan man"],
+    highlights: ["0 - 2.5 → 4.0 - 4.5", "Tăng thời lượng để xây nền vững", "Học đúng thứ tự, tránh học lan man"],
   },
   {
     id: "core",
     mode: "online",
     title: "CORE",
-    highlights: ["3.0 – 4.0 → 4.0 – 4.5", "Sửa lỗi nghiêm trọng ở mức cơ bản", "Có checkpoint để thấy tiến bộ"],
+    highlights: ["3.0 - 4.0 → 4.0 - 4.5", "Sửa lỗi nghiêm trọng ở mức cơ bản", "Có checkpoint để thấy tiến bộ"],
   },
   {
     id: "upstream",
     mode: "online",
     title: "UPSTREAM",
-    highlights: ["4.5 – 5.5 → 6", "Tăng độ vững ở tình huống phức tạp", "Lộ trình theo mục tiêu và band"],
+    highlights: ["4.5 - 5.5 → 6", "Tăng độ vững ở tình huống phức tạp", "Lộ trình theo mục tiêu và band"],
   },
   {
     id: "soar",
@@ -54,13 +54,13 @@ export const courseCatalog: CourseCatalogItem[] = [
     id: "foundation",
     mode: "offline",
     title: "FOUNDATION",
-    highlights: ["0 – 4.0 → 4.0 – 4.5", "Lớp nhỏ 10 HV/lớp", "Tập trung sửa lỗi nghiêm trọng ở mức cơ bản"],
+    highlights: ["0 - 4.0 → 4.0 - 4.5", "Lớp nhỏ 10 HV/lớp", "Tập trung sửa lỗi nghiêm trọng ở mức cơ bản"],
   },
   {
     id: "momentum",
     mode: "offline",
     title: "MOMENTUM",
-    highlights: ["4.5 – 5.5 → 6", "Có 2 lựa chọn lịch học", "Tăng tốc có kiểm soát theo mục tiêu"],
+    highlights: ["4.5 - 5.5 → 6", "Có 2 lựa chọn lịch học", "Tăng tốc có kiểm soát theo mục tiêu"],
   },
   {
     id: "advanced",
@@ -190,7 +190,7 @@ export const oneToOnePricingRows: OneToOnePricingRow[] = [
     id: "1-1-online-before-18",
     mode: "ONLINE",
     durationBandGE4:
-      "36h/khóa:\n- Học 2 buổi/tuần, 2h/buổi ⇒ 9 tuần (≈ 2 – 2.5 tháng)\n- Học 3 buổi/tuần, 2h/buổi ⇒ 6 tuần (1.5 tháng)",
+      "36h/khóa:\n- Học 2 buổi/tuần, 2h/buổi ⇒ 9 tuần (≈ 2 - 2.5 tháng)\n- Học 3 buổi/tuần, 2h/buổi ⇒ 6 tuần (1.5 tháng)",
   },
   { id: "1-1-offline", mode: "OFFLINE", durationBandGE4: "" },
 ];

@@ -3,7 +3,7 @@ const steps = [
     step: "1",
     title: "Chẩn — Đo đúng “đang yếu ở đâu”",
     body:
-      "Test đầu vào và phân tích kỹ năng (nghe, nói, đọc, viết / ngữ pháp – từ vựng). Không đoán mò — có số liệu và nhận định cụ thể.",
+      "Test đầu vào và phân tích kỹ năng (nghe, nói, đọc, viết / ngữ pháp - từ vựng). Không đoán mò — có số liệu và nhận định cụ thể.",
   },
   {
     step: "2",
@@ -25,7 +25,7 @@ export function ProcessSection() {
       <div className="mx-auto max-w-8xl px-4 sm:px-6">
         <div id="chan-chua-la-gi" className="scroll-mt-24">
           <h2 className="text-3xl font-bold tracking-tight text-[var(--foreground)] sm:text-4xl">
-            Chẩn – Chữa là gì?
+            Chẩn - Chữa là gì?
           </h2>
           <p className="mt-4 max-w-3xl text-base leading-relaxed text-[var(--muted)]">
             <strong className="text-[var(--foreground)]">Chẩn</strong> là bước làm rõ hiện trạng: con đang kẹt ở đâu, vì sao điểm chững lại.
@@ -36,7 +36,7 @@ export function ProcessSection() {
 
         <div id="quy-trinh" className="mt-14 scroll-mt-24">
           <h3 className="text-2xl font-semibold tracking-tight text-[var(--foreground)] sm:text-3xl">
-            Quy trình Chẩn – Chữa
+            Quy trình Chẩn - Chữa
           </h3>
           <p className="mt-2 max-w-2xl text-sm text-[var(--muted)]">
             Ba bước liên tiếp — mỗi bước có đầu ra rõ, để bạn “nhìn thấy” cách con (hoặc bạn) tiến bộ.

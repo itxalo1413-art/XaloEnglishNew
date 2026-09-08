@@ -7,7 +7,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 type NavItem = { href: string; label: string; mega?: boolean };
 
 const navItems: NavItem[] = [
-  { href: "/quy-trinh", label: "Quy trình Chẩn – Chữa" },
+  { href: "/quy-trinh", label: "Quy trình Chẩn - Chữa" },
   { href: "/khoa-hoc", label: "Lộ trình học", mega: true },
   { href: "/#ket-qua-hoc-vien", label: "Kết quả học viên" },
   { href: "/lich-khai-giang", label: "Lịch khai giảng" },
@@ -102,7 +102,7 @@ const coursesMegaMenu: MegaQuadrant[] = [
       {
         sub: "Tìm hiểu thêm",
         links: [
-          { label: "Quy trình Chẩn – Chữa", href: "/quy-trinh" },
+          { label: "Quy trình Chẩn - Chữa", href: "/quy-trinh" },
           { label: "Lịch khai giảng", href: "/lich-khai-giang" },
           { label: "Đăng ký tư vấn", href: "/lien-he" },
           { label: "Đặt lịch Test Speaking", href: "/speaking-test" },

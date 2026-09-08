@@ -142,7 +142,7 @@ export default function TuyenDungPage() {
             <div className="grid gap-12 lg:grid-cols-2 items-center">
               <div>
                 <h2 className="text-3xl font-extrabold tracking-tight text-[var(--foreground)] sm:text-4xl">
-                  Triết lý Chẩn – Chữa <br/>
+                  Triết lý Chẩn - Chữa <br/>
                   <span className="text-[var(--primary)] text-stroke-sm">dành cho giáo viên</span>
                 </h2>
                 <div className="mt-8 space-y-6">
@@ -150,7 +150,7 @@ export default function TuyenDungPage() {
                     <div className="absolute left-0 top-0 bottom-0 w-1 bg-[var(--primary)] rounded-full" />
                     <p className="text-base font-bold text-[var(--foreground)]">Hệ thống ra quyết định, không phải phương pháp cố định</p>
                     <p className="mt-2 text-sm text-[var(--muted)] leading-relaxed">
-                      Tại Xa Lộ English, giáo viên không chỉ là người truyền đạt kiến thức mà là người đưa ra quyết định dựa trên dữ liệu. Bạn sẽ dùng Chẩn – Chữa để xác định đúng điểm nghẽn và tùy biến phương pháp phù hợp nhất với từng học viên.
+                      Tại Xa Lộ English, giáo viên không chỉ là người truyền đạt kiến thức mà là người đưa ra quyết định dựa trên dữ liệu. Bạn sẽ dùng Chẩn - Chữa để xác định đúng điểm nghẽn và tùy biến phương pháp phù hợp nhất với từng học viên.
                     </p>
                   </div>
                   <div className="relative pl-6">

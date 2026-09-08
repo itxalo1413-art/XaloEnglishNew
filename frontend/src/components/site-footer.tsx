@@ -133,7 +133,7 @@ export function SiteFooter() {
             </ul>
           </div>
 
-          {/* Cột 3–4: Khóa học */}
+          {/* Cột 3-4: Khóa học */}
           <div className="md:col-span-2 lg:col-span-2">
             <h3 className="text-sm font-bold uppercase tracking-wide text-[var(--primary)]">Khóa học</h3>
             <div className="mt-4 grid grid-cols-2 gap-x-10 gap-y-6 sm:max-w-md">
@@ -172,7 +172,7 @@ export function SiteFooter() {
       </div>
 
       <div className="bg-[#1a1a3a] py-4 text-center text-sm text-white">
-        © Copyright 2022–{year} XA LỘ ENGLISH.
+        © Copyright 2022-{year} XA LỘ ENGLISH.
       </div>
     </footer>
   );

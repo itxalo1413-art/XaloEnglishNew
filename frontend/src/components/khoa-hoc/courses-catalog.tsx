@@ -83,7 +83,7 @@ function OfflineScheduleTable() {
         <div>
           <p className="text-xs font-extrabold uppercase tracking-widest text-[var(--primary)]">Thông tin lớp</p>
           <h3 className="mt-2 text-2xl font-extrabold text-[var(--foreground)] sm:text-3xl">
-            Đầu vào – đầu ra – sĩ số – thời lượng – đối tượng
+            Đầu vào - đầu ra - sĩ số - thời lượng - đối tượng
           </h3>
           <p className="mt-2 max-w-2xl text-sm font-medium leading-relaxed text-[var(--muted)] sm:text-base">
             Band/level chỉ là điều kiện tổ chức; lộ trình thực tế vẫn theo BCB và RLP cá nhân. (Không hiển thị học phí.)
@@ -207,7 +207,7 @@ export function CoursesCatalogSection() {
               Chọn Online / Offline theo nhu cầu
             </h3>
             <p className="mt-4 text-base font-medium leading-relaxed text-[var(--muted)] sm:text-lg">
-              Dù học Online hay Offline, bạn vẫn được đi theo quy trình Chẩn – Chữa: BCB để “thấy lỗi”, RLP để “biết bước tiếp theo”, và theo dõi tiến độ theo từng chặng.
+              Dù học Online hay Offline, bạn vẫn được đi theo quy trình Chẩn - Chữa: BCB để “thấy lỗi”, RLP để “biết bước tiếp theo”, và theo dõi tiến độ theo từng chặng.
             </p>
           </div>
           <ModeToggle mode={mode} setMode={setMode} />
@@ -296,7 +296,7 @@ export function CoursesCatalogSection() {
               <div>
                 <p className="text-xs font-extrabold uppercase tracking-widest text-[var(--primary)]">Thông tin lớp</p>
                 <h3 className="mt-2 text-2xl font-extrabold text-[var(--foreground)] sm:text-3xl">
-                  Đầu vào – đầu ra – sĩ số – thời lượng – đối tượng
+                  Đầu vào - đầu ra - sĩ số - thời lượng - đối tượng
                 </h3>
                 <p className="mt-2 max-w-2xl text-sm font-medium leading-relaxed text-[var(--muted)] sm:text-base">
                   Band/level chỉ là điều kiện tổ chức; lộ trình thực tế vẫn theo BCB và RLP cá nhân. (Không hiển thị học phí.)
@@ -372,7 +372,7 @@ export function CoursesCatalogSection() {
           <div className="border-b border-black/5 p-7">
             <p className="text-xs font-extrabold uppercase tracking-widest text-[var(--primary)]">Combo</p>
             <h3 className="mt-2 text-2xl font-extrabold text-[var(--foreground)] sm:text-3xl">
-              Đầu vào – đầu ra – thời gian học tối thiểu
+              Đầu vào - đầu ra - thời gian học tối thiểu
             </h3>
             <p className="mt-2 max-w-2xl text-sm font-medium leading-relaxed text-[var(--muted)] sm:text-base">
               Gợi ý thời gian theo combo khoá. Bạn có thể dùng filter Đầu vào/Đầu ra ở trên để lọc nhanh.

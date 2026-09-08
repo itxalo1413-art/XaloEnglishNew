@@ -130,7 +130,7 @@ export const courses: Course[] = [
     slug: "speaking-reflex",
     title: "Giao tiếp & phản xạ",
     audienceTag: "Mọi lứa tuổi",
-    shortDesc: "Ưu tiên nói – nghe thực tế, ít lý thuyết khô; tập phản xạ để dùng được ngay.",
+    shortDesc: "Ưu tiên nói - nghe thực tế, ít lý thuyết khô; tập phản xạ để dùng được ngay.",
     pain: [
       "Học nhiều nhưng không nói trôi chảy vì thiếu cơ chế luyện phản xạ.",
       "Ngại nói, sợ sai nên né thực hành.",
@@ -139,7 +139,7 @@ export const courses: Course[] = [
     solution: [
       "Chẩn năng lực nói/nghe để chọn bài tập đúng mức.",
       "Kê lộ trình theo mục tiêu tình huống (học/đi làm/du lịch...).",
-      "Chữa bằng bài luyện theo lỗi phát âm – phản xạ.",
+      "Chữa bằng bài luyện theo lỗi phát âm - phản xạ.",
     ],
     method: {
       chuan: "Test nói/nghe ngắn + đánh giá điểm nghẽn phản xạ.",

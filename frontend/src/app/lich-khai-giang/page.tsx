@@ -47,7 +47,7 @@ const schedules: Schedule[] = [
     studyDays: "T3 - T5 - CN",
     studyTime: "19:30 - 21:00",
     seatsLeft: 9,
-    shortDesc: "Nền IELTS: từ vựng – ngữ pháp – đọc hiểu nền, đi theo BCB/RLP.",
+    shortDesc: "Nền IELTS: từ vựng - ngữ pháp - đọc hiểu nền, đi theo BCB/RLP.",
     fitFor: "Các bạn chưa từng dùng tiếng Anh hoặc chỉ biết một vài từ tiếng Anh riêng lẻ.",
   },
   {
@@ -116,7 +116,7 @@ const schedules: Schedule[] = [
     seatsLeft: 3,
     shortDesc: "Bứt tốc band cao: tinh chỉnh theo tiêu chí và giảm lỗi tinh vi.",
     fitFor:
-      "Các bạn dùng tiếng Anh khá – tốt và muốn lên mức tự nhiên/chuẩn xác hơn: giảm lỗi tinh vi, tăng độ mạch lạc, phù hợp mục tiêu band cao.",
+      "Các bạn dùng tiếng Anh khá - tốt và muốn lên mức tự nhiên/chuẩn xác hơn: giảm lỗi tinh vi, tăng độ mạch lạc, phù hợp mục tiêu band cao.",
   },
   // —— OFFLINE IELTS (3 lộ trình) ——
   {
@@ -132,7 +132,7 @@ const schedules: Schedule[] = [
     studyDays: "T2 - T4 - T6",
     studyTime: "16:00 - 17:30",
     seatsLeft: 7,
-    shortDesc: "Chắc nền tại trung tâm: đọc hiểu – ngữ pháp – từ vựng học thuật.",
+    shortDesc: "Chắc nền tại trung tâm: đọc hiểu - ngữ pháp - từ vựng học thuật.",
     fitFor:
       "Các bạn dùng được tiếng Anh ở mức cơ bản, trong nhiều tình huống quen thuộc nhưng còn mắc nhiều lỗi nghiêm trọng.",
   },

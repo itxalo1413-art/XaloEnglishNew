@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 220" width="100%" height="100%" fill="none">
+  <rect width="160" height="220" rx="8" fill="#FDFCFA" stroke="#D1D5DB" stroke-width="1.5"/>
+  <!-- IELTS Header banner -->
+  <rect x="10" y="10" width="140" height="24" rx="4" fill="#6A5ACD" fill-opacity="0.1"/>
+  <text x="16" y="26" font-family="sans-serif" font-size="11" font-weight="900" fill="#6A5ACD">IELTS</text>
+  <text x="56" y="25" font-family="sans-serif" font-size="7" font-weight="700" fill="#64748B">Test Report Form</text>
+  
+  <!-- Candidate Info Lines -->
+  <rect x="12" y="42" width="40" height="40" rx="4" fill="#E2E8F0"/>
+  <circle cx="32" cy="56" r="10" fill="#94A3B8"/>
+  <path d="M18 78 C18 68, 46 68, 46 78 Z" fill="#94A3B8"/>
+
+  <rect x="58" y="44" width="90" height="6" rx="3" fill="#9494FF" fill-opacity="0.5"/>
+  <rect x="58" y="54" width="70" height="5" rx="2.5" fill="#E2E8F0"/>
+  <rect x="58" y="63" width="80" height="5" rx="2.5" fill="#E2E8F0"/>
+  <rect x="58" y="72" width="60" height="5" rx="2.5" fill="#E2E8F0"/>
+
+  <!-- Table of Scores -->
+  <rect x="10" y="90" width="140" height="58" rx="4" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+  <line x1="10" y1="108" x2="150" y2="108" stroke="#E2E8F0" stroke-width="1"/>
+  
+  <text x="14" y="103" font-family="sans-serif" font-size="6" font-weight="700" fill="#64748B">LISTENING</text>
+  <text x="48" y="103" font-family="sans-serif" font-size="6" font-weight="700" fill="#64748B">READING</text>
+  <text x="82" y="103" font-family="sans-serif" font-size="6" font-weight="700" fill="#64748B">WRITING</text>
+  <text x="114" y="103" font-family="sans-serif" font-size="6" font-weight="700" fill="#64748B">SPEAKING</text>
+
+  <text x="20" y="122" font-family="sans-serif" font-size="10" font-weight="900" fill="#1E293B">8.5</text>
+  <text x="54" y="122" font-family="sans-serif" font-size="10" font-weight="900" fill="#1E293B">8.5</text>
+  <text x="88" y="122" font-family="sans-serif" font-size="10" font-weight="900" fill="#1E293B">7.5</text>
+  <text x="122" y="122" font-family="sans-serif" font-size="10" font-weight="900" fill="#1E293B">8.0</text>
+
+  <rect x="10" y="132" width="140" height="16" fill="#6A5ACD" fill-opacity="0.1"/>
+  <text x="14" y="143" font-family="sans-serif" font-size="7" font-weight="800" fill="#6A5ACD">OVERALL BAND SCORE</text>
+  <text x="126" y="144" font-family="sans-serif" font-size="10" font-weight="900" fill="#6A5ACD">8.0</text>
+
+  <!-- Stamp & Validation -->
+  <circle cx="120" cy="180" r="16" stroke="#6A5ACD" stroke-width="1.5" stroke-dasharray="2 2" fill="#6A5ACD" fill-opacity="0.05"/>
+  <text x="108" y="179" font-family="sans-serif" font-size="5" font-weight="800" fill="#6A5ACD">VALIDATED</text>
+  <text x="111" y="186" font-family="sans-serif" font-size="6" font-weight="900" fill="#6A5ACD">OFFICIAL</text>
+  <rect x="14" y="170" width="70" height="4" rx="2" fill="#CBD5E1"/>
+  <rect x="14" y="178" width="50" height="4" rx="2" fill="#CBD5E1"/>
+  <rect x="14" y="186" width="60" height="4" rx="2" fill="#CBD5E1"/>
+  <rect x="14" y="194" width="40" height="4" rx="2" fill="#CBD5E1"/>
+</svg>

@@ -11,7 +11,7 @@ const courses = [
   },
   {
     name: "Giao tiếp & phản xạ",
-    desc: "Ưu tiên nói – nghe thực tế, ít lý thuyết khô; phù hợp người cần dùng tiếng Anh hằng ngày.",
+    desc: "Ưu tiên nói - nghe thực tế, ít lý thuyết khô; phù hợp người cần dùng tiếng Anh hằng ngày.",
     tag: "Mọi lứa tuổi",
   },
 ];

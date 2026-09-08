@@ -11,7 +11,7 @@ export function CoursesListSection() {
             Tìm lời giải cho vấn đề của bạn
           </h3>
           <p className="mt-4 max-w-2xl text-base font-medium leading-relaxed text-[var(--muted)] md:mx-0 mx-auto">
-            Khám phá danh sách đầy đủ. Bấm vào từng khóa để xem chi tiết cách Xa Lộ thiết kế điểm chạm Chẩn – Chữa cụ thể.
+            Khám phá danh sách đầy đủ. Bấm vào từng khóa để xem chi tiết cách Xa Lộ thiết kế điểm chạm Chẩn - Chữa cụ thể.
           </p>
         </div>
 

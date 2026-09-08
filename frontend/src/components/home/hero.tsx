@@ -1,101 +1,284 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, CheckCircle2, Sparkles, Stethoscope } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, Stethoscope, X } from "lucide-react";
+
+type ProofCard = {
+  id: string;
+  num: string;
+  name: string;
+  overall: string;
+  scores: { listening: string; reading: string; writing: string; speaking: string };
+  quote: string;
+};
+
+const proofCards: ProofCard[] = [
+  {
+    id: "thanh-thao",
+    num: "#1",
+    name: "NGUYỄN THANH THẢO",
+    overall: "8.0",
+    scores: { listening: "8.5", reading: "8.5", writing: "7.5", speaking: "8.0" },
+    quote:
+      "Lớp học nhẹ nhàng, cô dạy siêu hay và chữa bài kỹ lắm luôn ạ! Nhờ lộ trình cá nhân hóa của Xa Lộ English mà em đã bứt phá đạt Band 8.0.",
+  },
+  {
+    id: "hien-nga",
+    num: "#2",
+    name: "TẠ THỊ HIỀN NGA",
+    overall: "8.0",
+    scores: { listening: "8.5", reading: "8.0", writing: "7.5", speaking: "8.0" },
+    quote:
+      "Cô dạy siêu kỹ và chi tiết, theo sát từng kỹ năng. Nhờ đó mà em tự tin thi và vượt mục tiêu đạt Band 8.0 ngọt ngào...",
+  },
+  {
+    id: "minh-dung",
+    num: "#3",
+    name: "HOÀNG LÊ MINH DŨNG",
+    overall: "8.0",
+    scores: { listening: "9.0", reading: "8.5", writing: "7.0", speaking: "7.5" },
+    quote:
+      "Môi trường học tập đầy cảm hứng. Quy trình chẩn chữa giúp em nhận ra đúng điểm yếu và cải thiện cực nhanh...",
+  },
+];
 
 export function Hero() {
+  const [selectedStudent, setSelectedStudent] = useState<ProofCard | null>(null);
+
   return (
-    <div className="relative bg-white pb-[4vw] sm:pb-[2vw]">
+    <div className="relative bg-white pb-8 sm:pb-10">
       <section
         id="hero"
-        className="relative overflow-visible bg-[var(--surface-2)] text-[var(--foreground)]"
-        style={{
-          clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 4vw), 0 100%)",
-        }}
+        className="relative overflow-visible bg-[var(--surface-2)] text-[var(--foreground)] pt-6 pb-10 sm:pt-10 sm:pb-14"
       >
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-20 pt-10 sm:px-6 sm:pb-28 sm:pt-16 lg:px-8 lg:pb-36 lg:pt-20">
-          {/* Badge & Headline Area */}
-          <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch xl:gap-16">
-            <div className="flex flex-col justify-center">
-              <div className="inline-flex items-center gap-2 self-start rounded-full bg-[var(--primary)]/10 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-[var(--secondary)] ring-1 ring-[var(--primary)]/20">
-                <Sparkles className="h-3.5 w-3.5 text-[var(--secondary)]" />
-                Quy trình Chẩn – Chữa Độc Quyền
-              </div>
-
-              <h1 className="mt-5 font-heading text-3xl font-[900] uppercase leading-[1.05] tracking-tight text-[var(--foreground)] sm:text-5xl lg:text-[3rem] xl:text-[3.75rem] 2xl:text-[4.25rem]">
-                <span className="block text-[var(--secondary)] drop-shadow-sm">Học đúng cách</span>
-                <span className="block whitespace-nowrap">khi hiểu đúng mình</span>
-                <span className="mt-2 block text-xl font-black lowercase tracking-normal text-[var(--primary)] sm:text-2xl lg:text-3xl">
-                  cùng Quy trình Chẩn - Chữa
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+          {/* Main Hero Header & Headline */}
+          <div className="mx-auto max-w-4xl text-center">
+            <h1 className="mt-2 font-heading text-3xl font-[900] tracking-tight text-[var(--foreground)] sm:text-4xl md:text-5xl lg:text-6xl leading-[1.15] text-balance">
+              <span className="block text-[var(--secondary)]">Xa Lộ English</span>
+              <span className="block mt-1">Học đúng cách khi hiểu đúng mình</span>
+              <span className="mt-3 block text-2xl font-black lowercase tracking-normal sm:text-3xl lg:text-4xl text-[var(--foreground)]">
+                Cùng{" "}
+                <span className="relative inline-block px-3 py-0.5 rounded-[5px] bg-[var(--primary)]/20 text-[var(--secondary)] underline decoration-[var(--secondary)] decoration-2 underline-offset-4">
+                  Quy trình Chẩn - Chữa
                 </span>
-              </h1>
+              </span>
+            </h1>
 
-              <p className="mt-6 max-w-2xl border-l-4 border-[var(--primary)] pl-4 py-1 text-base font-medium leading-relaxed text-[var(--muted)] sm:text-lg">
-                Xa Lộ English giúp bạn xác định đúng điểm yếu trước khi bắt đầu học, từ đó xây lộ trình tập trung vào những gì bạn thực sự cần cải thiện.
-              </p>
+            <p className="mx-auto mt-6 max-w-3xl text-base font-medium leading-relaxed text-[var(--muted)] sm:text-lg text-pretty">
+              Xa Lộ English giúp bạn xác định đúng điểm yếu trước khi bắt đầu học, từ đó xây lộ trình tập trung vào những gì bạn thực sự cần cải thiện.
+            </p>
 
-              {/* CTAs */}
-              <div className="mt-8 flex flex-col gap-3.5 sm:flex-row sm:items-center">
-                <Link
-                  href="/#test-dau-vao"
-                  className="group inline-flex h-14 items-center justify-center rounded-full bg-[var(--primary)] px-8 text-sm font-black uppercase tracking-wider text-[var(--on-primary)] shadow-xl shadow-[var(--primary)]/25 transition-all duration-300 hover:-translate-y-1 hover:bg-[var(--secondary)] hover:shadow-2xl hover:shadow-[var(--primary)]/40"
-                >
-                  <Stethoscope className="mr-2.5 h-4 w-4" />
-                  Test trình độ & nhận Bảng Chẩn Bệnh miễn phí
-                  <ArrowRight className="ml-2.5 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </Link>
+            {/* CTAs */}
+            <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <Link
+                href="/#test-dau-vao"
+                className="group inline-flex h-12 w-full sm:w-auto items-center justify-center rounded-[5px] bg-[var(--primary)] px-7 text-sm font-black uppercase tracking-wider text-[var(--on-primary)] transition-all duration-300 hover:bg-[var(--secondary)]"
+              >
+                <Stethoscope className="mr-2 h-4 w-4" />
+                Test trình độ & nhận Bảng Chẩn Bệnh miễn phí
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
 
-                <Link
-                  href="/khoa-hoc"
-                  className="inline-flex h-14 items-center justify-center rounded-full bg-white px-7 text-sm font-extrabold text-[var(--foreground)] shadow-sm ring-1 ring-black/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--surface-1)] hover:text-[var(--primary)] hover:ring-[var(--primary)]/30"
-                >
-                  Xem lộ trình học phù hợp
-                </Link>
+              <Link
+                href="/khoa-hoc"
+                className="inline-flex h-12 w-full sm:w-auto items-center justify-center rounded-[5px] border border-[var(--border-strong)] bg-white px-7 text-sm font-extrabold text-[var(--foreground)] transition-all duration-300 hover:bg-[var(--surface-1)] hover:text-[var(--primary)]"
+              >
+                Xem lộ trình học phù hợp
+              </Link>
+            </div>
+          </div>
+
+          {/* Stats Metrics Table (3 Columns) */}
+          <div className="mx-auto mt-12 max-w-4xl overflow-hidden rounded-[5px] border border-[var(--border-strong)] bg-white">
+            <div className="grid grid-cols-3 divide-x divide-[var(--border-strong)]">
+              {/* Stat 1 */}
+              <div className="p-4 sm:p-5 text-center">
+                <div className="bg-[var(--surface-1)]/70 py-2.5 rounded-[5px]">
+                  <p className="font-heading text-2xl font-black text-[var(--foreground)] sm:text-3xl md:text-4xl">
+                    98%
+                  </p>
+                </div>
+                <p className="mt-2.5 text-xs font-extrabold text-[var(--foreground)] sm:text-sm md:text-base">
+                  Đạt mục tiêu
+                </p>
               </div>
 
-              {/* Trust Indicators */}
-              <div className="mt-8 flex flex-wrap items-center gap-y-2 gap-x-6 text-xs font-bold text-[var(--muted)]">
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="h-4 w-4 text-[var(--primary)]" />
-                  Test 4 kỹ năng chuẩn rubric
+              {/* Stat 2 */}
+              <div className="p-4 sm:p-5 text-center">
+                <div className="bg-[var(--surface-1)]/70 py-2.5 rounded-[5px]">
+                  <p className="font-heading text-2xl font-black text-[var(--foreground)] sm:text-3xl md:text-4xl">
+                    1000+
+                  </p>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="h-4 w-4 text-[var(--primary)]" />
-                  Nhận Bảng Chẩn Bệnh (BCB) chi tiết
+                <p className="mt-2.5 text-xs font-extrabold text-[var(--foreground)] sm:text-sm md:text-base">
+                  Học viên đồng hành
+                </p>
+              </div>
+
+              {/* Stat 3 */}
+              <div className="p-4 sm:p-5 text-center">
+                <div className="bg-[var(--surface-1)]/70 py-2.5 rounded-[5px]">
+                  <p className="font-heading text-2xl font-black text-[var(--foreground)] sm:text-3xl md:text-4xl">
+                    8.0+ IELTS
+                  </p>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="h-4 w-4 text-[var(--primary)]" />
-                  Lộ trình cá nhân hóa (RLP)
-                </div>
+                <p className="mt-2.5 text-xs font-extrabold text-[var(--foreground)] sm:text-sm md:text-base">
+                  Giáo viên kinh nghiệm
+                </p>
               </div>
             </div>
+          </div>
 
-            {/* Visual Photo Card - Tall Height */}
-            <div className="relative flex flex-col">
-              <div className="group relative w-full flex-1 min-h-[440px] sm:min-h-[500px] lg:min-h-[560px] overflow-hidden rounded-[2.5rem] bg-white p-3 shadow-2xl ring-1 ring-black/10 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_25px_60px_rgb(0,0,0,0.15)]">
-                <div className="relative h-full w-full min-h-[420px] sm:min-h-[480px] lg:min-h-[540px] overflow-hidden rounded-[2rem] bg-[var(--surface-1)]">
-                  <Image
-                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1000&h=1000"
-                    alt="Học viên Xa Lộ English trong buổi chẩn đoán và học lộ trình"
-                    fill
-                    priority
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 45vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-90" />
-                  
-                  <div className="absolute bottom-5 left-5 right-5 rounded-2xl bg-white/95 p-4 backdrop-blur-md ring-1 ring-black/5 shadow-lg">
-                    <p className="text-[11px] font-black uppercase tracking-widest text-[var(--secondary)]">
-                      Quy trình Chẩn – Chữa
-                    </p>
-                    <p className="mt-1 text-xs font-bold text-[var(--foreground)] sm:text-sm">
-                      Đồng hành 1 kèm 1 & Lộ trình RLP cá nhân hóa theo từng mục tiêu
-                    </p>
+          {/* Proof Section (3 Proof Cards) */}
+          <div className="mt-12">
+            {/* Purple container holding the 3 proof cards */}
+            <div className="rounded-[5px] bg-[var(--primary)]/10 p-5 sm:p-7 border border-[var(--primary)]/20">
+              <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+                {proofCards.map((card) => (
+                  <div
+                    key={card.id}
+                    className="flex flex-col justify-between rounded-[5px] bg-white p-5 border border-[var(--border-strong)] transition-all duration-200 hover:border-[var(--secondary)]/40"
+                  >
+                    <div>
+                      {/* Top Header: Index & Overall */}
+                      <div className="flex items-start justify-between border-b border-black/5 pb-2.5">
+                        <span className="text-xs font-black text-[var(--muted)]">{card.num}</span>
+                        <div className="text-right">
+                          <span className="block text-[10px] font-black uppercase tracking-wider text-[var(--muted)]">
+                            OVERALL
+                          </span>
+                          <span className="font-heading text-2xl font-black text-[var(--secondary)] leading-none">
+                            {card.overall}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Candidate Name */}
+                      <h3 className="mt-3 font-heading text-base font-black uppercase tracking-tight text-[var(--foreground)]">
+                        {card.name}
+                      </h3>
+
+                      {/* Certificate Thumbnail + Quote */}
+                      <div className="mt-3.5 flex gap-3 items-start">
+                        {/* Certificate TRF Mock SVG */}
+                        <div className="relative h-28 w-20 shrink-0 overflow-hidden rounded-[5px] border border-[var(--border-strong)] bg-slate-50">
+                          <Image
+                            src="/proof/ielts-trf-mock.svg"
+                            alt="Bảng điểm IELTS"
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+
+                        {/* Quote */}
+                        <p className="text-xs font-medium italic leading-relaxed text-[var(--muted)] line-clamp-5 text-pretty">
+                          “{card.quote}”
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Button CTA */}
+                    <div className="mt-5 pt-1">
+                      <button
+                        type="button"
+                        onClick={() => setSelectedStudent(card)}
+                        className="flex h-10 w-full items-center justify-center rounded-[5px] bg-[var(--secondary)] px-4 text-xs font-black text-white transition-colors hover:bg-[var(--primary)] cursor-pointer"
+                      >
+                        Xem chi tiết bảng điểm →
+                      </button>
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
         </div>
+
+        {/* Modal: Xem chi tiết bảng điểm */}
+        {selectedStudent && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm animate-in fade-in duration-200"
+            onClick={() => setSelectedStudent(null)}
+          >
+            <div
+              className="relative w-full max-w-lg rounded-[5px] bg-white p-6 sm:p-7 border border-black/10 shadow-xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                type="button"
+                onClick={() => setSelectedStudent(null)}
+                className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-[5px] bg-slate-100 text-slate-600 hover:bg-slate-200 cursor-pointer"
+              >
+                <X className="h-4 w-4" />
+              </button>
+
+              <div className="flex items-center gap-3 border-b border-black/5 pb-3">
+                <div className="flex h-8 w-8 items-center justify-center rounded-[5px] bg-[var(--secondary)] text-white font-black text-xs">
+                  {selectedStudent.num}
+                </div>
+                <div>
+                  <h4 className="text-base font-black uppercase text-[var(--foreground)]">
+                    {selectedStudent.name}
+                  </h4>
+                  <p className="text-xs font-bold text-[var(--secondary)]">
+                    IELTS Test Report Form — Overall {selectedStudent.overall}
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-5 flex gap-5 items-center">
+                <div className="relative h-40 w-28 shrink-0 overflow-hidden rounded-[5px] border border-slate-200">
+                  <Image
+                    src="/proof/ielts-trf-mock.svg"
+                    alt="Chứng chỉ IELTS"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+
+                <div className="flex-1 space-y-2">
+                  <div className="flex justify-between border-b pb-1 text-xs">
+                    <span className="font-bold text-[var(--muted)]">Listening:</span>
+                    <span className="font-black text-[var(--foreground)]">{selectedStudent.scores.listening}</span>
+                  </div>
+                  <div className="flex justify-between border-b pb-1 text-xs">
+                    <span className="font-bold text-[var(--muted)]">Reading:</span>
+                    <span className="font-black text-[var(--foreground)]">{selectedStudent.scores.reading}</span>
+                  </div>
+                  <div className="flex justify-between border-b pb-1 text-xs">
+                    <span className="font-bold text-[var(--muted)]">Writing:</span>
+                    <span className="font-black text-[var(--foreground)]">{selectedStudent.scores.writing}</span>
+                  </div>
+                  <div className="flex justify-between border-b pb-1 text-xs">
+                    <span className="font-bold text-[var(--muted)]">Speaking:</span>
+                    <span className="font-black text-[var(--foreground)]">{selectedStudent.scores.speaking}</span>
+                  </div>
+                  <div className="flex justify-between pt-1 text-sm">
+                    <span className="font-black text-[var(--secondary)]">OVERALL:</span>
+                    <span className="font-black text-[var(--secondary)] text-base">{selectedStudent.overall}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-5 rounded-[5px] bg-[var(--surface-1)] p-3.5 text-xs italic text-[var(--foreground)] font-medium leading-relaxed">
+                “{selectedStudent.quote}”
+              </div>
+
+              <div className="mt-5">
+                <Link
+                  href="/#test-dau-vao"
+                  onClick={() => setSelectedStudent(null)}
+                  className="flex h-11 w-full items-center justify-center rounded-[5px] bg-[var(--primary)] text-xs font-black uppercase tracking-wider text-white transition-colors hover:bg-[var(--secondary)]"
+                >
+                  Đăng ký Test & Lộ trình như học viên này
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
       </section>
     </div>
   );

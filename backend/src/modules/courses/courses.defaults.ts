@@ -32,7 +32,7 @@ export const DEFAULT_COURSES: UpsertCourseDto[] = [
     title: 'Giao tiếp & phản xạ',
     slug: 'speaking-reflex',
     mode: 'online',
-    note: 'Ưu tiên nói – nghe thực tế, ít lý thuyết khô; tập phản xạ để dùng được ngay.',
+    note: 'Ưu tiên nói - nghe thực tế, ít lý thuyết khô; tập phản xạ để dùng được ngay.',
     audience: 'Mọi lứa tuổi',
     highlights: [
       'Luyện phản xạ theo tình huống',

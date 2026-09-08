@@ -31,7 +31,7 @@ export default function KhoaHocPage() {
                 Khóa học
               </h1>
               <p className="mt-6 max-w-2xl text-lg font-medium leading-relaxed text-[var(--muted)] sm:text-xl">
-                Không có cách học chung cho mọi người. Chọn đúng khóa theo vấn đề của bạn để Chẩn – Chữa đi đúng trọng tâm và đạt kết quả thực thụ.
+                Không có cách học chung cho mọi người. Chọn đúng khóa theo vấn đề của bạn để Chẩn - Chữa đi đúng trọng tâm và đạt kết quả thực thụ.
               </p>
             </div>
           </section>

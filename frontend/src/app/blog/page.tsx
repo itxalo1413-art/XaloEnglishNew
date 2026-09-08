@@ -9,14 +9,14 @@ import { getSiteUrl } from "@/lib/site-url";
 export const metadata: Metadata = {
   title: "Tin tức — Xa Lộ English",
   description:
-    "Bài viết về học tiếng Anh, quy trình Chẩn – Chữa, lộ trình IELTS và kinh nghiệm học tập tại Xa Lộ English.",
+    "Bài viết về học tiếng Anh, quy trình Chẩn - Chữa, lộ trình IELTS và kinh nghiệm học tập tại Xa Lộ English.",
   alternates: {
     canonical: "/blog",
   },
   openGraph: {
     title: "Tin tức — Xa Lộ English",
     description:
-      "Bài viết về học tiếng Anh, quy trình Chẩn – Chữa và lộ trình học tập tại Xa Lộ English.",
+      "Bài viết về học tiếng Anh, quy trình Chẩn - Chữa và lộ trình học tập tại Xa Lộ English.",
     type: "website",
     url: "/blog",
   },
