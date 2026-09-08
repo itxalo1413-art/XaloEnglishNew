@@ -92,7 +92,7 @@ export function Hero() {
           </div>
 
           {/* Stats Metrics Table (3 Columns) */}
-          <div className="mx-auto mt-12 max-w-4xl overflow-hidden rounded-[5px] border border-[var(--border-strong)] bg-white">
+          <div className="mx-auto mt-12 max-w-4xl overflow-hidden rounded-2xl border border-[var(--border-strong)] bg-white shadow-sm">
             <div className="grid grid-cols-3 divide-x divide-[var(--border-strong)]">
               {/* Stat 1 */}
               <div className="p-4 sm:p-5 text-center">
@@ -135,12 +135,12 @@ export function Hero() {
           {/* Proof Section (3 Proof Cards) */}
           <div className="mt-12">
             {/* Purple container holding the 3 proof cards */}
-            <div className="rounded-[5px] bg-[var(--primary)]/10 p-5 sm:p-7 border border-[var(--primary)]/20">
+            <div className="rounded-3xl bg-[var(--primary)]/10 p-5 sm:p-7 border border-[var(--primary)]/20 shadow-sm">
               <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
                 {proofCards.map((card) => (
                   <div
                     key={card.id}
-                    className="flex flex-col justify-between rounded-[5px] bg-white p-5 border border-[var(--border-strong)] transition-all duration-200 hover:border-[var(--secondary)]/40"
+                    className="flex flex-col justify-between rounded-[5px] bg-white p-5 border border-[var(--border-strong)] transition-all duration-200 hover:border-[var(--secondary)]/40 shadow-sm"
                   >
                     <div>
                       {/* Top Header: Index & Overall */}
@@ -185,7 +185,7 @@ export function Hero() {
                       <button
                         type="button"
                         onClick={() => setSelectedStudent(card)}
-                        className="flex h-10 w-full items-center justify-center rounded-[5px] bg-[var(--secondary)] px-4 text-xs font-black text-white transition-colors hover:bg-[var(--primary)] cursor-pointer"
+                        className="flex h-10 w-full items-center justify-center rounded-[5px] bg-[var(--secondary)] px-4 text-xs font-black text-white transition-colors hover:bg-[var(--primary)] cursor-pointer shadow-sm"
                       >
                         Xem chi tiết bảng điểm →
                       </button>
@@ -204,7 +204,7 @@ export function Hero() {
             onClick={() => setSelectedStudent(null)}
           >
             <div
-              className="relative w-full max-w-lg rounded-[5px] bg-white p-6 sm:p-7 border border-black/10 shadow-xl"
+              className="relative w-full max-w-lg rounded-2xl bg-white p-6 sm:p-7 border border-black/10 shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               <button
@@ -271,7 +271,7 @@ export function Hero() {
                 <Link
                   href="/#test-dau-vao"
                   onClick={() => setSelectedStudent(null)}
-                  className="flex h-11 w-full items-center justify-center rounded-[5px] bg-[var(--primary)] text-xs font-black uppercase tracking-wider text-white transition-colors hover:bg-[var(--secondary)]"
+                  className="flex h-11 w-full items-center justify-center rounded-[5px] bg-[var(--primary)] text-xs font-black uppercase tracking-wider text-white transition-colors hover:bg-[var(--secondary)] shadow-sm"
                 >
                   Đăng ký Test & Lộ trình như học viên này
                 </Link>

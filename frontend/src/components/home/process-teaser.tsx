@@ -145,225 +145,273 @@ export function ProcessTeaserSection() {
           </div>
         </div>
 
-        {/* PROCESS FLOW DIAGRAM */}
-        <div className="mt-8 space-y-8">
-          {/* PHASE 1: CHẨN */}
+        {/* SEAMLESS 2-PHASE CLINICAL TIMELINE (Bố cục 2 Cột Đối Xứng Tinh Tế) */}
+        <div className="mt-10 grid gap-6 lg:grid-cols-2 items-stretch">
+          {/* PHASE 1: CHẨN (3 BƯỚC KHÁM & CHẨN ĐOÁN) */}
           {(activePhase === "all" || activePhase === "chan") && (
-            <div className="relative">
-              {/* Phase Header Line */}
-              <div className="flex items-center gap-4 mb-5">
-                <div className="flex h-8 w-8 items-center justify-center rounded-[5px] bg-[var(--secondary)] text-white font-black text-xs shadow-sm">
-                  01
-                </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <h3 className="font-heading text-base sm:text-lg font-black text-[var(--foreground)] uppercase tracking-wide">
-                      Giai đoạn CHẨN
-                    </h3>
-                    <span className="rounded-[5px] bg-[var(--primary)]/15 px-2 py-0.5 text-[11px] font-bold text-[var(--secondary)]">
-                      3 bước chẩn bệnh
+            <div className={`rounded-2xl bg-white p-6 sm:p-8 border border-slate-200/90 shadow-sm flex flex-col justify-between relative overflow-hidden ${activePhase === "chan" ? "lg:col-span-2" : ""}`}>
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-[var(--secondary)]" />
+              <div>
+                {/* Phase Header */}
+                <div className="flex items-center justify-between gap-2 border-b border-black/5 pb-4">
+                  <div className="flex items-center gap-2.5">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-[5px] bg-[var(--secondary)] text-xs font-black text-white shadow-sm">
+                      01
                     </span>
+                    <div>
+                      <h3 className="font-heading text-base sm:text-lg font-black text-[var(--foreground)] uppercase tracking-wide">
+                        Giai đoạn CHẨN
+                      </h3>
+                      <p className="text-xs text-[var(--muted)] font-medium">Bóc tách tận gốc nguyên nhân lỗi sai</p>
+                    </div>
                   </div>
-                  <p className="text-xs font-medium text-[var(--muted)]">
-                    Xác định chính xác nguyên nhân gốc rễ trước khi bắt đầu học
-                  </p>
+                  <span className="rounded-[5px] bg-[var(--primary)]/15 px-3 py-1 text-xs font-black uppercase text-[var(--secondary)]">
+                    3 Bước đầu
+                  </span>
                 </div>
-                <div className="hidden md:block flex-1 border-t border-dashed border-[var(--secondary)]/30" />
-              </div>
 
-              {/* Connected Step Cards with Images */}
-              <div className="grid gap-4 md:grid-cols-3">
-                {chanSteps.map((item, idx) => {
-                  const Icon = item.icon;
-                  return (
-                    <div
-                      key={item.step}
-                      className="group relative flex flex-col justify-between rounded-[5px] bg-white p-3.5 border border-[var(--border-strong)] hover:border-[var(--secondary)] hover:shadow-md transition-all duration-200"
-                    >
-                      <div>
-                        {/* Step Thumbnail Image */}
-                        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[5px] bg-[var(--surface-1)] border border-black/5">
-                          <Image
-                            src={item.image}
-                            alt={item.title}
-                            fill
-                            sizes="(max-width: 768px) 100vw, 33vw"
-                            className="object-cover transition-transform duration-500 group-hover:scale-105"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60" />
+                {/* Connected Vertical Timeline Nodes */}
+                <div className="mt-6 relative pl-6 space-y-6 before:absolute before:left-2.5 before:top-3 before:bottom-3 before:w-0.5 before:bg-[var(--secondary)]/25">
+                  {chanSteps.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <div key={item.step} className="group relative">
+                        {/* Timeline Node Dot */}
+                        <div className="absolute -left-6 top-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-white border-2 border-[var(--secondary)] shadow-sm group-hover:scale-110 group-hover:bg-[var(--secondary)] transition-all">
+                          <span className="h-1.5 w-1.5 rounded-full bg-[var(--secondary)] group-hover:bg-white" />
+                        </div>
 
-                          {/* Step Number Pill over image */}
-                          <div className="absolute top-2 left-2 flex h-6 w-6 items-center justify-center rounded-[5px] bg-[var(--secondary)] text-white text-xs font-black shadow-sm">
-                            {item.step}
-                          </div>
-
-                          {/* Tag Badge over image */}
-                          <div className="absolute top-2 right-2">
-                            <span className="inline-flex rounded-[5px] bg-white/95 backdrop-blur-sm border border-black/10 px-2 py-0.5 text-[10px] font-black text-[var(--secondary)] shadow-sm">
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs font-black text-[var(--secondary)] uppercase tracking-wider">
+                              Bước 0{item.step}
+                            </span>
+                            <span className="rounded-[5px] bg-black/5 px-2 py-0.5 text-[10px] font-bold text-[var(--muted)]">
                               {item.tag}
                             </span>
                           </div>
-
-                          {/* Icon over image */}
-                          <div className="absolute bottom-2 right-2 flex h-6 w-6 items-center justify-center rounded-[5px] bg-white/95 backdrop-blur-sm text-[var(--secondary)] shadow-sm">
-                            <Icon className="h-3 w-3" />
-                          </div>
-                        </div>
-
-                        {/* Content */}
-                        <div className="mt-3">
-                          <h4 className="font-heading text-sm font-black text-[var(--foreground)] group-hover:text-[var(--secondary)] transition-colors text-pretty">
+                          <h4 className="mt-1 font-heading text-sm sm:text-base font-black text-[var(--foreground)] group-hover:text-[var(--secondary)] transition-colors">
                             {item.title}
                           </h4>
-                          <p className="mt-1 text-xs font-medium leading-relaxed text-[var(--muted)] text-pretty line-clamp-2">
+                          <p className="mt-1 text-xs sm:text-sm leading-relaxed text-[var(--muted)] font-medium text-pretty">
                             {item.desc}
                           </p>
                         </div>
                       </div>
+                    );
+                  })}
+                </div>
+              </div>
 
-                      {/* Bottom connector indicator */}
-                      <div className="mt-3.5 pt-2.5 border-t border-black/5 flex items-center justify-between text-[11px] font-bold text-[var(--muted)]">
-                        <span>Bước {item.step} / 7</span>
-                        {idx < chanSteps.length - 1 ? (
-                          <span className="text-[var(--secondary)] group-hover:translate-x-1 transition-transform flex items-center gap-0.5">
-                            Tiếp theo <ChevronRight className="h-3 w-3" />
-                          </span>
-                        ) : (
-                          <span className="text-[var(--secondary)] font-black">Sang Chữa →</span>
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
+              {/* Bottom Transfer Tag to Phase 2 */}
+              <div className="mt-6 pt-4 border-t border-black/5 flex flex-wrap items-center justify-between gap-2 text-xs font-bold text-[var(--secondary)] bg-[var(--surface-1)] p-3 rounded-[5px]">
+                <span className="flex items-center gap-1.5 font-black">
+                  <span>📋</span> Đầu ra: Bảng Chẩn Bệnh (BCB)
+                </span>
+                <span className="flex items-center gap-1 text-[var(--secondary)] font-black">
+                  Chuyển sang Kê đơn RLP ➔
+                </span>
               </div>
             </div>
           )}
 
-          {/* PHASE 2: CHỮA */}
+          {/* PHASE 2: CHỮA (4 BƯỚC ĐIỀU TRỊ ĐẶC TRỊ) */}
           {(activePhase === "all" || activePhase === "chua") && (
-            <div className="relative">
-              {/* Phase Header Line */}
-              <div className="flex items-center gap-4 mb-5">
-                <div className="flex h-8 w-8 items-center justify-center rounded-[5px] bg-[var(--primary)] text-white font-black text-xs shadow-sm">
-                  02
-                </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <h3 className="font-heading text-base sm:text-lg font-black text-[var(--foreground)] uppercase tracking-wide">
-                      Giai đoạn CHỮA
-                    </h3>
-                    <span className="rounded-[5px] bg-[var(--secondary)]/15 px-2 py-0.5 text-[11px] font-bold text-[var(--secondary)]">
-                      4 bước điều trị
+            <div className={`rounded-2xl bg-gradient-to-br from-[var(--primary)]/10 via-white to-[var(--secondary)]/15 p-6 sm:p-8 border-2 border-[var(--secondary)]/50 shadow-lg shadow-purple-900/5 flex flex-col justify-between relative overflow-hidden ${activePhase === "chua" ? "lg:col-span-2" : ""}`}>
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[var(--primary)] via-[var(--secondary)] to-[var(--primary)]" />
+              <div>
+                {/* Phase Header */}
+                <div className="flex items-center justify-between gap-2 border-b border-[var(--primary)]/20 pb-4">
+                  <div className="flex items-center gap-2.5">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-[5px] bg-[var(--secondary)] text-xs font-black text-white shadow-sm">
+                      02
                     </span>
+                    <div>
+                      <h3 className="font-heading text-base sm:text-lg font-black text-[var(--foreground)] uppercase tracking-wide">
+                        Giai đoạn CHỮA
+                      </h3>
+                      <p className="text-xs text-[var(--muted)] font-medium">Tập trung điều trị trọng tâm 80/20</p>
+                    </div>
                   </div>
-                  <p className="text-xs font-medium text-[var(--muted)]">
-                    Tập trung sửa đúng điểm yếu qua lộ trình cá nhân hóa
-                  </p>
+                  <span className="rounded-[5px] bg-[var(--secondary)] px-3 py-1 text-xs font-black uppercase text-white shadow-sm">
+                    4 Bước điều trị
+                  </span>
                 </div>
-                <div className="hidden md:block flex-1 border-t border-dashed border-[var(--primary)]/40" />
-              </div>
 
-              {/* Connected Step Cards with Images */}
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                {chuaSteps.map((item, idx) => {
-                  const Icon = item.icon;
-                  return (
-                    <div
-                      key={item.step}
-                      className="group relative flex flex-col justify-between rounded-[5px] bg-white p-3.5 border border-[var(--border-strong)] hover:border-[var(--primary)] hover:shadow-md transition-all duration-200"
-                    >
-                      <div>
-                        {/* Step Thumbnail Image */}
-                        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[5px] bg-[var(--surface-1)] border border-black/5">
-                          <Image
-                            src={item.image}
-                            alt={item.title}
-                            fill
-                            sizes="(max-width: 768px) 100vw, 25vw"
-                            className="object-cover transition-transform duration-500 group-hover:scale-105"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60" />
+                {/* Connected Vertical Timeline Nodes */}
+                <div className="mt-6 relative pl-6 space-y-5 before:absolute before:left-2.5 before:top-3 before:bottom-3 before:w-0.5 before:bg-[var(--secondary)]/35">
+                  {chuaSteps.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <div key={item.step} className="group relative">
+                        {/* Timeline Node Dot */}
+                        <div className="absolute -left-6 top-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-white border-2 border-[var(--secondary)] shadow-sm group-hover:scale-110 group-hover:bg-[var(--secondary)] transition-all">
+                          <span className="h-1.5 w-1.5 rounded-full bg-[var(--secondary)] group-hover:bg-white" />
+                        </div>
 
-                          {/* Step Number Pill over image */}
-                          <div className="absolute top-2 left-2 flex h-6 w-6 items-center justify-center rounded-[5px] bg-[var(--primary)] text-white text-xs font-black shadow-sm">
-                            {item.step}
-                          </div>
-
-                          {/* Tag Badge over image */}
-                          <div className="absolute top-2 right-2">
-                            <span className="inline-flex rounded-[5px] bg-white/95 backdrop-blur-sm border border-black/10 px-2 py-0.5 text-[10px] font-black text-[var(--secondary)] shadow-sm">
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs font-black text-[var(--secondary)] uppercase tracking-wider">
+                              Bước 0{item.step}
+                            </span>
+                            <span className="rounded-[5px] bg-[var(--primary)]/15 px-2 py-0.5 text-[10px] font-bold text-[var(--secondary)]">
                               {item.tag}
                             </span>
                           </div>
-
-                          {/* Icon over image */}
-                          <div className="absolute bottom-2 right-2 flex h-6 w-6 items-center justify-center rounded-[5px] bg-white/95 backdrop-blur-sm text-[var(--secondary)] shadow-sm">
-                            <Icon className="h-3 w-3" />
-                          </div>
-                        </div>
-
-                        {/* Content */}
-                        <div className="mt-3">
-                          <h4 className="font-heading text-sm font-black text-[var(--foreground)] group-hover:text-[var(--secondary)] transition-colors text-pretty">
+                          <h4 className="mt-1 font-heading text-sm sm:text-base font-black text-[var(--foreground)] group-hover:text-[var(--secondary)] transition-colors">
                             {item.title}
                           </h4>
-                          <p className="mt-1 text-xs font-medium leading-relaxed text-[var(--muted)] text-pretty line-clamp-2">
+                          <p className="mt-1 text-xs sm:text-sm leading-relaxed text-[var(--muted)] font-medium text-pretty">
                             {item.desc}
                           </p>
                         </div>
                       </div>
+                    );
+                  })}
+                </div>
+              </div>
 
-                      {/* Bottom connector indicator */}
-                      <div className="mt-3.5 pt-2.5 border-t border-black/5 flex items-center justify-between text-[11px] font-bold text-[var(--muted)]">
-                        <span>Bước {item.step} / 7</span>
-                        {idx < chuaSteps.length - 1 ? (
-                          <span className="text-[var(--primary)] group-hover:translate-x-1 transition-transform flex items-center gap-0.5">
-                            Tiếp theo <ChevronRight className="h-3 w-3" />
-                          </span>
-                        ) : (
-                          <span className="text-[var(--secondary)] font-black">Về đích ✓</span>
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
+              {/* Bottom Result Tag */}
+              <div className="mt-6 pt-4 border-t border-[var(--primary)]/20 flex flex-wrap items-center justify-between gap-2 text-xs font-black text-[var(--secondary)] bg-white/80 p-3 rounded-[5px] border border-[var(--primary)]/20">
+                <span>Đích đến: Đạt & Vượt Band mục tiêu</span>
+                <span className="flex items-center gap-1 text-[var(--secondary)]">
+                  <Zap className="h-3.5 w-3.5 fill-current" /> Tiến bộ thật
+                </span>
               </div>
             </div>
           )}
         </div>
 
-        {/* OUTCOME / KẾT QUẢ - Sơ đồ dòng chảy tự nhiên */}
-        <div className="mt-8 rounded-[5px] bg-[var(--surface-2)] p-5 sm:p-6 border border-[var(--border-strong)] text-center">
-          <span className="text-[11px] font-black uppercase tracking-widest text-[var(--secondary)] bg-[var(--primary)]/15 px-3 py-1 rounded-[5px]">
-            Kết quả của toàn bộ quy trình
-          </span>
+        {/* OUTCOME / KẾT QUẢ CỦA QUY TRÌNH - Sơ đồ 3 bước chuyển hóa năng lực */}
+        <div className="mt-12 rounded-2xl bg-gradient-to-b from-white to-[var(--surface-2)] p-6 sm:p-8 lg:p-10 border border-[var(--border-strong)] shadow-sm">
+          {/* Section Header */}
+          <div className="mx-auto max-w-2xl text-center">
+            <div className="inline-flex items-center gap-2 rounded-[5px] bg-[var(--primary)]/15 px-3 py-1 text-xs font-black uppercase tracking-widest text-[var(--secondary)] border border-[var(--primary)]/30">
+              <Sparkles className="h-3.5 w-3.5 text-[var(--secondary)]" />
+              Kết quả của toàn bộ quy trình
+            </div>
+            <h3 className="mt-3 font-heading text-2xl font-black tracking-tight text-[var(--foreground)] sm:text-3xl text-balance">
+              Từ hiểu đúng điểm yếu đến bứt phá điểm số thực tế
+            </h3>
+            <p className="mt-2 text-xs sm:text-sm font-medium leading-relaxed text-[var(--muted)] text-pretty">
+              Quy trình Chẩn - Chữa loại bỏ hoàn toàn việc học lan man, giúp học viên luôn nhìn thấy sự tiến bộ đo lường được:
+            </p>
+          </div>
 
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-2.5 text-xs sm:text-sm font-black text-[var(--foreground)]">
-            <div className="rounded-[5px] bg-white border border-[var(--border-strong)] px-3.5 py-2 shadow-sm">
-              Biết mình yếu ở đâu
+          {/* 3-Step Milestone Flow Cards */}
+          <div className="mt-8 grid gap-5 md:grid-cols-3 relative">
+            {/* Step 1: Chẩn */}
+            <div className="group relative flex flex-col justify-between rounded-[5px] bg-white p-5 border border-[var(--border-strong)] shadow-sm hover:border-[var(--secondary)] transition-all duration-300">
+              <div>
+                <div className="flex items-center justify-between">
+                  <span className="rounded-[5px] bg-[var(--primary)]/10 px-2.5 py-1 text-[11px] font-black uppercase tracking-wider text-[var(--secondary)]">
+                    Giai đoạn 01
+                  </span>
+                  <div className="flex h-9 w-9 items-center justify-center rounded-[5px] bg-[var(--surface-1)] text-[var(--secondary)] border border-black/5">
+                    <Search className="h-4 w-4" />
+                  </div>
+                </div>
+
+                <h4 className="mt-4 font-heading text-lg font-black text-[var(--foreground)] group-hover:text-[var(--secondary)] transition-colors">
+                  Biết mình yếu ở đâu
+                </h4>
+
+                <p className="mt-2 text-xs font-medium leading-relaxed text-[var(--muted)] text-pretty">
+                  Được bóc tách từng lỗi sai ngữ pháp, phát âm và phản xạ qua <span className="font-bold text-[var(--foreground)]">Bảng Chẩn Bệnh (BCB)</span> thay vì đoán mò năng lực.
+                </p>
+              </div>
+
+              <div className="mt-5 border-t border-black/5 pt-3">
+                <span className="inline-flex items-center gap-1.5 text-[11px] font-black text-[var(--secondary)]">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-[var(--primary)]" />
+                  100% minh bạch dữ liệu
+                </span>
+              </div>
+
+              {/* Desktop Flow Arrow */}
+              <div className="hidden md:flex absolute top-1/2 -right-3 -translate-y-1/2 z-10 h-6 w-6 items-center justify-center rounded-full bg-white border border-[var(--border-strong)] shadow-sm text-[var(--secondary)]">
+                <ChevronRight className="h-3.5 w-3.5" />
+              </div>
             </div>
-            <span className="text-[var(--secondary)] font-black text-lg">→</span>
-            <div className="rounded-[5px] bg-white border border-[var(--border-strong)] px-3.5 py-2 shadow-sm">
-              Được chữa đúng chỗ
+
+            {/* Step 2: Chữa */}
+            <div className="group relative flex flex-col justify-between rounded-[5px] bg-white p-5 border border-[var(--border-strong)] shadow-sm hover:border-[var(--secondary)] transition-all duration-300">
+              <div>
+                <div className="flex items-center justify-between">
+                  <span className="rounded-[5px] bg-[var(--secondary)]/10 px-2.5 py-1 text-[11px] font-black uppercase tracking-wider text-[var(--secondary)]">
+                    Giai đoạn 02
+                  </span>
+                  <div className="flex h-9 w-9 items-center justify-center rounded-[5px] bg-[var(--surface-1)] text-[var(--secondary)] border border-black/5">
+                    <Target className="h-4 w-4" />
+                  </div>
+                </div>
+
+                <h4 className="mt-4 font-heading text-lg font-black text-[var(--foreground)] group-hover:text-[var(--secondary)] transition-colors">
+                  Được chữa đúng chỗ
+                </h4>
+
+                <p className="mt-2 text-xs font-medium leading-relaxed text-[var(--muted)] text-pretty">
+                  Học theo <span className="font-bold text-[var(--foreground)]">lộ trình RLP cá nhân</span>, dồn 80% năng lượng giải quyết điểm nghẽn then chốt với giáo viên chuyên môn.
+                </p>
+              </div>
+
+              <div className="mt-5 border-t border-black/5 pt-3">
+                <span className="inline-flex items-center gap-1.5 text-[11px] font-black text-[var(--secondary)]">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-[var(--primary)]" />
+                  Chấm chữa chi tiết 1:1
+                </span>
+              </div>
+
+              {/* Desktop Flow Arrow */}
+              <div className="hidden md:flex absolute top-1/2 -right-3 -translate-y-1/2 z-10 h-6 w-6 items-center justify-center rounded-full bg-white border border-[var(--border-strong)] shadow-sm text-[var(--secondary)]">
+                <ChevronRight className="h-3.5 w-3.5" />
+              </div>
             </div>
-            <span className="text-[var(--secondary)] font-black text-lg">→</span>
-            <div className="rounded-[5px] bg-[var(--secondary)] text-white px-3.5 py-2 shadow-sm">
-              Tiến bộ rõ ràng
+
+            {/* Step 3: Kết quả */}
+            <div className="group relative flex flex-col justify-between rounded-[5px] bg-gradient-to-br from-[var(--secondary)]/5 via-white to-[var(--primary)]/10 p-5 border-2 border-[var(--secondary)]/40 shadow-sm hover:border-[var(--secondary)] transition-all duration-300">
+              <div>
+                <div className="flex items-center justify-between">
+                  <span className="rounded-[5px] bg-[var(--secondary)] px-2.5 py-1 text-[11px] font-black uppercase tracking-wider text-white shadow-sm">
+                    Đích đến 03
+                  </span>
+                  <div className="flex h-9 w-9 items-center justify-center rounded-[5px] bg-[var(--secondary)] text-white shadow-sm">
+                    <Zap className="h-4 w-4" />
+                  </div>
+                </div>
+
+                <h4 className="mt-4 font-heading text-lg font-black text-[var(--secondary)]">
+                  Tiến bộ rõ ràng
+                </h4>
+
+                <p className="mt-2 text-xs font-medium leading-relaxed text-[var(--foreground)] text-pretty">
+                  Đo lường sự thay đổi theo từng tuần, tự tin bước vào kỳ thi và đạt band điểm mục tiêu đúng hạn cam kết.
+                </p>
+              </div>
+
+              <div className="mt-5 border-t border-[var(--secondary)]/20 pt-3">
+                <span className="inline-flex items-center gap-1.5 text-[11px] font-black text-[var(--secondary)]">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-[var(--secondary)]" />
+                  Bứt phá band điểm thật
+                </span>
+              </div>
             </div>
           </div>
 
-          <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-2.5">
+          {/* Action CTAs */}
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 pt-6 border-t border-black/5">
             <Link
               href="/#test-dau-vao"
-              className="inline-flex h-10 items-center justify-center rounded-[5px] bg-[var(--primary)] px-5 text-xs font-black uppercase tracking-wider text-white transition-all hover:bg-[var(--secondary)] shadow-sm"
+              className="inline-flex h-11 w-full sm:w-auto items-center justify-center gap-2 rounded-[5px] bg-[var(--primary)] px-7 text-xs font-black uppercase tracking-wider text-white transition-all hover:bg-[var(--secondary)] shadow-sm"
             >
-              Test để nhận Bảng Chẩn Bệnh
+              <Stethoscope className="h-4 w-4" />
+              Test để nhận Bảng Chẩn Bệnh miễn phí
             </Link>
             <Link
               href="/quy-trinh"
-              className="inline-flex h-10 items-center justify-center gap-1.5 rounded-[5px] bg-white border border-[var(--border-strong)] px-5 text-xs font-black uppercase tracking-wider text-[var(--foreground)] transition-all hover:border-[var(--secondary)] hover:text-[var(--secondary)]"
+              className="inline-flex h-11 w-full sm:w-auto items-center justify-center gap-2 rounded-[5px] bg-white border border-[var(--border-strong)] px-6 text-xs font-black uppercase tracking-wider text-[var(--foreground)] transition-all hover:border-[var(--secondary)] hover:text-[var(--secondary)] shadow-sm"
             >
-              Tìm hiểu sâu về Quy trình
+              Tìm hiểu sâu về Quy trình Chẩn - Chữa
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>

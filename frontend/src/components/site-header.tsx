@@ -248,7 +248,7 @@ export function SiteHeader() {
         <div className="ml-auto flex shrink-0 items-center gap-2">
           <Link
             href="/#test-dau-vao"
-            className="hidden h-10 min-w-[200px] items-center justify-center whitespace-nowrap rounded-full bg-[var(--primary)] px-4 py-2 text-center text-xs font-black uppercase tracking-wider text-[var(--on-primary)] shadow-md shadow-[var(--primary)]/20 transition-all hover:bg-[var(--secondary)] hover:shadow-lg hover:shadow-[var(--primary)]/30 lg:inline-flex"
+            className="hidden h-10 min-w-[200px] items-center justify-center whitespace-nowrap rounded-[5px] bg-[var(--primary)] px-4 py-2 text-center text-xs font-black uppercase tracking-wider text-[var(--on-primary)] shadow-md shadow-[var(--primary)]/20 transition-all hover:bg-[var(--secondary)] hover:shadow-lg hover:shadow-[var(--primary)]/30 lg:inline-flex"
           >
             TEST TRÌNH ĐỘ MIỄN PHÍ
           </Link>
@@ -420,7 +420,7 @@ export function SiteHeader() {
             })}
             <Link
               href="/#test-dau-vao"
-              className="mt-2 flex h-11 items-center justify-center rounded-full bg-[var(--primary)] text-center text-xs font-black uppercase tracking-wider text-[var(--on-primary)] shadow-md"
+              className="mt-2 flex h-11 items-center justify-center rounded-[5px] bg-[var(--primary)] text-center text-xs font-black uppercase tracking-wider text-[var(--on-primary)] shadow-md"
               onClick={() => setOpen(false)}
             >
               TEST TRÌNH ĐỘ MIỄN PHÍ

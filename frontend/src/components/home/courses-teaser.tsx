@@ -399,7 +399,7 @@ export function CoursesTeaserSection() {
           </div>
           <Link
             href="/khoa-hoc"
-            className="group inline-flex h-12 shrink-0 items-center justify-center rounded-full bg-[var(--primary)] px-7 text-sm font-bold tracking-wide text-[var(--on-primary)] shadow-lg shadow-[var(--primary)]/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--primary-hover)] hover:shadow-xl hover:shadow-[var(--primary)]/30"
+            className="group inline-flex h-12 shrink-0 items-center justify-center rounded-[5px] bg-[var(--primary)] px-7 text-sm font-bold tracking-wide text-[var(--on-primary)] shadow-lg shadow-[var(--primary)]/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--primary-hover)] hover:shadow-xl hover:shadow-[var(--primary)]/30"
           >
             Tất cả khóa học
             <span className="inline-block transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:translate-x-1.5 ml-2">
@@ -410,11 +410,11 @@ export function CoursesTeaserSection() {
 
         {/* Toggle ONLINE/OFFLINE */}
         <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div className="inline-flex w-full sm:w-auto rounded-[2rem] bg-black/5 p-1.5">
+          <div className="inline-flex w-full sm:w-auto rounded-[5px] bg-black/5 p-1.5">
             <button
               type="button"
               onClick={() => setMode("online")}
-              className={`flex-1 sm:flex-none inline-flex items-center justify-center rounded-full px-6 py-2.5 text-sm font-extrabold transition-all ${
+              className={`flex-1 sm:flex-none inline-flex items-center justify-center rounded-[5px] px-6 py-2.5 text-sm font-extrabold transition-all ${
                 mode === "online" ? "bg-white text-[var(--primary)] shadow-sm ring-1 ring-black/5" : "text-[var(--muted)] hover:text-[var(--foreground)]"
               }`}
               aria-pressed={mode === "online"}
@@ -424,7 +424,7 @@ export function CoursesTeaserSection() {
             <button
               type="button"
               onClick={() => setMode("offline")}
-              className={`flex-1 sm:flex-none inline-flex items-center justify-center rounded-full px-6 py-2.5 text-sm font-extrabold transition-all ${
+              className={`flex-1 sm:flex-none inline-flex items-center justify-center rounded-[5px] px-6 py-2.5 text-sm font-extrabold transition-all ${
                 mode === "offline" ? "bg-white text-[var(--primary)] shadow-sm ring-1 ring-black/5" : "text-[var(--muted)] hover:text-[var(--foreground)]"
               }`}
               aria-pressed={mode === "offline"}
@@ -433,12 +433,12 @@ export function CoursesTeaserSection() {
             </button>
           </div>
           <p className="text-sm font-semibold text-[var(--muted)] sm:text-base">
-            {mode === "online" ? "Các lớp ONLINE theo lộ trình." : "Các lớp OFFLINE tại trung tâm."}
+            Mọi khóa học đều bao gồm bước Chẩn đoán BCB & Kê đơn RLP 1:1
           </p>
         </div>
 
-        {/* Thanh tab — rounded-full premium style */}
-        <div className="mt-6 w-full rounded-[2rem] bg-black/5 p-1.5 sm:rounded-full">
+        {/* Thanh tab — rounded-[5px] style */}
+        <div className="mt-6 w-full rounded-[5px] bg-black/5 p-1.5">
           <div
             className="flex w-full gap-1 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-2 sm:overflow-visible [&::-webkit-scrollbar]:hidden"
             role="tablist"
@@ -454,7 +454,7 @@ export function CoursesTeaserSection() {
                   role="tab"
                   aria-selected={active}
                   onClick={() => setActiveId(t.id)}
-                  className={`inline-flex shrink-0 items-center gap-2 rounded-xl sm:rounded-full px-5 py-2.5 text-sm font-bold transition-all duration-300 sm:flex-1 sm:shrink sm:justify-center sm:px-5 sm:py-3.5 sm:text-base ${
+                  className={`inline-flex shrink-0 items-center gap-2 rounded-[5px] px-5 py-2.5 text-sm font-bold transition-all duration-300 sm:flex-1 sm:shrink sm:justify-center sm:px-5 sm:py-3.5 sm:text-base ${
                     active
                       ? "bg-white text-[var(--primary)] shadow-md shadow-black/5 ring-1 ring-black/5"
                       : "text-[var(--muted)] hover:bg-black/5 hover:text-[var(--foreground)]"
@@ -471,7 +471,7 @@ export function CoursesTeaserSection() {
         {/* Band vs Roadmap Clarification Note */}
         <div className="mt-8 flex flex-col items-center justify-center text-center px-4 sm:px-6">
           <div className="flex items-center gap-3 rounded-2xl bg-[var(--surface-2)] px-6 py-4 shadow-sm ring-1 ring-black/5">
-            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--primary)] text-white shadow-sm" aria-hidden>
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[5px] bg-[var(--primary)] text-white shadow-sm" aria-hidden>
               <span className="text-xs font-black">!</span>
             </div>
             <p className="text-sm font-semibold text-[var(--foreground)] leading-tight text-left">
@@ -482,8 +482,8 @@ export function CoursesTeaserSection() {
           </div>
         </div>
 
-        {/* Nội dung — card premium với rounded-3xl và shadow soft */}
-        <div className="mt-8 rounded-[2.5rem] bg-white p-5 shadow-[0_8px_30px_rgb(0,0,0,0.06)] ring-1 ring-black/5 sm:p-8 lg:p-10 transition-all duration-500 overflow-hidden relative">
+        {/* Nội dung — card premium với rounded-2xl */}
+        <div className="mt-8 rounded-2xl bg-white p-5 shadow-[0_8px_30px_rgb(0,0,0,0.06)] ring-1 ring-black/5 sm:p-8 lg:p-10 transition-all duration-500 overflow-hidden relative">
           <div className="pointer-events-none absolute -right-40 -top-40 h-[500px] w-[500px] rounded-full bg-[var(--primary)]/5 blur-3xl opacity-60" />
           <div className="flex flex-col gap-4 border-b border-[var(--border)] pb-6 sm:flex-row sm:items-center sm:justify-between">
             <nav className="text-sm font-bold text-[var(--foreground)] sm:text-base" aria-label="Breadcrumb">
@@ -494,13 +494,13 @@ export function CoursesTeaserSection() {
             <div className="flex flex-wrap items-center gap-3">
               <Link
                 href="/khoa-hoc"
-                className="inline-flex h-11 items-center justify-center rounded-full bg-[var(--surface-1)] px-5 text-xs font-bold text-[var(--foreground)] transition-all hover:bg-[var(--secondary)]/10 hover:text-[var(--primary)] ring-1 ring-inset ring-[var(--border)] sm:text-sm"
+                className="inline-flex h-11 items-center justify-center rounded-[5px] bg-[var(--surface-1)] px-5 text-xs font-bold text-[var(--foreground)] transition-all hover:bg-[var(--secondary)]/10 hover:text-[var(--primary)] ring-1 ring-inset ring-[var(--border)] sm:text-sm"
               >
                 Danh sách khóa
               </Link>
               <Link
                 href="/lien-he"
-                className="inline-flex h-11 items-center justify-center rounded-full bg-[var(--accent)] px-6 text-xs font-bold text-white shadow-lg shadow-[var(--accent)]/30 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[var(--accent)]/40 sm:text-sm"
+                className="inline-flex h-11 items-center justify-center rounded-[5px] bg-[var(--accent)] px-6 text-xs font-bold text-white shadow-lg shadow-[var(--accent)]/30 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[var(--accent)]/40 sm:text-sm"
               >
                 Đăng ký tư vấn
               </Link>
@@ -509,7 +509,7 @@ export function CoursesTeaserSection() {
 
           <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_minmax(280px,36%)] lg:gap-10">
             {/* LEFT COLUMN: PHASES BENTO GRID */}
-            <aside className="min-w-0 rounded-[2rem] bg-[var(--surface-2)] p-6 sm:p-8 ring-1 ring-black/5 shadow-sm self-start lg:sticky lg:top-8">
+            <aside className="min-w-0 rounded-2xl bg-[var(--surface-2)] p-6 sm:p-8 ring-1 ring-black/5 shadow-sm self-start lg:sticky lg:top-8">
               <div>
                 <h3 className="text-xl font-extrabold leading-snug text-[var(--foreground)] sm:text-2xl">{course.headline}</h3>
                 <p className="mt-3 text-sm font-medium leading-relaxed text-[var(--muted)] sm:text-base">{course.shortDesc}</p>
@@ -542,7 +542,7 @@ export function CoursesTeaserSection() {
                 </div>
               </dl>
 
-              <div className="mt-8 rounded-2xl bg-white p-5 ring-1 ring-black/5 relative overflow-hidden group">
+              <div className="mt-8 rounded-[5px] bg-white p-5 ring-1 ring-black/5 relative overflow-hidden group">
                 <div className="pointer-events-none absolute -right-6 -top-6 h-28 w-28 rounded-full bg-[var(--primary)]/5 transition-transform duration-700 group-hover:scale-[2.5]" />
                 <p className="text-[10px] font-black uppercase tracking-widest text-[var(--muted)] relative z-10">Kết quả dự kiến</p>
                 <ul className="mt-4 space-y-3 text-sm relative z-10">
@@ -559,7 +559,7 @@ export function CoursesTeaserSection() {
 
               <Link
                 href="/khoa-hoc"
-                className="group mt-8 flex w-full h-14 items-center justify-center rounded-full bg-[var(--primary)] text-sm font-extrabold uppercase tracking-wide text-[var(--on-primary)] shadow-lg shadow-[var(--primary)]/20 transition-all duration-300 hover:-translate-y-1 hover:bg-[var(--primary-hover)] hover:shadow-xl hover:shadow-[var(--primary)]/40"
+                className="group mt-8 flex w-full h-14 items-center justify-center rounded-[5px] bg-[var(--primary)] text-sm font-extrabold uppercase tracking-wide text-[var(--on-primary)] shadow-lg shadow-[var(--primary)]/20 transition-all duration-300 hover:-translate-y-1 hover:bg-[var(--primary-hover)] hover:shadow-xl hover:shadow-[var(--primary)]/40"
               >
                 Chi tiết bộ môn
                 <span className="inline-block transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:translate-x-1.5 ml-2">

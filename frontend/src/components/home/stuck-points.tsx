@@ -90,119 +90,182 @@ const stuckPoints: StuckPoint[] = [
 ];
 
 export function StuckPointsSection() {
-  const [activePopupItem, setActivePopupItem] = useState<StuckPoint | null>(null);
-
-  // Lock body scroll when popup is open
-  useEffect(() => {
-    if (activePopupItem) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [activePopupItem]);
-
-  // Handle ESC key to close popup
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setActivePopupItem(null);
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  const [selectedId, setSelectedId] = useState<string>(stuckPoints[0].id);
+  const activeItem = stuckPoints.find((item) => item.id === selectedId) ?? stuckPoints[0];
+  const ActiveIcon = activeItem.icon;
 
   return (
-    <section className="relative overflow-hidden bg-[var(--background)] py-10 sm:py-14 border-t border-black/5">
+    <section className="relative overflow-hidden bg-[var(--background)] py-12 sm:py-16 border-t border-black/5">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-[5px] bg-[var(--primary)]/10 px-3.5 py-1 text-xs font-black uppercase tracking-widest text-[var(--secondary)] border border-[var(--primary)]/20">
-            <Stethoscope className="h-3.5 w-3.5 text-[var(--secondary)]" />
-            Nhận diện vấn đề
+          <div className="inline-flex items-center gap-2 rounded-[5px] bg-[var(--primary)]/15 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-[var(--secondary)] border border-[var(--primary)]/30">
+            <Stethoscope className="h-4 w-4 text-[var(--secondary)]" />
+            Tự chẩn đoán vấn đề học tập
           </div>
-          <h2 className="mt-3 font-heading text-3xl font-black tracking-tight text-[var(--foreground)] sm:text-4xl lg:text-5xl text-balance">
+          <h2 className="mt-3.5 font-heading text-3xl font-black tracking-tight text-[var(--foreground)] sm:text-4xl lg:text-5xl text-balance">
             Bạn đang kẹt ở đâu trên hành trình IELTS?
           </h2>
           <p className="mt-2.5 text-sm font-medium leading-relaxed text-[var(--muted)] sm:text-base text-pretty">
-            Nhấp vào từng thẻ bên dưới để xem popup phân tích chẩn bệnh chi tiết:
+            Chọn một trong các triệu chứng phổ biến bên dưới để xem phân tích nguyên nhân gốc rễ và phác đồ điều trị:
           </p>
         </div>
 
-        {/* 4 Cards Grid with Images - Clicking opens popup */}
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
-          {stuckPoints.map((item) => {
-            const Icon = item.icon;
+        {/* Interactive Symptom Diagnostic Console (No Card Overload) */}
+        <div className="mt-10 grid gap-6 lg:grid-cols-12 items-stretch">
+          {/* LEFT: 4 Symptom Selectors (Danh sách chọn triệu chứng) */}
+          <div className="lg:col-span-5 flex flex-col gap-3">
+            <p className="text-xs font-black uppercase tracking-wider text-[var(--muted)] pl-1">
+              Chọn tình trạng của bạn:
+            </p>
+            {stuckPoints.map((item, index) => {
+              const isSelected = item.id === selectedId;
+              const ItemIcon = item.icon;
 
-            return (
-              <div
-                key={item.id}
-                onClick={() => setActivePopupItem(item)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    setActivePopupItem(item);
-                  }
-                }}
-                className="group relative flex flex-col justify-between rounded-[5px] bg-white p-3.5 border border-[var(--border-strong)] transition-all duration-200 text-left cursor-pointer hover:border-[var(--secondary)] hover:shadow-md hover:-translate-y-0.5 select-none"
-              >
-                <div>
-                  {/* Card Thumbnail Image */}
-                  <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[5px] bg-[var(--surface-1)] border border-black/5">
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60" />
-                    
-                    {/* Badge over image */}
-                    <div className="absolute top-2 left-2">
-                      <span className="inline-flex rounded-[5px] bg-white/95 backdrop-blur-sm border border-black/10 px-2 py-0.5 text-[10px] font-black text-[var(--secondary)] shadow-sm">
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => setSelectedId(item.id)}
+                  className={`group relative flex items-start gap-3.5 rounded-[5px] p-4 text-left transition-all duration-200 cursor-pointer border ${
+                    isSelected
+                      ? "bg-white border-[var(--secondary)] shadow-md shadow-[var(--secondary)]/10 -translate-y-0.5"
+                      : "bg-white/60 border-[var(--border-strong)] hover:bg-white hover:border-[var(--secondary)]/40 hover:shadow-sm"
+                  }`}
+                >
+                  {/* Left accent bar if selected */}
+                  {isSelected && (
+                    <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-[var(--secondary)] rounded-l-[5px]" />
+                  )}
+
+                  <div
+                    className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-[5px] transition-colors ${
+                      isSelected
+                        ? "bg-[var(--secondary)] text-white shadow-sm"
+                        : "bg-[var(--surface-1)] text-[var(--muted)] group-hover:bg-[var(--primary)]/15 group-hover:text-[var(--secondary)]"
+                    }`}
+                  >
+                    <ItemIcon className="h-5 w-5" />
+                  </div>
+
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span
+                        className={`rounded-[5px] px-2 py-0.5 text-[10px] font-black uppercase tracking-wider ${
+                          isSelected
+                            ? "bg-[var(--primary)]/20 text-[var(--secondary)]"
+                            : "bg-black/5 text-[var(--muted)]"
+                        }`}
+                      >
                         {item.badge}
                       </span>
                     </div>
-
-                    {/* Icon over image */}
-                    <div className="absolute bottom-2 right-2 flex h-7 w-7 items-center justify-center rounded-[5px] bg-white/95 backdrop-blur-sm text-[var(--secondary)] shadow-sm">
-                      <Icon className="h-3.5 w-3.5" />
-                    </div>
+                    <h3 className="mt-1 font-heading text-sm sm:text-base font-black text-[var(--foreground)] leading-snug">
+                      {item.title}
+                    </h3>
+                    <p className="mt-1 text-xs text-[var(--muted)] line-clamp-1 font-medium">
+                      {item.pain}
+                    </p>
                   </div>
 
-                  {/* Card Title */}
-                  <h3 className="mt-3 font-heading text-sm font-black text-[var(--foreground)] leading-snug text-pretty group-hover:text-[var(--secondary)] transition-colors">
-                    {item.title}
-                  </h3>
+                  <ChevronRight
+                    className={`h-4 w-4 shrink-0 transition-transform self-center ${
+                      isSelected
+                        ? "text-[var(--secondary)] translate-x-0.5"
+                        : "text-slate-300 group-hover:text-[var(--secondary)]"
+                    }`}
+                  />
+                </button>
+              );
+            })}
+          </div>
 
-                  {/* Main Pain Description */}
-                  <p className="mt-1.5 text-xs leading-relaxed text-[var(--muted)] font-medium text-pretty line-clamp-3">
-                    {item.pain}
+          {/* RIGHT: Real-time Diagnostic Analysis Panel (Bảng Bóc Tách & Phác Đồ) */}
+          <div
+            key={activeItem.id}
+            className="lg:col-span-7 flex flex-col justify-between rounded-2xl bg-white p-6 sm:p-8 border-2 border-[var(--primary)]/30 shadow-xl shadow-purple-900/5 animate-in fade-in duration-300 relative overflow-hidden"
+          >
+            <div>
+              {/* Header of Active Diagnosis */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-black/5 pb-5">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[5px] bg-[var(--secondary)] text-white shadow-sm">
+                    <ActiveIcon className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <span className="rounded-[5px] bg-[var(--primary)]/15 px-2.5 py-0.5 text-xs font-black uppercase text-[var(--secondary)]">
+                      {activeItem.badge}
+                    </span>
+                    <h3 className="mt-1 font-heading text-lg sm:text-xl font-black text-[var(--foreground)]">
+                      {activeItem.title}
+                    </h3>
+                  </div>
+                </div>
+
+                <div className="relative h-14 w-24 shrink-0 overflow-hidden rounded-[5px] border border-black/10 hidden sm:block">
+                  <Image
+                    src={activeItem.image}
+                    alt={activeItem.title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+
+              {/* 3 Structured Diagnostic Insights */}
+              <div className="mt-5 space-y-3.5">
+                {/* 1. Dấu hiệu nhận biết cụ thể */}
+                <div className="rounded-[5px] bg-amber-500/5 p-4 border border-amber-500/20">
+                  <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-amber-700">
+                    <AlertTriangle className="h-4 w-4" />
+                    <span>Dấu hiệu nhận biết cụ thể:</span>
+                  </div>
+                  <p className="mt-1.5 text-xs sm:text-sm font-medium leading-relaxed text-[var(--foreground)] text-pretty">
+                    {activeItem.detailedSymptom}
                   </p>
                 </div>
 
-                {/* Bottom CTA trigger */}
-                <div className="mt-4 border-t border-black/5 pt-2.5 flex items-center justify-between">
-                  <span className="text-xs font-bold text-[var(--secondary)]">
-                    Xem chẩn đoán chi tiết
-                  </span>
-                  <div className="flex h-5 w-5 items-center justify-center rounded-[5px] bg-[var(--primary)]/10 text-[var(--secondary)] group-hover:bg-[var(--secondary)] group-hover:text-white transition-all">
-                    <ChevronRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+                {/* 2. Nguyên nhân cốt lõi */}
+                <div className="rounded-[5px] bg-[var(--surface-1)] p-4 border border-slate-200/80">
+                  <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-slate-700">
+                    <span>🔍</span>
+                    <span>Nguyên nhân gốc rễ (Bản chất lỗi sai):</span>
                   </div>
+                  <p className="mt-1.5 text-xs sm:text-sm font-medium leading-relaxed text-slate-700 text-pretty">
+                    {activeItem.rootCause}
+                  </p>
+                </div>
+
+                {/* 3. Phác đồ điều trị XLE */}
+                <div className="rounded-[5px] bg-gradient-to-r from-[var(--primary)]/15 to-[var(--secondary)]/15 p-4 border border-[var(--primary)]/40 shadow-sm">
+                  <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-[var(--secondary)]">
+                    <CheckCircle2 className="h-4 w-4 text-[var(--secondary)]" />
+                    <span>Phác đồ Chẩn & Chữa tại XLE:</span>
+                  </div>
+                  <p className="mt-1.5 text-xs sm:text-sm font-black leading-relaxed text-[var(--secondary)] text-pretty">
+                    {activeItem.solution}
+                  </p>
                 </div>
               </div>
-            );
-          })}
+            </div>
+
+            {/* Bottom Action Footer */}
+            <div className="mt-6 pt-5 border-t border-black/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <p className="text-xs font-semibold text-[var(--muted)] text-center sm:text-left">
+                Được kiểm tra & tư vấn lộ trình riêng hoàn toàn miễn phí.
+              </p>
+              <Link
+                href="/#test-dau-vao"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-[5px] bg-[var(--primary)] px-6 py-3 text-xs font-black uppercase tracking-wider text-white transition-all hover:bg-[var(--secondary)] shadow-md hover:shadow-lg hover:-translate-y-0.5 shrink-0"
+              >
+                Nhận Bảng Chẩn Bệnh Cho Tình Trạng Này
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
         </div>
 
         {/* Bottom Banner Call to Action */}
-        <div className="mt-10 rounded-[5px] bg-[var(--surface-2)] p-5 sm:p-6 border border-[var(--border-strong)]">
+        <div className="mt-8 rounded-2xl bg-[var(--surface-2)] p-5 sm:p-6 border border-[var(--border-strong)] shadow-sm">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row text-center md:text-left">
             <div className="flex items-center gap-3.5">
               <div className="hidden sm:flex h-10 w-10 shrink-0 items-center justify-center rounded-[5px] bg-[var(--primary)] text-white">
@@ -212,7 +275,7 @@ export function StuckPointsSection() {
                 <p className="text-base font-extrabold text-[var(--foreground)]">
                   Chưa chắc chắn mình đang kẹt ở điểm nào?
                 </p>
-                <p className="mt-0.5 text-xs text-[var(--muted)] font-medium text-pretty">
+                <p className="mt-0.5 text-xs sm:text-sm text-[var(--muted)] font-medium text-pretty">
                   Làm bài test 4 kỹ năng hoàn toàn miễn phí để giáo viên XLE trực tiếp chẩn đoán cho bạn.
                 </p>
               </div>
@@ -220,104 +283,13 @@ export function StuckPointsSection() {
 
             <Link
               href="/#test-dau-vao"
-              className="inline-flex h-11 shrink-0 items-center justify-center rounded-[5px] bg-[var(--primary)] px-6 text-xs font-black uppercase tracking-wider text-white transition-all hover:bg-[var(--secondary)]"
+              className="inline-flex h-11 shrink-0 items-center justify-center rounded-[5px] bg-[var(--primary)] px-6 text-xs font-black uppercase tracking-wider text-white transition-all hover:bg-[var(--secondary)] shadow-sm"
             >
               Test & Chẩn Bệnh Ngay
             </Link>
           </div>
         </div>
       </div>
-
-      {/* POPUP MODAL */}
-      {activePopupItem && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm animate-in fade-in duration-200"
-          onClick={() => setActivePopupItem(null)}
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-lg rounded-[5px] bg-white p-6 shadow-2xl border border-[var(--border-strong)] animate-in zoom-in-95 duration-200"
-          >
-            {/* Close Button */}
-            <button
-              onClick={() => setActivePopupItem(null)}
-              className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-[5px] text-[var(--muted)] hover:bg-[var(--surface-1)] hover:text-[var(--foreground)] transition-colors"
-              aria-label="Đóng popup"
-            >
-              <X className="h-5 w-5" />
-            </button>
-
-            {/* Popup Header */}
-            <div className="flex items-center gap-2">
-              <span className="inline-flex rounded-[5px] bg-[var(--primary)]/10 border border-[var(--primary)]/20 px-2.5 py-0.5 text-xs font-bold text-[var(--secondary)]">
-                {activePopupItem.badge}
-              </span>
-            </div>
-
-            <h3 className="mt-2.5 font-heading text-xl font-black text-[var(--foreground)] text-pretty pr-8">
-              {activePopupItem.title}
-            </h3>
-
-            <p className="mt-1.5 text-xs font-medium text-[var(--muted)] text-pretty">
-              {activePopupItem.pain}
-            </p>
-
-            {/* Popup Detailed Sections */}
-            <div className="mt-5 space-y-3.5">
-              {/* Dấu hiệu nhận biết */}
-              <div className="rounded-[5px] bg-[var(--surface-1)] p-3.5 border border-black/5">
-                <div className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-[var(--secondary)]">
-                  <AlertTriangle className="h-3.5 w-3.5" />
-                  <span>Dấu hiệu nhận biết cụ thể:</span>
-                </div>
-                <p className="mt-1.5 text-xs font-medium leading-relaxed text-[var(--foreground)] text-pretty">
-                  {activePopupItem.detailedSymptom}
-                </p>
-              </div>
-
-              {/* Nguyên nhân gốc rễ */}
-              <div className="rounded-[5px] bg-[var(--surface-1)] p-3.5 border border-black/5">
-                <div className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-[var(--foreground)]">
-                  <span className="h-2 w-2 rounded-full bg-[var(--secondary)]" />
-                  <span>Nguyên nhân gốc rễ:</span>
-                </div>
-                <p className="mt-1.5 text-xs font-medium leading-relaxed text-[var(--muted)] text-pretty">
-                  {activePopupItem.rootCause}
-                </p>
-              </div>
-
-              {/* Giải pháp tại XLE */}
-              <div className="rounded-[5px] bg-[var(--primary)]/10 p-3.5 border border-[var(--primary)]/20">
-                <div className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-[var(--secondary)]">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-[var(--secondary)]" />
-                  <span>Phác đồ Chẩn & Chữa tại XLE:</span>
-                </div>
-                <p className="mt-1.5 text-xs font-bold leading-relaxed text-[var(--secondary)] text-pretty">
-                  {activePopupItem.solution}
-                </p>
-              </div>
-            </div>
-
-            {/* Popup CTA Footer */}
-            <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-black/5">
-              <button
-                onClick={() => setActivePopupItem(null)}
-                className="w-full sm:w-auto text-xs font-bold text-[var(--muted)] hover:text-[var(--foreground)] transition-colors py-2"
-              >
-                Đóng
-              </button>
-              <Link
-                href="/#test-dau-vao"
-                onClick={() => setActivePopupItem(null)}
-                className="w-full sm:w-auto inline-flex h-10 items-center justify-center gap-2 rounded-[5px] bg-[var(--primary)] px-5 text-xs font-black uppercase tracking-wider text-white transition-all hover:bg-[var(--secondary)] shadow-sm"
-              >
-                Đăng ký Test & Chẩn Bệnh
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 }

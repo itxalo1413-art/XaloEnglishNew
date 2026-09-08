@@ -103,7 +103,7 @@ export function FinalCta() {
             </p>
 
             {/* Brand Message Chốt */}
-            <div className="mt-6 rounded-[5px] bg-white/10 p-5 backdrop-blur-md border border-white/20">
+            <div className="mt-6 rounded-2xl bg-white/10 p-5 backdrop-blur-md border border-white/20 shadow-sm">
               <p className="text-[11px] font-black uppercase tracking-widest text-white/80">
                 Triết lý đào tạo XLE
               </p>
@@ -133,7 +133,7 @@ export function FinalCta() {
 
           {/* Right Column: Lead Form */}
           <div className="lg:col-span-6">
-            <div className="rounded-[5px] bg-white p-6 text-[var(--foreground)] shadow-xl border border-black/5 sm:p-8">
+            <div className="rounded-2xl bg-white p-6 text-[var(--foreground)] shadow-xl border border-black/5 sm:p-8">
               {submitted ? (
                 <div className="py-8 text-center animate-in fade-in duration-500">
                   <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-[5px] bg-[var(--primary)]/15 text-[var(--secondary)]">

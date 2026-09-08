@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { HeartHandshake, MessageSquare } from "lucide-react";
+import { ChevronRight, HeartHandshake, MessageSquare } from "lucide-react";
 
 type TeacherProfile = {
   name: string;
@@ -128,8 +128,8 @@ export function TeachersSection() {
                   </p>
                 </div>
 
-                {/* Action CTAs */}
-                <div className="mt-auto pt-4 flex flex-col gap-2">
+                {/* Action CTA */}
+                <div className="mt-auto pt-4">
                   <a
                     href={teacher.fbLink}
                     target="_blank"
@@ -138,16 +138,21 @@ export function TeachersSection() {
                   >
                     Xem Feedback & Profile GV ↗
                   </a>
-                  <Link
-                    href="/#test-dau-vao"
-                    className="flex h-10 w-full items-center justify-center rounded-[5px] bg-[var(--primary)] text-xs font-black uppercase tracking-wider text-white shadow-sm transition-all hover:bg-[var(--secondary)]"
-                  >
-                    Đăng ký học cùng GV →
-                  </Link>
                 </div>
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Bottom CTA to view all teachers */}
+        <div className="mt-8 text-center">
+          <Link
+            href="/ve-xalo"
+            className="inline-flex items-center gap-2 rounded-[5px] bg-[var(--primary)] px-6 py-2.5 text-xs font-black uppercase tracking-wider text-white transition-all duration-200 hover:bg-[var(--secondary)] shadow-sm hover:shadow"
+          >
+            Xem tất cả giáo viên
+            <ChevronRight className="h-3.5 w-3.5" />
+          </Link>
         </div>
       </div>
     </section>
