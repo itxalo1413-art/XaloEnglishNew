@@ -55,11 +55,15 @@ export function Hero() {
       >
         <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Main Hero Header & Headline */}
-          <div className="mx-auto max-w-4xl text-center">
-            <h1 className="mt-2 font-heading text-3xl font-[900] tracking-tight text-[var(--foreground)] sm:text-4xl md:text-5xl lg:text-6xl leading-[1.15] text-balance">
-              <span className="block text-[var(--secondary)]">Xa Lộ English</span>
-              <span className="block mt-1">Học đúng cách khi hiểu đúng mình</span>
-              <span className="mt-3 block text-2xl font-black lowercase tracking-normal sm:text-3xl lg:text-4xl text-[var(--foreground)]">
+          <div className="mx-auto max-w-5xl w-full flex flex-col items-center justify-center text-center">
+            <h1 className="w-full mt-2 font-heading tracking-tight leading-[1.15] flex flex-col items-center justify-center text-center">
+              <span className="w-full text-center text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-[900] text-[var(--secondary)]">
+                Xa Lộ English
+              </span>
+              <span className="w-full text-center mt-1 text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-[900] text-[var(--foreground)] whitespace-nowrap">
+                Học đúng cách khi hiểu đúng mình
+              </span>
+              <span className="w-full text-center mt-3.5 block text-lg sm:text-2xl lg:text-3xl font-black lowercase tracking-normal text-[var(--foreground)]">
                 Cùng{" "}
                 <span className="relative inline-block px-3 py-0.5 rounded-[5px] bg-[var(--primary)]/20 text-[var(--secondary)] underline decoration-[var(--secondary)] decoration-2 underline-offset-4">
                   Quy trình Chẩn - Chữa
