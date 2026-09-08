@@ -249,50 +249,69 @@ export function FinalCta() {
                     </p>
                   </div>
 
-                  <div className="space-y-3.5">
-                    <div>
-                      <label className="block text-xs font-extrabold uppercase tracking-wider text-[var(--muted)]">
-                        Mục tiêu Band IELTS
-                      </label>
-                      <select
-                        value={targetBand}
-                        onChange={(e) => setTargetBand(e.target.value)}
-                        className="mt-1 h-11 w-full rounded-[5px] border border-[var(--border)] bg-[var(--surface-1)] px-3.5 text-xs font-semibold text-[var(--foreground)] outline-none focus:border-[var(--primary)]"
-                      >
-                        {TARGET_BANDS.map((b) => (
-                          <option key={b} value={b}>{b}</option>
-                        ))}
-                      </select>
+                  <div className="space-y-3">
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                      <div>
+                        <label className="block text-xs font-extrabold uppercase tracking-wider text-[var(--muted)]">
+                          Target Band mục tiêu
+                        </label>
+                        <select
+                          value={targetBand}
+                          onChange={(e) => setTargetBand(e.target.value)}
+                          className="mt-1 h-10 w-full rounded-[5px] border border-[var(--border)] bg-[var(--surface-1)] px-3 text-xs font-semibold text-[var(--foreground)] outline-none focus:border-[var(--primary)]"
+                        >
+                          {TARGET_BANDS.map((b) => (
+                            <option key={b} value={b}>{b}</option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-extrabold uppercase tracking-wider text-[var(--muted)]">
+                          Deadline mục tiêu
+                        </label>
+                        <select
+                          value={deadline}
+                          onChange={(e) => setDeadline(e.target.value)}
+                          className="mt-1 h-10 w-full rounded-[5px] border border-[var(--border)] bg-[var(--surface-1)] px-3 text-xs font-semibold text-[var(--foreground)] outline-none focus:border-[var(--primary)]"
+                        >
+                          {DEADLINES.map((d) => (
+                            <option key={d} value={d}>{d}</option>
+                          ))}
+                        </select>
+                      </div>
                     </div>
 
-                    <div>
-                      <label className="block text-xs font-extrabold uppercase tracking-wider text-[var(--muted)]">
-                        Thời gian dự kiến thi / hoàn thành
-                      </label>
-                      <select
-                        value={deadline}
-                        onChange={(e) => setDeadline(e.target.value)}
-                        className="mt-1 h-11 w-full rounded-[5px] border border-[var(--border)] bg-[var(--surface-1)] px-3.5 text-xs font-semibold text-[var(--foreground)] outline-none focus:border-[var(--primary)]"
-                      >
-                        {DEADLINES.map((d) => (
-                          <option key={d} value={d}>{d}</option>
-                        ))}
-                      </select>
-                    </div>
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                      <div>
+                        <label className="block text-xs font-extrabold uppercase tracking-wider text-[var(--muted)]">
+                          Hình thức học
+                        </label>
+                        <select
+                          value={learningMode}
+                          onChange={(e) => setLearningMode(e.target.value)}
+                          className="mt-1 h-10 w-full rounded-[5px] border border-[var(--border)] bg-[var(--surface-1)] px-3 text-xs font-semibold text-[var(--foreground)] outline-none focus:border-[var(--primary)]"
+                        >
+                          {LEARNING_MODES.map((m) => (
+                            <option key={m} value={m}>{m}</option>
+                          ))}
+                        </select>
+                      </div>
 
-                    <div>
-                      <label className="block text-xs font-extrabold uppercase tracking-wider text-[var(--muted)]">
-                        Khung giờ thuận tiện để nhận tư vấn
-                      </label>
-                      <select
-                        value={timeSlot}
-                        onChange={(e) => setTimeSlot(e.target.value)}
-                        className="mt-1 h-11 w-full rounded-[5px] border border-[var(--border)] bg-[var(--surface-1)] px-3.5 text-xs font-semibold text-[var(--foreground)] outline-none focus:border-[var(--primary)]"
-                      >
-                        {TIME_SLOTS.map((t) => (
-                          <option key={t} value={t}>{t}</option>
-                        ))}
-                      </select>
+                      <div>
+                        <label className="block text-xs font-extrabold uppercase tracking-wider text-[var(--muted)]">
+                          Khung giờ tư vấn
+                        </label>
+                        <select
+                          value={timeSlot}
+                          onChange={(e) => setTimeSlot(e.target.value)}
+                          className="mt-1 h-10 w-full rounded-[5px] border border-[var(--border)] bg-[var(--surface-1)] px-3 text-xs font-semibold text-[var(--foreground)] outline-none focus:border-[var(--primary)]"
+                        >
+                          {TIME_SLOTS.map((t) => (
+                            <option key={t} value={t}>{t}</option>
+                          ))}
+                        </select>
+                      </div>
                     </div>
                   </div>
 
