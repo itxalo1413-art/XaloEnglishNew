@@ -524,16 +524,16 @@ export default function LichKhaiGiangPage() {
                       </li>
                     </ul>
 
-                    <div className="mt-auto grid grid-cols-2 gap-3">
+                    <div className="mt-auto grid grid-cols-2 gap-2.5 sm:gap-3">
                       <button
                         onClick={() => setSelectedClass(row)}
-                        className="rounded-full bg-[var(--surface-1)] py-3.5 text-xs font-bold text-[var(--foreground)] transition-colors hover:bg-[var(--secondary)]/20 hover:text-[var(--primary)]"
+                        className="rounded-[5px] bg-[var(--surface-1)] py-2.5 sm:py-3 text-xs sm:text-sm font-black text-[var(--foreground)] transition-colors hover:bg-[var(--secondary)]/15 hover:text-[var(--primary)] cursor-pointer"
                       >
                         Thông tin
                       </button>
                       <a
                         href={`mailto:hello@xaloenglish.vn?subject=${encodeURIComponent(`Đăng ký: ${row.filterLabel}`)}`}
-                        className="flex items-center justify-center rounded-full bg-[var(--primary)] py-3.5 text-xs font-bold text-[var(--on-primary)] shadow-md shadow-[var(--primary)]/20 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[var(--primary)]/30"
+                        className="flex items-center justify-center rounded-[5px] bg-[var(--primary)] py-2.5 sm:py-3 text-xs sm:text-sm font-black text-[var(--on-primary)] shadow-md shadow-[var(--primary)]/20 transition-all hover:bg-[var(--secondary)]"
                       >
                         Đăng ký
                       </a>
@@ -624,13 +624,13 @@ export default function LichKhaiGiangPage() {
                 <button
                   type="button"
                   onClick={() => setSelectedClass(null)}
-                  className="order-2 flex h-12 flex-1 items-center justify-center rounded-full bg-[var(--surface-1)] text-sm font-bold text-[var(--foreground)] hover:bg-[var(--surface-2)] sm:order-1"
+                  className="order-2 flex min-h-[46px] flex-1 items-center justify-center rounded-[5px] bg-[var(--surface-1)] text-xs sm:text-sm font-black text-[var(--foreground)] hover:bg-[var(--surface-2)] sm:order-1 cursor-pointer border border-black/5"
                 >
                   Đóng
                 </button>
                 <a
                   href={`mailto:hello@xaloenglish.vn?subject=Đăng%20ký%20lớp%20Xalo%20English`}
-                  className="order-1 flex h-12 flex-1 items-center justify-center rounded-full bg-[var(--primary)] text-sm font-bold text-[var(--on-primary)] shadow-lg shadow-[var(--primary)]/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[var(--primary)]/30 sm:order-2"
+                  className="order-1 flex min-h-[46px] flex-1 items-center justify-center rounded-[5px] bg-[var(--primary)] text-xs sm:text-sm font-black uppercase tracking-wider text-[var(--on-primary)] shadow-lg shadow-[var(--primary)]/20 transition-all hover:bg-[var(--secondary)] sm:order-2 text-center"
                 >
                   Đăng ký ngay
                 </a>

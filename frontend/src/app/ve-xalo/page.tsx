@@ -373,7 +373,7 @@ export default function VeXaloPage() {
         </section>
 
         {/* Đội ngũ — layout “Meet the team” */}
-        <section className="mx-auto max-w-8xl px-6 pb-20 sm:px-10 lg:px-14 lg:pb-24">
+        <section id="giao-vien" className="scroll-mt-24 mx-auto max-w-8xl px-6 pb-20 sm:px-10 lg:px-14 lg:pb-24">
           <div className="mb-12 grid gap-8 lg:mb-16 lg:grid-cols-2 lg:items-start lg:gap-12 xl:gap-16">
             <h2 className="max-w-xl text-balance text-3xl font-bold tracking-tight text-[var(--foreground)] md:text-4xl lg:text-[2.65rem] lg:leading-[1.12]">
               Gặp gỡ chuyên gia đồng hành cùng bạn

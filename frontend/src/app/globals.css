@@ -79,12 +79,27 @@
   
   --animate-marquee: marquee 40s linear infinite;
   --animate-marquee-reverse: marquee 50s linear infinite reverse;
+  --animate-cta-pulse: cta-pulse 2.4s ease-in-out infinite;
 
   @keyframes marquee {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
   }
+
+  @keyframes cta-pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.035);
+    }
+  }
 }
+
+.animate-cta-pulse {
+  animation: cta-pulse 2.4s ease-in-out infinite;
+}
+
 
 /* Cỡ chữ & độ đậm mặc định toàn site (tăng kích thước text đọc thoải mái và rõ nét) */
 html {

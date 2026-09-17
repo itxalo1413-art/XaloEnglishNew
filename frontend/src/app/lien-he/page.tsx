@@ -148,13 +148,13 @@ export default function LienHePage() {
 
                 <button
                   type="submit"
-                  className="mt-5 inline-flex h-12 items-center justify-center rounded-sm bg-[var(--primary)] px-8 text-base font-semibold text-[var(--on-primary)] shadow transition-colors hover:bg-[var(--secondary)]"
+                  className="mt-5 inline-flex min-h-[46px] items-center justify-center rounded-[5px] bg-[var(--primary)] px-6 sm:px-8 text-xs sm:text-sm font-black uppercase tracking-wider text-[var(--on-primary)] shadow transition-colors hover:bg-[var(--secondary)] cursor-pointer"
                 >
                   Nhận tư vấn ngay
                 </button>
 
                 {submitted && (
-                  <p className="mt-3 text-sm text-[var(--muted)]">
+                  <p className="mt-3 text-xs sm:text-sm font-bold text-green-700">
                     Cảm ơn bạn! Hệ thống đã mở email với nội dung đăng ký.
                   </p>
                 )}
@@ -162,14 +162,14 @@ export default function LienHePage() {
 
               {/* QUICK CHOICE */}
               <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface-2)] p-6">
-                <h3 className="text-base font-semibold text-[var(--foreground)]">Tôi muốn:</h3>
+                <h3 className="text-sm font-black uppercase tracking-wider text-[var(--foreground)]">Tôi muốn:</h3>
                 <div className="mt-4 space-y-3">
                   {quickChoices.map((item) => (
                     <button
                       key={item.label}
                       type="button"
                       onClick={() => applyQuickChoice(item)}
-                      className="w-full rounded-sm border border-[var(--border)] bg-[var(--background)] px-4 py-3 text-left text-sm font-medium text-[var(--foreground)] transition-colors hover:border-[var(--border-strong)]"
+                      className="w-full rounded-[5px] border border-[var(--border)] bg-[var(--background)] px-4 py-3 text-left text-xs sm:text-sm font-bold text-[var(--foreground)] transition-colors hover:border-[var(--secondary)] hover:text-[var(--secondary)] cursor-pointer"
                     >
                       {item.label}
                     </button>

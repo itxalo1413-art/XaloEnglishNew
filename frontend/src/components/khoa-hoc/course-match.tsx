@@ -55,21 +55,21 @@ export function CourseMatchSection() {
                       type="button"
                       onClick={() => setSelectedId(key.id)}
                       className={[
-                        "group w-full rounded-2xl px-5 py-4 text-left transition-all duration-300",
+                        "group w-full rounded-[5px] px-4 py-3 sm:px-5 sm:py-4 text-left transition-all duration-200 cursor-pointer border",
                         active
-                          ? "bg-white shadow-[0px_4px_16px_rgba(0,0,0,0.06)] ring-1 ring-[var(--primary)]/20"
-                          : "bg-[var(--surface-1)] hover:bg-white hover:shadow-md hover:ring-1 hover:ring-black/5",
+                          ? "bg-white border-[var(--secondary)] shadow-md ring-1 ring-[var(--secondary)]/20"
+                          : "bg-[var(--surface-1)] border-black/5 hover:bg-white hover:border-[var(--secondary)]/40 hover:shadow-sm",
                       ].join(" ")}
                     >
-                      <div className="flex items-center justify-between gap-4">
-                        <span className={`text-sm font-bold transition-colors ${active ? "text-[var(--primary)]" : "text-[var(--foreground)] group-hover:text-[var(--primary)]"}`}>
+                      <div className="flex items-center justify-between gap-3">
+                        <span className={`text-xs sm:text-sm font-black transition-colors ${active ? "text-[var(--secondary)]" : "text-[var(--foreground)] group-hover:text-[var(--secondary)]"}`}>
                           {key.label}
                         </span>
-                        <span className={`flex h-6 w-6 items-center justify-center rounded-full transition-colors ${active ? "bg-[var(--primary)] text-white" : "bg-black/5 text-transparent group-hover:bg-[var(--primary)]/10 group-hover:text-[var(--primary)]"}`}>
+                        <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-[5px] text-xs font-black transition-colors ${active ? "bg-[var(--secondary)] text-white" : "bg-black/5 text-transparent group-hover:bg-[var(--primary)]/15 group-hover:text-[var(--secondary)]"}`}>
                           ✓
                         </span>
                       </div>
-                      <p className="mt-2 text-xs font-medium leading-relaxed text-[var(--muted)]">{key.help}</p>
+                      <p className="mt-1.5 text-xs font-medium leading-relaxed text-[var(--muted)]">{key.help}</p>
                     </button>
                   );
                 })}
@@ -77,7 +77,7 @@ export function CourseMatchSection() {
                 <button
                   type="button"
                   onClick={() => setSelectedId("")}
-                  className="mt-2 w-full rounded-2xl py-4 text-center text-sm font-bold text-[var(--muted)] transition-colors hover:text-[var(--primary)]"
+                  className="mt-2 w-full rounded-[5px] py-3 text-center text-xs sm:text-sm font-bold text-[var(--muted)] transition-colors hover:text-[var(--secondary)] cursor-pointer"
                 >
                   Xoá bộ lọc / Xem tất cả
                 </button>

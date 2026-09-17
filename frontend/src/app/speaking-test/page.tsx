@@ -397,7 +397,7 @@ export default function SpeakingTestBookingPage() {
                         <button
                           type="submit"
                           disabled={submitting}
-                          className="h-14 min-w-[200px] w-full sm:w-auto rounded-full bg-[var(--primary)] px-8 text-sm font-black text-[var(--on-primary)] shadow-lg shadow-[var(--primary)]/20 uppercase tracking-wider transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[var(--primary)]/30 disabled:opacity-60"
+                          className="min-h-[48px] min-w-[200px] w-full sm:w-auto rounded-[5px] bg-[var(--primary)] px-8 py-3 text-xs sm:text-sm font-black text-[var(--on-primary)] shadow-lg shadow-[var(--primary)]/20 uppercase tracking-wider transition hover:-translate-y-0.5 hover:bg-[var(--secondary)] hover:shadow-xl hover:shadow-[var(--primary)]/30 disabled:opacity-60 cursor-pointer text-center"
                         >
                           {submitting ? "Đang đăng ký lịch..." : "Xác nhận Đặt lịch"}
                         </button>

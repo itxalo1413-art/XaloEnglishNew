@@ -11,11 +11,11 @@ function normBand(s: string) {
 
 function ModeToggle({ mode, setMode }: { mode: CourseMode; setMode: (m: CourseMode) => void }) {
   return (
-    <div className="inline-flex w-full sm:w-auto rounded-[2rem] bg-black/5 p-1.5">
+    <div className="inline-flex w-full sm:w-auto rounded-[5px] bg-black/5 p-1.5">
       <button
         type="button"
         onClick={() => setMode("online")}
-        className={`flex-1 sm:flex-none inline-flex items-center justify-center rounded-full px-6 py-2.5 text-sm font-extrabold transition-all ${
+        className={`flex-1 sm:flex-none inline-flex items-center justify-center rounded-[5px] px-4 py-2 sm:px-6 sm:py-2.5 text-xs sm:text-sm font-black transition-all ${
           mode === "online" ? "bg-white text-[var(--primary)] shadow-sm ring-1 ring-black/5" : "text-[var(--muted)] hover:text-[var(--foreground)]"
         }`}
         aria-pressed={mode === "online"}
@@ -25,7 +25,7 @@ function ModeToggle({ mode, setMode }: { mode: CourseMode; setMode: (m: CourseMo
       <button
         type="button"
         onClick={() => setMode("offline")}
-        className={`flex-1 sm:flex-none inline-flex items-center justify-center rounded-full px-6 py-2.5 text-sm font-extrabold transition-all ${
+        className={`flex-1 sm:flex-none inline-flex items-center justify-center rounded-[5px] px-4 py-2 sm:px-6 sm:py-2.5 text-xs sm:text-sm font-black transition-all ${
           mode === "offline" ? "bg-white text-[var(--primary)] shadow-sm ring-1 ring-black/5" : "text-[var(--muted)] hover:text-[var(--foreground)]"
         }`}
         aria-pressed={mode === "offline"}
@@ -38,9 +38,9 @@ function ModeToggle({ mode, setMode }: { mode: CourseMode; setMode: (m: CourseMo
 
 function CatalogCard({ item }: { item: CourseCatalogItem }) {
   return (
-    <div className="group relative flex flex-col rounded-[2rem] bg-white p-7 shadow-lg shadow-black/5 ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10">
+    <div className="group relative flex flex-col rounded-2xl bg-white p-6 sm:p-7 shadow-lg shadow-black/5 ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/10">
       <div className="flex items-start justify-between gap-3">
-        <span className="rounded-full bg-[var(--primary)]/10 px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-[var(--primary)]">
+        <span className="rounded-[5px] bg-[var(--primary)]/10 px-3 py-1 text-xs font-black uppercase tracking-wider text-[var(--primary)]">
           {item.mode === "online" ? "Online" : "Offline"}
         </span>
       </div>
@@ -59,14 +59,14 @@ function CatalogCard({ item }: { item: CourseCatalogItem }) {
         ))}
       </ul>
 
-      <div className="mt-6 flex items-center justify-between">
+      <div className="mt-6 flex items-center justify-between gap-3">
         <Link
           href="/lien-he"
-          className="inline-flex h-11 items-center justify-center rounded-full bg-[var(--primary)] px-6 text-sm font-extrabold text-[var(--on-primary)] transition-opacity hover:opacity-90"
+          className="inline-flex min-h-[42px] items-center justify-center rounded-[5px] bg-[var(--primary)] px-5 sm:px-6 text-xs sm:text-sm font-black uppercase tracking-wider text-[var(--on-primary)] transition-all hover:bg-[var(--secondary)] shadow-sm"
         >
           Nhận tư vấn
         </Link>
-        <Link href="/quy-trinh" className="text-sm font-bold text-[var(--primary)] hover:opacity-90">
+        <Link href="/quy-trinh" className="text-xs sm:text-sm font-black text-[var(--primary)] hover:text-[var(--secondary)]">
           Quy trình →
         </Link>
       </div>
@@ -91,7 +91,7 @@ function OfflineScheduleTable() {
         </div>
         <Link
           href="/lien-he"
-          className="inline-flex h-11 items-center justify-center whitespace-nowrap rounded-full bg-[var(--surface-1)] px-6 text-sm font-extrabold text-[var(--foreground)] ring-1 ring-inset ring-[var(--border)] hover:bg-[var(--secondary)]/10 hover:text-[var(--primary)]"
+          className="inline-flex min-h-[42px] items-center justify-center whitespace-nowrap rounded-[5px] bg-[var(--surface-1)] px-5 text-xs sm:text-sm font-black text-[var(--foreground)] ring-1 ring-inset ring-[var(--border)] hover:bg-[var(--secondary)]/10 hover:text-[var(--primary)]"
         >
           Hỏi lớp phù hợp
         </Link>
@@ -274,7 +274,7 @@ export function CoursesCatalogSection() {
                     setEntryFilter("");
                     setTargetFilter("");
                   }}
-                  className="inline-flex h-12 items-center justify-center whitespace-nowrap rounded-2xl bg-white px-6 text-sm font-extrabold text-[var(--foreground)] shadow-sm ring-1 ring-black/5 hover:bg-black/5"
+                  className="inline-flex min-h-[42px] items-center justify-center whitespace-nowrap rounded-[5px] bg-white px-5 text-xs sm:text-sm font-black text-[var(--foreground)] shadow-sm ring-1 ring-black/5 hover:bg-black/5 cursor-pointer"
                 >
                   Xoá filter
                 </button>
@@ -291,8 +291,8 @@ export function CoursesCatalogSection() {
 
         {/* Table respects entry/target filters (online + offline) */}
         <div className="mt-12">
-          <div className="rounded-[2rem] bg-white shadow-lg shadow-black/5 ring-1 ring-black/5 overflow-hidden">
-            <div className="flex flex-col gap-3 border-b border-black/5 p-7 sm:flex-row sm:items-end sm:justify-between">
+          <div className="rounded-2xl bg-white shadow-lg shadow-black/5 ring-1 ring-black/5 overflow-hidden">
+            <div className="flex flex-col gap-3 border-b border-black/5 p-6 sm:p-7 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <p className="text-xs font-extrabold uppercase tracking-widest text-[var(--primary)]">Thông tin lớp</p>
                 <h3 className="mt-2 text-2xl font-extrabold text-[var(--foreground)] sm:text-3xl">
@@ -304,7 +304,7 @@ export function CoursesCatalogSection() {
               </div>
               <Link
                 href="/lien-he"
-                className="inline-flex h-11 items-center justify-center whitespace-nowrap rounded-full bg-[var(--surface-1)] px-6 text-sm font-extrabold text-[var(--foreground)] ring-1 ring-inset ring-[var(--border)] hover:bg-[var(--secondary)]/10 hover:text-[var(--primary)]"
+                className="inline-flex min-h-[42px] items-center justify-center whitespace-nowrap rounded-[5px] bg-[var(--surface-1)] px-5 text-xs sm:text-sm font-black text-[var(--foreground)] ring-1 ring-inset ring-[var(--border)] hover:bg-[var(--secondary)]/10 hover:text-[var(--primary)]"
               >
                 Hỏi lớp phù hợp
               </Link>

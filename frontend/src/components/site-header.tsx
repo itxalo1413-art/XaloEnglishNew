@@ -4,14 +4,34 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-type NavItem = { href: string; label: string; mega?: boolean };
+type NavItem = {
+  href: string;
+  label: string;
+  mega?: boolean;
+  subItems?: { label: string; href: string; desc?: string }[];
+};
 
 const navItems: NavItem[] = [
-  { href: "/quy-trinh", label: "Quy trình Chẩn - Chữa" },
+  {
+    href: "/quy-trinh",
+    label: "Quy trình Chẩn - Chữa",
+    subItems: [
+      { label: "Tổng quan Quy trình", href: "/quy-trinh", desc: "Sơ đồ 6 bước khép kín" },
+      { label: "Bảng Chẩn Bệnh (BCB)", href: "/quy-trinh#chan-doan", desc: "Bóc tách nguyên nhân sai sót theo dạng bài" },
+      { label: "Lộ trình RLP", href: "/quy-trinh#lo-trinh-rlp", desc: "Kế hoạch cộng hưởng dồn 80% năng lượng" },
+    ],
+  },
   { href: "/khoa-hoc", label: "Lộ trình học", mega: true },
   { href: "/#ket-qua-hoc-vien", label: "Kết quả học viên" },
   { href: "/lich-khai-giang", label: "Lịch khai giảng" },
-  { href: "/ve-xalo", label: "Về Xa Lộ" },
+  {
+    href: "/ve-xalo",
+    label: "Về Xa Lộ",
+    subItems: [
+      { label: "Giới thiệu Xa Lộ English", href: "/ve-xalo", desc: "Triết lý và định hướng đào tạo" },
+      { label: "Giảng viên tại Xa Lộ", href: "/ve-xalo#giao-vien", desc: "Đội ngũ chuyên môn trực tiếp chấm chữa 1:1" },
+    ],
+  },
   { href: "/blog", label: "Blog" },
 ];
 
@@ -40,6 +60,7 @@ function isActive(pathname: string, hash: string, href: string) {
 
   if (href === "/khoa-hoc") return pathname === "/khoa-hoc" || pathname.startsWith("/khoa-hoc/");
   if (href === "/quy-trinh") return pathname === "/quy-trinh" || pathname.startsWith("/quy-trinh/");
+  if (href === "/ve-xalo") return pathname === "/ve-xalo" || pathname.startsWith("/ve-xalo/");
   if (href === "/blog") return pathname === "/blog" || pathname.startsWith("/blog/");
 
   return pathname === href;
@@ -124,6 +145,14 @@ function ChevronRight({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
       <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+    </svg>
+  );
+}
+
+function ChevronDown({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
     </svg>
   );
 }
@@ -221,6 +250,51 @@ export function SiteHeader() {
               }
 
               const active = isActive(pathname, hash, item.href);
+
+              if (item.subItems) {
+                return (
+                  <li key={item.href} className="group relative flex h-full shrink-0 list-none items-center">
+                    <Link
+                      href={item.href}
+                      className={`relative flex h-full items-center gap-1 whitespace-nowrap text-sm leading-6 transition-colors ${
+                        active
+                          ? "font-bold text-[var(--primary)]"
+                          : "font-normal text-[var(--foreground)] hover:text-[var(--primary)]"
+                      }`}
+                    >
+                      {item.label}
+                      <ChevronDown className="h-3.5 w-3.5 opacity-60 transition-transform duration-200 group-hover:rotate-180" />
+                      {active && (
+                        <span
+                          className="pointer-events-none absolute bottom-0 left-0 h-1 w-full rounded-t-[2px] bg-[var(--primary)]"
+                          aria-hidden
+                        />
+                      )}
+                    </Link>
+                    <div className="invisible absolute top-full left-0 z-50 w-64 pt-2 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
+                      <div className="rounded-2xl border border-black/5 bg-white p-2.5 shadow-xl shadow-black/10">
+                        {item.subItems.map((sub) => (
+                          <Link
+                            key={sub.href}
+                            href={sub.href}
+                            className="block rounded-xl p-2.5 transition-colors hover:bg-[var(--surface-1)]"
+                          >
+                            <p className="text-xs font-black text-[var(--foreground)] hover:text-[var(--primary)]">
+                              {sub.label}
+                            </p>
+                            {sub.desc && (
+                              <p className="mt-0.5 text-[11px] font-medium text-[var(--muted)]">
+                                {sub.desc}
+                              </p>
+                            )}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </li>
+                );
+              }
+
               return (
                 <li key={item.href} className="flex h-full shrink-0 list-none">
                   <Link
@@ -248,14 +322,15 @@ export function SiteHeader() {
         <div className="ml-auto flex shrink-0 items-center gap-2">
           <Link
             href="/#test-dau-vao"
-            className="hidden h-10 min-w-[200px] items-center justify-center whitespace-nowrap rounded-[5px] bg-[var(--primary)] px-4 py-2 text-center text-xs font-black uppercase tracking-wider text-[var(--on-primary)] shadow-md shadow-[var(--primary)]/20 transition-all hover:bg-[var(--secondary)] hover:shadow-lg hover:shadow-[var(--primary)]/30 lg:inline-flex"
+            className="flex h-9 sm:h-10 items-center justify-center whitespace-nowrap rounded-[5px] bg-[var(--primary)] px-3 sm:px-4 py-1.5 sm:py-2 text-center text-[11px] sm:text-xs font-black uppercase tracking-wider text-[var(--on-primary)] shadow-md shadow-[var(--primary)]/20 transition-all hover:bg-[var(--secondary)] hover:shadow-lg hover:shadow-[var(--primary)]/30 animate-cta-pulse"
           >
-            TEST TRÌNH ĐỘ MIỄN PHÍ
+            <span className="hidden sm:inline">TEST TRÌNH ĐỘ MIỄN PHÍ</span>
+            <span className="inline sm:hidden">TEST TRÌNH ĐỘ</span>
           </Link>
 
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-[var(--foreground)]/20 text-[var(--foreground)] lg:hidden"
+            className="inline-flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-[5px] border border-[var(--foreground)]/20 text-[var(--foreground)] lg:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             onClick={() => setOpen((v) => !v)}
@@ -403,6 +478,37 @@ export function SiteHeader() {
                   </div>
                 );
               }
+
+              if (item.subItems) {
+                return (
+                  <div key={item.href} className="flex flex-col">
+                    <Link
+                      href={item.href}
+                      className={`rounded-sm px-3 py-2 text-sm leading-6 ${
+                        isActive(pathname, hash, item.href)
+                          ? "font-bold text-[var(--primary)]"
+                          : "font-semibold text-[var(--foreground)]"
+                      }`}
+                      onClick={() => setOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                    <div className="ml-3 flex flex-col border-l-2 border-[var(--border-strong)]/30 pl-2">
+                      {item.subItems.map((sub) => (
+                        <Link
+                          key={sub.href}
+                          href={sub.href}
+                          className="py-1.5 text-xs font-semibold text-[var(--muted)] hover:text-[var(--primary)]"
+                          onClick={() => setOpen(false)}
+                        >
+                          • {sub.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                );
+              }
+
               return (
                 <Link
                   key={item.href}
